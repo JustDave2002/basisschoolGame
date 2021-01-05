@@ -38,16 +38,14 @@ class Game {
 
         this.levelArray = [
             new Level1(this.canvas, this.player),
-            new Level2(this.canvas, this.player)
-            /** 
-            
-            new Level(this.canvas, this.player, 75, 600, 1),
-            new Level(this.canvas, this.player, 70, 800, 1.5),
-            new Level(this.canvas, this.player, 65, 1000, 2),
-            new Level(this.canvas, this.player, 60, 1200, 2.5),
-            new Level(this.canvas, this.player, 55, 1400, 3),
-            new Level(this.canvas, this.player, 50, 1600, 3.5)
-        ]*/
+            new Level2(this.canvas, this.player),
+            new Level3(this.canvas, this.player),
+            new Level4(this.canvas, this.player),
+            new Level5(this.canvas, this.player),
+            new Level6(this.canvas, this.player),
+            new Level7(this.canvas, this.player),
+            new Level8(this.canvas, this.player)
+        ]
         this.advanceToNextLevel();
 
         
