@@ -23,6 +23,8 @@ class Game {
     private paused: boolean;
     //9 is last level
     private levelIndex: number = 0;
+    private levelArray: Level[];
+    
 
     public constructor(canvas: HTMLElement) {
         this.canvas = <HTMLCanvasElement>canvas;
@@ -34,6 +36,17 @@ class Game {
         // Set the player at the center
         this.player = new Player(this.canvas);
 
+        this.levelArray = [
+            new Level1(this.canvas, this.player),
+            /** 
+            new Level2(this.canvas, this.player, 80, 400,0.5),
+            new Level3(this.canvas, this.player, 75, 600, 1),
+            new Level4(this.canvas, this.player, 70, 800, 1.5),
+            new Level5(this.canvas, this.player, 65, 1000, 2),
+            new Level6(this.canvas, this.player, 60, 1200, 2.5),
+            new Level7(this.canvas, this.player, 55, 1400, 3),
+            new Level8(this.canvas, this.player, 50, 1600, 3.5)
+       */ ]
         this.advanceToNextLevel();
 
         
@@ -86,16 +99,8 @@ class Game {
     }
 
     private advanceToNextLevel() {
-        const levelArray: Level[] = [
-            new Level(this.canvas, this.player, 90, 400, 0),
-            new Level(this.canvas, this.player, 80, 400,0.5),
-            new Level(this.canvas, this.player, 75, 600, 1),
-            new Level(this.canvas, this.player, 70, 800, 1.5),
-            new Level(this.canvas, this.player, 65, 1000, 2),
-            new Level(this.canvas, this.player, 60, 1200, 2.5),
-            new Level(this.canvas, this.player, 55, 1400, 3),
-            new Level(this.canvas, this.player, 50, 1600, 3.5)]
-        this.level = levelArray[this.levelIndex];
+        
+        this.level = this.levelArray[this.levelIndex];
         this.levelIndex ++
     }
 

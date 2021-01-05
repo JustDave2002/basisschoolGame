@@ -1,35 +1,35 @@
 /**
  * this class is responsible for the state of the level
  */
-class Level {
+abstract class Level {
 
-    private totalScore: number = 0;
+    protected totalScore: number = 390;
 
 
     // The objects on the canvas
-    private scoringObject: Array<ScoringObject> = new Array()
+    protected scoringObject: Array<ScoringObject> = new Array()
 
 
-    private totalLives: number;
-    private player: Player;
+    protected totalLives: number;
+    protected player: Player;
 
     //has a formula of speeding up the game the more points you have
-    private speedBoost: number;
-    private speedMultiplier: number;
-    private speedSwitch: boolean = true;
+    protected speedBoost: number;
+    protected speedMultiplier: number;
+    protected speedSwitch: boolean = true;
 
-    private baseSpawnRate: number;
-    private maxPoints: number;
+    protected baseSpawnRate: number;
+    protected maxPoints: number;
 
     //TODO change when won
-    private won: boolean = false;
+    protected won: boolean = false;
 
-    private frameIndex: number;
+    protected frameIndex: number;
 
-    private canvas: HTMLCanvasElement
+    protected canvas: HTMLCanvasElement
 
 
-    constructor(canvas: HTMLCanvasElement, player: Player, baseSpawnRate: number, maxPoints: number, speedMultiplier: number) {
+    constructor(canvas: HTMLCanvasElement, player: Player) {
 
         this.canvas = canvas;
         this.player = player;
@@ -39,9 +39,6 @@ class Level {
 
         //upps the speed
         this.speedBoost = 0;
-        this.speedMultiplier = speedMultiplier;
-        this.baseSpawnRate = baseSpawnRate;
-        this.maxPoints = maxPoints;
 
 
     }
@@ -125,7 +122,7 @@ class Level {
             }
         );
     }
-    private createRandomScoringObject(): void {
+    protected createRandomScoringObject(): void {
 
         const random = this.randomInteger(1, 5);
         const plusLife = this.randomInteger(1, 40)
@@ -165,7 +162,7 @@ class Level {
     * @param {number} min - minimal time
     * @param {number} max - maximal time
     */
-    private randomInteger(min: number, max: number): number {
+    protected randomInteger(min: number, max: number): number {
         return Math.round(Math.random() * (max - min) + min);
     }
 }

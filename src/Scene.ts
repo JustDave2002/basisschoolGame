@@ -4,4 +4,8 @@ abstract class Scene{
 
         
     }
+
+    protected draw() {
+        
+    }
 }
