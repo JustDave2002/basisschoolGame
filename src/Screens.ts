@@ -1,4 +1,4 @@
-abstract class Scene{
+abstract class Screens{
 
     protected constructor(){
 
