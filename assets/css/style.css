@@ -10,3 +10,18 @@ canvas{
     margin: 0 auto;
     display: block;
 }
+
+button {
+    text-align: center;
+    background-color: #ff5100;
+    border: none;
+    color: white;
+    width: 500px;
+    height: 100px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 52px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }

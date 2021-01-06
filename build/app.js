@@ -79,7 +79,6 @@ class Game {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
-        this.writeTextToCanvas(ctx, "UP arrow = middle | LEFT arrow = left | RIGHT arrow = right", this.canvas.width / 2, 40, 14);
         this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
         this.writeTextToCanvas(ctx, `Lives: ${this.level.getTotalLives()}`, this.canvas.width / 2 + 250, 20, 16);
         if (this.level.isComplete() === true) {
@@ -442,18 +441,18 @@ class Player {
         this.middleLane = this.canvas.width / 2;
         this.rightLane = this.canvas.width / 4 * 3;
         this.keyListener = new KeyListener();
+        this.keyUp = true;
         this.image = this.loadNewImage("./assets/img/players/carplayer.png");
         this.positionX = this.canvas.width / 2;
     }
     move() {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== this.leftLane) {
-            this.positionX = this.leftLane;
+        if (this.keyListener.isKeyTyped(KeyListener.KEY_LEFT) && this.keyUp == false) {
+            console.log("released");
+            this.keyUp = true;
         }
-        if (this.keyListener.isKeyDown(KeyListener.KEY_UP) && this.positionX !== this.middleLane) {
-            this.positionX = this.middleLane;
-        }
-        if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX !== this.rightLane) {
-            this.positionX = this.rightLane;
+        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.keyUp == true) {
+            console.log("pressed");
+            this.keyUp = false;
         }
     }
     draw(ctx) {

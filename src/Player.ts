@@ -7,6 +7,7 @@ class Player {
     private rightLane: number;
 
     private keyListener: KeyListener;
+    private keyUp: boolean;
 
     private image: HTMLImageElement;
     private positionX: number;
@@ -20,11 +21,24 @@ class Player {
 
         this.keyListener = new KeyListener();
 
+        this.keyUp = true;
+
         this.image = this.loadNewImage("./assets/img/players/carplayer.png");
         this.positionX = this.canvas.width / 2;
     }
 
     public move() {
+        if(this.keyUp == false){
+            
+            
+            this.keyUp= true;
+        }
+        
+        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.keyUp == true){
+            console.log("pressed");
+            this. keyUp = false;
+        }
+        /**
         if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== this.leftLane) {
             this.positionX = this.leftLane;
         }
@@ -33,7 +47,7 @@ class Player {
         }
         if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX !== this.rightLane) {
             this.positionX = this.rightLane;
-        }
+        } */
     }
 
     public draw(ctx: CanvasRenderingContext2D) {
