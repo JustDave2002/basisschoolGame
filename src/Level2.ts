@@ -1,3 +1,4 @@
+/// <reference path="level.ts"/>
 
 class Level2 extends Level {
 

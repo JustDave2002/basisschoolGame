@@ -128,7 +128,6 @@ class Game {
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.writeTextToCanvas(ctx,` Level: ${this.levelIndex}`, this.canvas.width / 2,  20, 18);
-        this.writeTextToCanvas(ctx, "UP arrow = middle | LEFT arrow = left | RIGHT arrow = right", this.canvas.width / 2, 40, 14);
         this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
         this.writeTextToCanvas(ctx, `Lives: ${this.level.getTotalLives()}`, this.canvas.width / 2 + 250, 20, 16);
 
@@ -197,7 +196,7 @@ class Game {
      * pauses the game for ms amount of time
      * @param ms amount of time in MS
      */
-    private delay(ms: number) {
+    public delay(ms: number) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 

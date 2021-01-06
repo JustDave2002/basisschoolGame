@@ -1,3 +1,4 @@
+/// <reference path="Screens.ts"/>
 /**
  * this class is responsible for the state of the level
  */
