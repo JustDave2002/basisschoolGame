@@ -365,16 +365,16 @@ class Level {
 class Level1 extends Level {
     constructor(canvas, player) {
         super(canvas, player);
-        this.baseSpawnRate = 90;
-        this.maxPoints = 400;
+        this.baseSpawnRate = 100;
+        this.maxPoints = 100;
         this.speedMultiplier = 0, 5;
     }
 }
 class Level2 extends Level {
     constructor(canvas, player) {
         super(canvas, player);
-        this.baseSpawnRate = 80;
-        this.maxPoints = 600;
+        this.baseSpawnRate = 90;
+        this.maxPoints = 200;
         this.speedMultiplier = 1;
     }
 }
@@ -382,7 +382,7 @@ class Level3 extends Level {
     constructor(canvas, player) {
         super(canvas, player);
         this.baseSpawnRate = 75;
-        this.maxPoints = 600;
+        this.maxPoints = 400;
         this.speedMultiplier = 1;
     }
 }
