@@ -1,6 +1,6 @@
 /// <reference path="ScoringObject.ts"/>
 
-class SilverTrophy extends ScoringObject {
+class SilverCoin extends ScoringObject {
 
  
     public constructor(canvas: HTMLCanvasElement) {

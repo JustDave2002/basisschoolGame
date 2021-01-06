@@ -67,11 +67,29 @@ class ScoringObject {
         return Math.round(Math.random() * (max - min) + min);
     }
 }
+class Banana extends ScoringObject {
+    constructor(canvas) {
+        super(canvas);
+        this.image = this.loadNewImage("assets/img/objects/banana.png");
+        this.speed = 7;
+        this.points = -10;
+        this._lives = 0;
+    }
+}
 class Box extends ScoringObject {
     constructor(canvas) {
         super(canvas);
         this.image = this.loadNewImage("assets/img/objects/box1.png");
         this.speed = 7;
+        this.points = 0;
+        this._lives = -1;
+    }
+}
+class Cone extends ScoringObject {
+    constructor(canvas) {
+        super(canvas);
+        this.image = this.loadNewImage("assets/img/objects/cone.png");
+        this.speed = 6;
         this.points = 0;
         this._lives = -1;
     }
@@ -188,7 +206,7 @@ class Game {
         ctx.fillText(text, xCoordinate, yCoordinate);
     }
 }
-class GoldTrophy extends ScoringObject {
+class GoldCoin extends ScoringObject {
     constructor(canvas) {
         super(canvas);
         this.image = this.loadNewImage("assets/img/objects/goldcoin.png");
@@ -197,10 +215,10 @@ class GoldTrophy extends ScoringObject {
         this._lives = 0;
     }
 }
-class GreenCross extends ScoringObject {
+class Heart extends ScoringObject {
     constructor(canvas) {
         super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/tilted_plus_health.png");
+        this.image = this.loadNewImage("assets/img/objects/heart.png");
         this.speed = 9;
         this.points = 0;
         this._lives = 1;
@@ -356,19 +374,19 @@ class Level {
         const random = this.randomInteger(1, 5);
         const plusLife = this.randomInteger(1, 40);
         if (plusLife === 6) {
-            this.scoringObject.push(new GreenCross(this.canvas));
+            this.scoringObject.push(new Heart(this.canvas));
         }
         else if (random === 1) {
-            this.scoringObject.push(new GoldTrophy(this.canvas));
+            this.scoringObject.push(new GoldCoin(this.canvas));
         }
         else if (random === 2) {
-            this.scoringObject.push(new SilverTrophy(this.canvas));
+            this.scoringObject.push(new SilverCoin(this.canvas));
         }
         else if (random === 3) {
-            this.scoringObject.push(new RedCross(this.canvas));
+            this.scoringObject.push(new Cone(this.canvas));
         }
         else if (random === 4) {
-            this.scoringObject.push(new LightningBolt(this.canvas));
+            this.scoringObject.push(new Banana(this.canvas));
         }
         else if (random === 5) {
             this.scoringObject.push(new Box(this.canvas));
@@ -445,15 +463,6 @@ class Level8 extends Level {
         this.speedMultiplier = 3.5;
     }
 }
-class LightningBolt extends ScoringObject {
-    constructor(canvas) {
-        super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/titled_yellow_power_icon.png");
-        this.speed = 7;
-        this.points = -10;
-        this._lives = 0;
-    }
-}
 class Player {
     constructor(canvas) {
         this.canvas = canvas;
@@ -497,16 +506,7 @@ class Player {
         return img;
     }
 }
-class RedCross extends ScoringObject {
-    constructor(canvas) {
-        super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/cone.png");
-        this.speed = 6;
-        this.points = 0;
-        this._lives = -1;
-    }
-}
-class SilverTrophy extends ScoringObject {
+class SilverCoin extends ScoringObject {
     constructor(canvas) {
         super(canvas);
         this.image = this.loadNewImage("assets/img/objects/silvercoin.png");
@@ -515,18 +515,6 @@ class SilverTrophy extends ScoringObject {
         this._lives = 0;
     }
 }
-<<<<<<< HEAD
-=======
-class BlueLightningBolt extends ScoringObject {
-    constructor(canvas) {
-        super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/box1.png");
-        this.speed = 7;
-        this.points = 0;
-        this._lives = -1;
-    }
-}
->>>>>>> 8e7f0a3ad5638ecbd2d0d7433c01bef36c60a05e
 console.log("Javascript is working!");
 window.addEventListener('load', () => {
     console.log("Handling the Load event");

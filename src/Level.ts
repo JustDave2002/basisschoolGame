@@ -132,21 +132,21 @@ abstract class Level {
 
 
         if (plusLife === 6) {
-            this.scoringObject.push(new GreenCross(this.canvas));
+            this.scoringObject.push(new Heart(this.canvas));
         } else if (random === 1) {
-            this.scoringObject.push(new GoldTrophy(this.canvas));
+            this.scoringObject.push(new GoldCoin(this.canvas));
         }
 
         else if (random === 2) {
-            this.scoringObject.push(new SilverTrophy(this.canvas));
+            this.scoringObject.push(new SilverCoin(this.canvas));
         }
 
         else if (random === 3) {
-            this.scoringObject.push(new RedCross(this.canvas));
+            this.scoringObject.push(new Cone(this.canvas));
         }
 
         else if (random === 4) {
-            this.scoringObject.push(new LightningBolt(this.canvas));
+            this.scoringObject.push(new Banana(this.canvas));
         }
         else if (random === 5) {
             this.scoringObject.push(new Box(this.canvas));
