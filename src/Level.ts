@@ -149,7 +149,7 @@ abstract class Level {
             this.scoringObject.push(new LightningBolt(this.canvas));
         }
         else if (random === 5) {
-            this.scoringObject.push(new BlueLightningBolt(this.canvas));
+            this.scoringObject.push(new Box(this.canvas));
         }
 
         const last_element: number = this.scoringObject.length - 1;
