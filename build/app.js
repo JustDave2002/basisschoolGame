@@ -7,6 +7,75 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+class ScoringObject {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.leftLane = this.canvas.width / 6;
+        this.middleLane = this.canvas.width / 2;
+        this.rightLane = this.canvas.width / 6 * 5;
+        const random = this.randomInteger(1, 3);
+        if (random === 1) {
+            this.positionX = this.leftLane;
+        }
+        if (random === 2) {
+            this.positionX = this.middleLane;
+        }
+        if (random === 3) {
+            this.positionX = this.rightLane;
+        }
+        this.positionY = 60;
+    }
+    move() {
+        this.positionY += this.speed;
+    }
+    draw(ctx) {
+        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.positionY);
+    }
+    collidesWithCanvasBottom() {
+        if (this.positionY + this.image.height > this.canvas.height) {
+            return true;
+        }
+        return false;
+    }
+    getPositionX() {
+        return this.positionX;
+    }
+    getPositionY() {
+        return this.positionY;
+    }
+    getImageWidth() {
+        return this.image.width;
+    }
+    getImageHeight() {
+        return this.image.height;
+    }
+    getPoints() {
+        return this.points;
+    }
+    getLives() {
+        return this._lives;
+    }
+    setSpeed(v) {
+        this.speed += v;
+    }
+    loadNewImage(source) {
+        const img = new Image();
+        img.src = source;
+        return img;
+    }
+    randomInteger(min, max) {
+        return Math.round(Math.random() * (max - min) + min);
+    }
+}
+class BlueLightningBolt extends ScoringObject {
+    constructor(canvas) {
+        super(canvas);
+        this.image = this.loadNewImage("assets/img/objects/box1.png");
+        this.speed = 7;
+        this.points = 0;
+        this._lives = -1;
+    }
+}
 class Screens {
     constructor() {
     }
@@ -112,66 +181,6 @@ class Game {
     }
     delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
-    }
-}
-class ScoringObject {
-    constructor(canvas) {
-        this.canvas = canvas;
-        this.leftLane = this.canvas.width / 6;
-        this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 6 * 5;
-        const random = this.randomInteger(1, 3);
-        if (random === 1) {
-            this.positionX = this.leftLane;
-        }
-        if (random === 2) {
-            this.positionX = this.middleLane;
-        }
-        if (random === 3) {
-            this.positionX = this.rightLane;
-        }
-        this.positionY = 60;
-    }
-    move() {
-        this.positionY += this.speed;
-    }
-    draw(ctx) {
-        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.positionY);
-    }
-    collidesWithCanvasBottom() {
-        if (this.positionY + this.image.height > this.canvas.height) {
-            return true;
-        }
-        return false;
-    }
-    getPositionX() {
-        return this.positionX;
-    }
-    getPositionY() {
-        return this.positionY;
-    }
-    getImageWidth() {
-        return this.image.width;
-    }
-    getImageHeight() {
-        return this.image.height;
-    }
-    getPoints() {
-        return this.points;
-    }
-    getLives() {
-        return this._lives;
-    }
-    setSpeed(v) {
-        this.speed += v;
-    }
-    loadNewImage(source) {
-        const img = new Image();
-        img.src = source;
-        return img;
-    }
-    randomInteger(min, max) {
-        return Math.round(Math.random() * (max - min) + min);
     }
 }
 class GoldTrophy extends ScoringObject {
@@ -493,15 +502,6 @@ class SilverTrophy extends ScoringObject {
         this.image = this.loadNewImage("assets/img/objects/silvercoin.png");
         this.speed = 5;
         this.points = 5;
-        this._lives = 0;
-    }
-}
-class BlueLightningBolt extends ScoringObject {
-    constructor(canvas) {
-        super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/box1.png");
-        this.speed = 7;
-        this.points = -15;
         this._lives = 0;
     }
 }

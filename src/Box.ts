@@ -1,6 +1,6 @@
 /// <reference path="ScoringObject.ts"/>
 
-class BlueLightningBolt extends ScoringObject {
+class Box extends ScoringObject {
 
  
     public constructor(canvas: HTMLCanvasElement) {
