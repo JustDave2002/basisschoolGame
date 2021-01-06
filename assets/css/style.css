@@ -1,6 +1,6 @@
-body {
+.gameBackground {
     overflow: hidden;
-    background-image: url(../img/grass.jpg);;
+    background-image: url(../img/grass.jpg);
 }
 
 canvas{
@@ -10,6 +10,7 @@ canvas{
     margin: 0 auto;
     display: block;
 }
+<<<<<<< HEAD
 
 button {
     text-align: center;
@@ -25,3 +26,10 @@ button {
     margin-top: 50px;
     margin-bottom: 50px;
   }
+=======
+.Background{
+ overflow: hidden;
+ 
+ background-image: url(../img/backgroundPattern.png);
+}
+>>>>>>> 10ea25367ca52c29fb8384c7246532987ffcdb3b

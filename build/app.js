@@ -111,9 +111,9 @@ class Game {
 class ScoringObject {
     constructor(canvas) {
         this.canvas = canvas;
-        this.leftLane = this.canvas.width / 4;
+        this.leftLane = this.canvas.width / 6;
         this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 4 * 3;
+        this.rightLane = this.canvas.width / 6 * 5;
         const random = this.randomInteger(1, 3);
         if (random === 1) {
             this.positionX = this.leftLane;
@@ -437,9 +437,9 @@ class LightningBolt extends ScoringObject {
 class Player {
     constructor(canvas) {
         this.canvas = canvas;
-        this.leftLane = this.canvas.width / 4;
+        this.leftLane = this.canvas.width / 6;
         this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 4 * 3;
+        this.rightLane = this.canvas.width / 6 * 5;
         this.keyListener = new KeyListener();
         this.keyUp = true;
         this.image = this.loadNewImage("./assets/img/players/carplayer.png");
