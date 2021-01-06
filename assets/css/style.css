@@ -12,5 +12,6 @@ canvas{
 }
 .Background{
  overflow: hidden;
- background-image: url(../basisschoolGame/assets/img/backgroundPattern.png);
+ 
+ background-image: url(../img/backgroundPattern.png);
 }
