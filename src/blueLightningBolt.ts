@@ -7,8 +7,8 @@ class BlueLightningBolt extends ScoringObject {
         super(canvas);
         this.image = this.loadNewImage("assets/img/objects/face_on_blue_power_icon.png");
         this.speed = 7;
-        this.points = -15;
-        this._lives = 0;
+        this.points = 0;
+        this._lives = -1;
     }
 }
 
