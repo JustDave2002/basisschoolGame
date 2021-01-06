@@ -501,8 +501,8 @@ class BlueLightningBolt extends ScoringObject {
         super(canvas);
         this.image = this.loadNewImage("assets/img/objects/box1.png");
         this.speed = 7;
-        this.points = -15;
-        this._lives = 0;
+        this.points = 0;
+        this._lives = -1;
     }
 }
 console.log("Javascript is working!");
