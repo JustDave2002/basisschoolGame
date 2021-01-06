@@ -505,6 +505,18 @@ class SilverTrophy extends ScoringObject {
         this._lives = 0;
     }
 }
+<<<<<<< HEAD
+=======
+class BlueLightningBolt extends ScoringObject {
+    constructor(canvas) {
+        super(canvas);
+        this.image = this.loadNewImage("assets/img/objects/box1.png");
+        this.speed = 7;
+        this.points = 0;
+        this._lives = -1;
+    }
+}
+>>>>>>> 8e7f0a3ad5638ecbd2d0d7433c01bef36c60a05e
 console.log("Javascript is working!");
 window.addEventListener('load', () => {
     console.log("Handling the Load event");
