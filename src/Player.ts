@@ -14,9 +14,9 @@ class Player {
     public constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
 
-        this.leftLane = this.canvas.width / 4;
+        this.leftLane = this.canvas.width / 6;
         this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 4 * 3;
+        this.rightLane = this.canvas.width / 6 * 5;
 
         this.keyListener = new KeyListener();
 
