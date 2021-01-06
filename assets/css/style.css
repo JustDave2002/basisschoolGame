@@ -1,6 +1,6 @@
-body {
+.gameBackground {
     overflow: hidden;
-    background-image: url(../img/grass.jpg);;
+    background-image: url(../img/grass.jpg);
 }
 
 canvas{
@@ -9,4 +9,8 @@ canvas{
     background-size: cover;
     margin: 0 auto;
     display: block;
+}
+.Background{
+ overflow: hidden;
+ background-image: url(../basisschoolGame/assets/img/backgroundPattern.png);
 }
