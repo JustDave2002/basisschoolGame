@@ -67,7 +67,7 @@ class ScoringObject {
         return Math.round(Math.random() * (max - min) + min);
     }
 }
-class BlueLightningBolt extends ScoringObject {
+class Box extends ScoringObject {
     constructor(canvas) {
         super(canvas);
         this.image = this.loadNewImage("assets/img/objects/box1.png");
@@ -366,7 +366,7 @@ class Level {
             this.scoringObject.push(new LightningBolt(this.canvas));
         }
         else if (random === 5) {
-            this.scoringObject.push(new BlueLightningBolt(this.canvas));
+            this.scoringObject.push(new Box(this.canvas));
         }
         const last_element = this.scoringObject.length - 1;
         console.log(this.speedBoost + this.speedMultiplier);
