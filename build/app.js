@@ -12,6 +12,12 @@ class Screens {
     }
     draw() {
     }
+    writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
+        ctx.font = `${fontSize}px sans-serif`;
+        ctx.fillStyle = color;
+        ctx.textAlign = alignment;
+        ctx.fillText(text, xCoordinate, yCoordinate);
+    }
 }
 class DeathScreen extends Screens {
     constructor(canvas, level) {
@@ -446,8 +452,7 @@ class Player {
         this.positionX = this.canvas.width / 2;
     }
     move() {
-        if (this.keyListener.isKeyTyped(KeyListener.KEY_LEFT) && this.keyUp == false) {
-            console.log("released");
+        if (this.keyUp == false) {
             this.keyUp = true;
         }
         if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.keyUp == true) {
