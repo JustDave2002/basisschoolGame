@@ -177,7 +177,7 @@ class ScoringObject {
 class GoldTrophy extends ScoringObject {
     constructor(canvas) {
         super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/gold_trophy.png");
+        this.image = this.loadNewImage("assets/img/objects/goldcoin.png");
         this.speed = 5;
         this.points = 10;
         this._lives = 0;
@@ -481,7 +481,7 @@ class Player {
 class RedCross extends ScoringObject {
     constructor(canvas) {
         super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/tilted_cross.png");
+        this.image = this.loadNewImage("assets/img/objects/cone.png");
         this.speed = 6;
         this.points = 0;
         this._lives = -1;
@@ -490,7 +490,7 @@ class RedCross extends ScoringObject {
 class SilverTrophy extends ScoringObject {
     constructor(canvas) {
         super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/silver_trophy.png");
+        this.image = this.loadNewImage("assets/img/objects/silvercoin.png");
         this.speed = 5;
         this.points = 5;
         this._lives = 0;
@@ -499,7 +499,7 @@ class SilverTrophy extends ScoringObject {
 class BlueLightningBolt extends ScoringObject {
     constructor(canvas) {
         super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/face_on_blue_power_icon.png");
+        this.image = this.loadNewImage("assets/img/objects/box1.png");
         this.speed = 7;
         this.points = -15;
         this._lives = 0;
