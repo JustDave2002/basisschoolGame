@@ -3,7 +3,7 @@
 class DeathScreen extends Screens {
 
     
-    public constructor(canvas: HTMLCanvasElement, level: ) {
+    public constructor(canvas: HTMLCanvasElement, level:Level) {
         //90 400 0
 
         super()

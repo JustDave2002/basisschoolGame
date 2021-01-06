@@ -3,7 +3,7 @@
  */
 abstract class Level {
 
-    protected totalScore: number = 390;
+    protected totalScore: number;
 
 
     // The objects on the canvas
@@ -39,6 +39,8 @@ abstract class Level {
 
         //upps the speed
         this.speedBoost = 0;
+
+        this.totalScore = 0;
 
 
     }

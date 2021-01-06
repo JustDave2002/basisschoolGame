@@ -1,10 +1,12 @@
 body {
     overflow: hidden;
-    background-color: black;
+    background-image: url(C:/hbo-ict/jaar1/kwartiel2/gameproject/basisschoolGame/assets/img/grass.jpg);;
 }
 
 canvas{
-    background-color: lightblue;
+    background-image: url(C:/hbo-ict/jaar1/kwartiel2/gameproject/basisschoolGame/assets/img/road.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: 0 auto;
     display: block;
 }
