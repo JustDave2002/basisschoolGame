@@ -27,6 +27,13 @@ class DeathScreen extends Screens {
         super.draw();
     }
 }
+class Delay {
+    constructor() {
+    }
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+}
 class Game {
     constructor(canvas) {
         this.levelIndex = 0;
@@ -46,6 +53,7 @@ class Game {
             requestAnimationFrame(this.step);
         };
         this.canvas = canvas;
+        this.delay = new Delay;
         this.canvas.width = 650;
         this.canvas.height = window.innerHeight;
         this.player = new Player(this.canvas);
@@ -76,7 +84,7 @@ class Game {
                 this.paused = true;
             }
             else if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
-                yield this.delay(1000);
+                yield this.delay.delay(1000);
                 this.paused = false;
             }
         });
@@ -109,9 +117,6 @@ class Game {
         ctx.fillStyle = color;
         ctx.textAlign = alignment;
         ctx.fillText(text, xCoordinate, yCoordinate);
-    }
-    delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
 class ScoringObject {
@@ -443,6 +448,7 @@ class LightningBolt extends ScoringObject {
 class Player {
     constructor(canvas) {
         this.canvas = canvas;
+        this.delay = new Delay;
         this.leftLane = this.canvas.width / 6;
         this.middleLane = this.canvas.width / 2;
         this.rightLane = this.canvas.width / 6 * 5;
@@ -452,13 +458,17 @@ class Player {
         this.positionX = this.canvas.width / 2;
     }
     move() {
-        if (this.keyUp == false) {
-            this.keyUp = true;
-        }
-        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.keyUp == true) {
-            console.log("pressed");
-            this.keyUp = false;
-        }
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== this.leftLane) {
+                this.positionX = this.leftLane;
+            }
+            if (this.keyListener.isKeyDown(KeyListener.KEY_UP) && this.positionX !== this.middleLane) {
+                this.positionX = this.middleLane;
+            }
+            if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX !== this.rightLane) {
+                this.positionX = this.rightLane;
+            }
+        });
     }
     draw(ctx) {
         ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 150);
