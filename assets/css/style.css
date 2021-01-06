@@ -1,10 +1,10 @@
 body {
     overflow: hidden;
-    background-image: url(C:/hbo-ict/jaar1/kwartiel2/gameproject/basisschoolGame/assets/img/grass.jpg);;
+    background-image: url(../img/grass.jpg);;
 }
 
 canvas{
-    background-image: url(C:/hbo-ict/jaar1/kwartiel2/gameproject/basisschoolGame/assets/img/road.png);
+    background-image: url(../img/road.png);
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0 auto;
