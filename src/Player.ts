@@ -20,7 +20,7 @@ class Player {
 
         this.keyListener = new KeyListener();
 
-        this.image = this.loadNewImage("./assets/img/players/character_pain_walk0.png");
+        this.image = this.loadNewImage("./assets/img/players/carplayer.png");
         this.positionX = this.canvas.width / 2;
     }
 
