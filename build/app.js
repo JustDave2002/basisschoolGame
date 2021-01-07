@@ -7,8 +7,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-<<<<<<< HEAD
-=======
 class ScoringObject {
     constructor(canvas) {
         this.canvas = canvas;
@@ -96,21 +94,17 @@ class Cone extends ScoringObject {
         this._lives = -1;
     }
 }
->>>>>>> 222f8b364dae7a49d0f0c4af6f2343954407e6bf
 class Screens {
     constructor() {
     }
     draw() {
     }
-<<<<<<< HEAD
-=======
     writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
         ctx.font = `${fontSize}px sans-serif`;
         ctx.fillStyle = color;
         ctx.textAlign = alignment;
         ctx.fillText(text, xCoordinate, yCoordinate);
     }
->>>>>>> 222f8b364dae7a49d0f0c4af6f2343954407e6bf
 }
 class DeathScreen extends Screens {
     constructor(canvas, level) {
@@ -118,9 +112,6 @@ class DeathScreen extends Screens {
     }
     draw() {
         super.draw();
-<<<<<<< HEAD
-        console.log("hi im ded");
-=======
     }
 }
 class Delay {
@@ -128,7 +119,6 @@ class Delay {
     }
     delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
->>>>>>> 222f8b364dae7a49d0f0c4af6f2343954407e6bf
     }
 }
 class Game {
@@ -196,7 +186,6 @@ class Game {
             this.writeTextToCanvas(ctx, `You Won!`, this.canvas.width / 2, 200, 40);
         }
         if (this.level.getTotalLives() <= 0) {
-            new DeathScreen(this.canvas, this.levelIndex);
             this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
         }
         else if (this.paused === true) {
@@ -312,10 +301,7 @@ KeyListener.KEY_Y = 89;
 KeyListener.KEY_Z = 90;
 class Level {
     constructor(canvas, player) {
-<<<<<<< HEAD
         this.totalScore = 0;
-=======
->>>>>>> 222f8b364dae7a49d0f0c4af6f2343954407e6bf
         this.scoringObject = new Array();
         this.speedSwitch = true;
         this.won = false;
@@ -417,13 +403,8 @@ class Level {
 class Level1 extends Level {
     constructor(canvas, player) {
         super(canvas, player);
-<<<<<<< HEAD
-        this.baseSpawnRate = 90;
-        this.maxPoints = 400;
-=======
         this.baseSpawnRate = 100;
         this.maxPoints = 100;
->>>>>>> 222f8b364dae7a49d0f0c4af6f2343954407e6bf
         this.speedMultiplier = 0, 5;
     }
 }
@@ -439,11 +420,7 @@ class Level3 extends Level {
     constructor(canvas, player) {
         super(canvas, player);
         this.baseSpawnRate = 75;
-<<<<<<< HEAD
-        this.maxPoints = 600;
-=======
         this.maxPoints = 400;
->>>>>>> 222f8b364dae7a49d0f0c4af6f2343954407e6bf
         this.speedMultiplier = 1;
     }
 }
@@ -485,18 +462,6 @@ class Level8 extends Level {
         this.baseSpawnRate = 50;
         this.maxPoints = 1600;
         this.speedMultiplier = 3.5;
-<<<<<<< HEAD
-    }
-}
-class LightningBolt extends ScoringObject {
-    constructor(canvas) {
-        super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/titled_yellow_power_icon.png");
-        this.speed = 7;
-        this.points = -10;
-        this._lives = 0;
-=======
->>>>>>> 222f8b364dae7a49d0f0c4af6f2343954407e6bf
     }
 }
 class Player {
@@ -545,20 +510,7 @@ class Player {
 class SilverCoin extends ScoringObject {
     constructor(canvas) {
         super(canvas);
-<<<<<<< HEAD
-        this.image = this.loadNewImage("assets/img/objects/tilted_cross.png");
-        this.speed = 6;
-        this.points = 0;
-        this._lives = -1;
-    }
-}
-class SilverTrophy extends ScoringObject {
-    constructor(canvas) {
-        super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/silver_trophy.png");
-=======
         this.image = this.loadNewImage("assets/img/objects/silvercoin.png");
->>>>>>> 222f8b364dae7a49d0f0c4af6f2343954407e6bf
         this.speed = 5;
         this.points = 5;
         this._lives = 0;
