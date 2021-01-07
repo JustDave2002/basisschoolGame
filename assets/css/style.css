@@ -77,3 +77,13 @@ a {
     text-decoration-color: rgba(255, 255, 255, 0.349);
     color: rgb(255, 255, 255);
 }
+.explainLeft {
+    float: left;
+    color:aliceblue
+}
+.controles {
+    
+    float: center;
+    color:aliceblue
+}
+
