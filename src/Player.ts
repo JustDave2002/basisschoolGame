@@ -14,6 +14,10 @@ class Player {
 
     private delay: Delay;
 
+    private Left:number = 0;
+    private Right:number = 0;
+
+    private log:HTMLElement;
     public constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
 
@@ -24,36 +28,43 @@ class Player {
         this.rightLane = this.canvas.width / 6 * 5;
 
         this.keyListener = new KeyListener();
-
+        this.log = document.getElementById('log')
         this.keyUp = true;
 
         this.image = this.loadNewImage("./assets/img/players/carplayer.png");
         this.positionX = this.canvas.width / 2;
     }
 
-    public async move() {
-        /**console.log(this.keyUp);
-        
-        if(this.keyUp == false){
-            this.delay.delay(500);
-            this.keyUp= true;
+    public move() {
+
+         if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT)) {
+             this.Left += 1;
+         } else {
+            this.Left = 0;
         }
-        
-        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.keyUp == true){
-            console.log("pressed");
-            await this.delay.delay(11500)
-        }*/
-        
-        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== this.leftLane) {
-            this.positionX = this.leftLane;
-        }
-        if (this.keyListener.isKeyDown(KeyListener.KEY_UP) && this.positionX !== this.middleLane) {
-            this.positionX = this.middleLane;
-        }
-        if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX !== this.rightLane) {
-            this.positionX = this.rightLane;
+        if (this.Left === 1) {
+
+            if (this.positionX == this.rightLane) {
+                this.positionX = this.middleLane;
+            } else if (this.positionX == this.middleLane) {
+                this.positionX = this.leftLane;
+            }
         } 
-    }
+
+        if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT)) {
+            this.Right += 1;
+            if (this.Right === 1) {
+                if (this.positionX == this.leftLane) {
+                    this.positionX = this.middleLane;
+                } else if (this.positionX == this.middleLane) {
+                    this.positionX = this.rightLane;
+                }
+            }
+         } else {
+            this.Right = 0;
+         }
+    } 
+    
 
     public draw(ctx: CanvasRenderingContext2D) {
         ctx.drawImage(

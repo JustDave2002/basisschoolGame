@@ -290,6 +290,69 @@ class Level {
         document.body.style.backgroundImage = img;
     }
 }
+class Player {
+    constructor(canvas) {
+        this.Left = 0;
+        this.Right = 0;
+        this.canvas = canvas;
+        this.delay = new Delay;
+        this.leftLane = this.canvas.width / 6;
+        this.middleLane = this.canvas.width / 2;
+        this.rightLane = this.canvas.width / 6 * 5;
+        this.keyListener = new KeyListener();
+        this.log = document.getElementById('log');
+        this.keyUp = true;
+        this.image = this.loadNewImage("./assets/img/players/carplayer.png");
+        this.positionX = this.canvas.width / 2;
+    }
+    move() {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT)) {
+            this.Left += 1;
+        }
+        else {
+            this.Left = 0;
+        }
+        if (this.Left === 1) {
+            if (this.positionX == this.rightLane) {
+                this.positionX = this.middleLane;
+            }
+            else if (this.positionX == this.middleLane) {
+                this.positionX = this.leftLane;
+            }
+        }
+        if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT)) {
+            this.Right += 1;
+            if (this.Right === 1) {
+                if (this.positionX == this.leftLane) {
+                    this.positionX = this.middleLane;
+                }
+                else if (this.positionX == this.middleLane) {
+                    this.positionX = this.rightLane;
+                }
+            }
+        }
+        else {
+            this.Right = 0;
+        }
+    }
+    draw(ctx) {
+        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 150);
+    }
+    collidesWith(scoringObject) {
+        if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()
+            && this.positionX + this.image.width > scoringObject.getPositionX()
+            && this.canvas.height - 150 < scoringObject.getPositionY() + scoringObject.getImageHeight()
+            && this.canvas.height - 150 + this.image.height > scoringObject.getPositionY()) {
+            return true;
+        }
+        return false;
+    }
+    loadNewImage(source) {
+        const img = new Image();
+        img.src = source;
+        return img;
+    }
+}
 class ScoringObject {
     constructor(canvas) {
         this.canvas = canvas;
@@ -462,49 +525,6 @@ class Heart extends ScoringObject {
         this.speed = 9;
         this.points = 0;
         this._lives = 1;
-    }
-}
-class Player {
-    constructor(canvas) {
-        this.canvas = canvas;
-        this.delay = new Delay;
-        this.leftLane = this.canvas.width / 6;
-        this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 6 * 5;
-        this.keyListener = new KeyListener();
-        this.keyUp = true;
-        this.image = this.loadNewImage("./assets/img/players/carplayer.png");
-        this.positionX = this.canvas.width / 2;
-    }
-    move() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== this.leftLane) {
-                this.positionX = this.leftLane;
-            }
-            if (this.keyListener.isKeyDown(KeyListener.KEY_UP) && this.positionX !== this.middleLane) {
-                this.positionX = this.middleLane;
-            }
-            if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX !== this.rightLane) {
-                this.positionX = this.rightLane;
-            }
-        });
-    }
-    draw(ctx) {
-        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 150);
-    }
-    collidesWith(scoringObject) {
-        if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()
-            && this.positionX + this.image.width > scoringObject.getPositionX()
-            && this.canvas.height - 150 < scoringObject.getPositionY() + scoringObject.getImageHeight()
-            && this.canvas.height - 150 + this.image.height > scoringObject.getPositionY()) {
-            return true;
-        }
-        return false;
-    }
-    loadNewImage(source) {
-        const img = new Image();
-        img.src = source;
-        return img;
     }
 }
 class SilverCoin extends ScoringObject {
