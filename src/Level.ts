@@ -168,4 +168,8 @@ abstract class Level {
     protected randomInteger(min: number, max: number): number {
         return Math.round(Math.random() * (max - min) + min);
     }
+
+    protected changeTheme(img: string) {
+        document.body.style.backgroundImage = img;
+    }
 }

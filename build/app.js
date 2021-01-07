@@ -399,6 +399,9 @@ class Level {
     randomInteger(min, max) {
         return Math.round(Math.random() * (max - min) + min);
     }
+    changeTheme(img) {
+        document.body.style.backgroundImage = img;
+    }
 }
 class Level1 extends Level {
     constructor(canvas, player) {
