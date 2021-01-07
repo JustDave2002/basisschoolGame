@@ -1,13 +1,15 @@
 /// <reference path="ScoringObject.ts"/>
 
-class GoldTrophy extends ScoringObject {
+class SilverCoin extends ScoringObject {
 
  
     public constructor(canvas: HTMLCanvasElement) {
         super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/gold_trophy.png");
+        this.image = this.loadNewImage("assets/img/objects/silvercoin.png");
         this.speed = 5;
-        this.points = 10;
+        this.points = 5;
         this._lives = 0;
     }
 }
+
+

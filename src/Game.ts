@@ -24,10 +24,14 @@ class Game {
     //9 is last level
     private levelIndex: number = 0;
     private levelArray: Level[];
+
+    private delay: Delay;
     
 
     public constructor(canvas: HTMLElement) {
         this.canvas = <HTMLCanvasElement>canvas;
+
+        this.delay = new Delay
 
         // Resize the canvas so it looks more like a Runner game
         this.canvas.width = 650;
@@ -112,7 +116,7 @@ class Game {
         if (this.keyListener.isKeyDown(KeyListener.KEY_ESC)) {
             this.paused = true
         } else if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
-            await this.delay(1000);
+            await this.delay.delay(1000);
             this.paused = false
         }
     }
@@ -128,7 +132,6 @@ class Game {
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.writeTextToCanvas(ctx,` Level: ${this.levelIndex}`, this.canvas.width / 2,  20, 18);
-        this.writeTextToCanvas(ctx, "UP arrow = middle | LEFT arrow = left | RIGHT arrow = right", this.canvas.width / 2, 40, 14);
         this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
         this.writeTextToCanvas(ctx, `Lives: ${this.level.getTotalLives()}`, this.canvas.width / 2 + 250, 20, 16);
 
@@ -193,13 +196,7 @@ class Game {
     }
 
 
-    /**
-     * pauses the game for ms amount of time
-     * @param ms amount of time in MS
-     */
-    private delay(ms: number) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    
 
 
 

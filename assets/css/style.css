@@ -1,10 +1,79 @@
-body {
+.gameBackground {
     overflow: hidden;
-    background-color: black;
+    background-image: url(../img/grass.jpg);
 }
 
 canvas{
-    background-color: lightblue;
+    background-image: url(../img/road.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: 0 auto;
     display: block;
+}
+
+button {
+    text-align: center;
+    background-color: #ff5100;
+    border: none;
+    color: white;
+    width: 500px;
+    height: 100px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 52px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+.Background{
+ overflow: hidden;
+ 
+ background-image: url(../img/backgroundPattern.png);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
+
+html {
+    height: 100%;
+    width: 100%;
+    font-family: 'Dosis', monospace;
+    overflow-y: hidden ! important;
+    overflow-x: hidden ! important;
+    background-color: #f8f8f8;
+    /*background-size: cover;*/
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+body {
+    text-align: center;
+}
+#header {
+    text-align: center;
+    background-color: #a7a7a7;
+    color: rgb(255, 255, 255);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 400px;
+    margin-right: 400px;
+}
+
+button {
+    text-align: center;
+    background-color: #ff5100;
+    border: none;
+    color: white;
+    width: 500px;
+    height: 100px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 52px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+a {
+    text-decoration-color: rgba(255, 255, 255, 0.349);
+    color: rgb(255, 255, 255);
 }

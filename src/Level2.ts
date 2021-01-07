@@ -1,3 +1,4 @@
+/// <reference path="level.ts"/>
 
 class Level2 extends Level {
 
@@ -6,8 +7,8 @@ class Level2 extends Level {
         //90 400 0
 
         super(canvas,player)
-    this.baseSpawnRate = 80; 
-     this.maxPoints= 600;
+    this.baseSpawnRate = 90; 
+     this.maxPoints= 200;
      this.speedMultiplier= 1;
     }
 }
