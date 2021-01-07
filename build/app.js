@@ -7,6 +7,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+class Screens {
+    constructor() {
+    }
+    draw() {
+    }
+}
+class DeathScreen extends Screens {
+    constructor(canvas, level) {
+        super();
+    }
+    draw() {
+        super.draw();
+        console.log("hi im ded");
+    }
+}
 class Game {
     constructor(canvas) {
         this.levelIndex = 0;
@@ -31,6 +46,13 @@ class Game {
         this.player = new Player(this.canvas);
         this.levelArray = [
             new Level1(this.canvas, this.player),
+            new Level2(this.canvas, this.player),
+            new Level3(this.canvas, this.player),
+            new Level4(this.canvas, this.player),
+            new Level5(this.canvas, this.player),
+            new Level6(this.canvas, this.player),
+            new Level7(this.canvas, this.player),
+            new Level8(this.canvas, this.player)
         ];
         this.advanceToNextLevel();
         this.frameIndex = 0;
@@ -65,6 +87,7 @@ class Game {
             this.writeTextToCanvas(ctx, `You Won!`, this.canvas.width / 2, 200, 40);
         }
         if (this.level.getTotalLives() <= 0) {
+            new DeathScreen(this.canvas, this.levelIndex);
             this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
         }
         else if (this.paused === true) {
@@ -243,7 +266,7 @@ KeyListener.KEY_Y = 89;
 KeyListener.KEY_Z = 90;
 class Level {
     constructor(canvas, player) {
-        this.totalScore = 390;
+        this.totalScore = 0;
         this.scoringObject = new Array();
         this.speedSwitch = true;
         this.won = false;
@@ -346,7 +369,7 @@ class Level1 extends Level {
         super(canvas, player);
         this.baseSpawnRate = 90;
         this.maxPoints = 400;
-        this.speedMultiplier = 0;
+        this.speedMultiplier = 0, 5;
     }
 }
 class Level2 extends Level {
@@ -355,6 +378,54 @@ class Level2 extends Level {
         this.baseSpawnRate = 80;
         this.maxPoints = 600;
         this.speedMultiplier = 1;
+    }
+}
+class Level3 extends Level {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.baseSpawnRate = 75;
+        this.maxPoints = 600;
+        this.speedMultiplier = 1;
+    }
+}
+class Level4 extends Level {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.baseSpawnRate = 70;
+        this.maxPoints = 800;
+        this.speedMultiplier = 1.5;
+    }
+}
+class Level5 extends Level {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.baseSpawnRate = 65;
+        this.maxPoints = 1000;
+        this.speedMultiplier = 2;
+    }
+}
+class Level6 extends Level {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.baseSpawnRate = 60;
+        this.maxPoints = 1200;
+        this.speedMultiplier = 2.5;
+    }
+}
+class Level7 extends Level {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.baseSpawnRate = 55;
+        this.maxPoints = 1400;
+        this.speedMultiplier = 3;
+    }
+}
+class Level8 extends Level {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.baseSpawnRate = 50;
+        this.maxPoints = 1600;
+        this.speedMultiplier = 3.5;
     }
 }
 class LightningBolt extends ScoringObject {
@@ -412,12 +483,6 @@ class RedCross extends ScoringObject {
         this.speed = 6;
         this.points = 0;
         this._lives = -1;
-    }
-}
-class Scene {
-    constructor() {
-    }
-    draw() {
     }
 }
 class SilverTrophy extends ScoringObject {
