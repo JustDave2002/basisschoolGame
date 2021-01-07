@@ -4,11 +4,7 @@
  */
 abstract class Level {
 
-<<<<<<< HEAD
     protected totalScore: number = 0;
-=======
-    protected totalScore: number;
->>>>>>> 222f8b364dae7a49d0f0c4af6f2343954407e6bf
 
 
     // The objects on the canvas
