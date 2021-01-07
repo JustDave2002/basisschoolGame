@@ -2,7 +2,7 @@
 /**
  * this class is responsible for the state of the level
  */
-abstract class Level {
+abstract class Level extends Screens {
 
     protected totalScore: number = 0;
 
@@ -23,7 +23,7 @@ abstract class Level {
     protected maxPoints: number;
 
     //TODO change when won
-    protected won: boolean = false;
+    
 
     protected frameIndex: number;
 
@@ -32,6 +32,7 @@ abstract class Level {
 
     constructor(canvas: HTMLCanvasElement, player: Player) {
 
+        super();
         this.canvas = canvas;
         this.player = player;
 
@@ -60,9 +61,7 @@ abstract class Level {
         return this.totalScore
     }
 
-    isComplete(): boolean {
-        return this.won
-    }
+    
 
 
 
@@ -98,14 +97,39 @@ abstract class Level {
         }
 
     }
+/**
+ * draws everything on screen for a level
+ * @param ctx 
+ * @param levelIndex shows which level the player is currently at
+ */
+    public draw(ctx:CanvasRenderingContext2D, levelIndex: number) {
 
-    public drawObjects(ctx: CanvasRenderingContext2D) {
+        this.writeTextToCanvas(ctx,` Level: ${levelIndex}`, this.canvas.width / 2,  20, 18);
+        this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
+        this.writeTextToCanvas(ctx, `Lives: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
+
+        this.drawScore(ctx);
+        this.drawObjects(ctx);
+    }
+    /**
+     * draws all objects within the level
+     * @param ctx 
+     */
+    protected drawObjects(ctx: CanvasRenderingContext2D) {
         this.scoringObject.forEach(
             (object) => {
                 if (object !== null) {
                     object.draw(ctx);
                 }
             });
+    }
+
+    /**
+     * Draw the score on a canvas
+     * @param ctx
+     */
+    protected drawScore(ctx: CanvasRenderingContext2D): void {
+        this.writeTextToCanvas(ctx, `Score: ${this.totalScore}`, this.canvas.width / 2, 45, 18);
     }
 
     public collision() {

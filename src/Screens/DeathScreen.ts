@@ -9,8 +9,8 @@ class DeathScreen extends Screens {
         super()
     
     }
-    public draw(){
-        super.draw();
+    public draw(ctx:CanvasRenderingContext2D){
+        //super.draw(ctx);
 
         
     }

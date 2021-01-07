@@ -9,7 +9,7 @@ class Game {
 
     
 
-    private level: Level;
+    
     // KeyListener so the user can give input
     private keyListener: KeyListener;
 
@@ -23,7 +23,11 @@ class Game {
     private paused: boolean;
     //9 is last level
     private levelIndex: number = 0;
+
     private levelArray: Level[];
+    private betweenLevel: LevelWon; 
+    private level: Level;
+
 
     private delay: Delay;
     
@@ -31,7 +35,7 @@ class Game {
     public constructor(canvas: HTMLElement) {
         this.canvas = <HTMLCanvasElement>canvas;
 
-        this.delay = new Delay
+        this.delay = new Delay;
 
         // Resize the canvas so it looks more like a Runner game
         this.canvas.width = 650;
@@ -48,9 +52,9 @@ class Game {
             new Level5(this.canvas, this.player),
             new Level6(this.canvas, this.player),
             new Level7(this.canvas, this.player),
-            new Level8(this.canvas, this.player)
-        ]
-        this.advanceToNextLevel();
+            new Level8(this.canvas, this.player)]
+            this.betweenLevel = new LevelWon(this.canvas);
+        this.newLevel();
 
         
 
@@ -103,11 +107,19 @@ class Game {
 
     private advanceToNextLevel() {
         
-        this.level = this.levelArray[this.levelIndex];
-        this.levelIndex ++
+
+        if (this.betweenLevel.isComplete()) {
+
+        this.newLevel();
+    }
     }
 
     
+
+    private newLevel() {
+        this.level = this.levelArray[this.levelIndex];
+        this.levelIndex++;
+    }
 
     /**
      * pauses the game on button press and start back up 1000 ms after pressing start
@@ -131,14 +143,9 @@ class Game {
         // Clear the entire canvas 
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.writeTextToCanvas(ctx,` Level: ${this.levelIndex}`, this.canvas.width / 2,  20, 18);
-        this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
-        this.writeTextToCanvas(ctx, `Lives: ${this.level.getTotalLives()}`, this.canvas.width / 2 + 250, 20, 16);
+        
 
-        //writes you won when you win
-        if (this.level.isComplete()  === true) {
-            this.writeTextToCanvas(ctx, `You Won!`, this.canvas.width / 2, 200, 40);
-        }
+        
         //writes you lost when you lost
         if (this.level.getTotalLives() <= 0) {
             this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
@@ -149,24 +156,18 @@ class Game {
             this.writeTextToCanvas(ctx, `Press P to start`, this.canvas.width / 2, 250, 35);
         }
 
-        this.drawScore(ctx);
+        
 
+        if (this.level.isComplete() === false) {
+          this.level.draw(ctx, this.levelIndex);  
+        } else if (this.level.isComplete() === true){
+
+            this.betweenLevel.draw();
+        }
+        
         this.player.draw(ctx);
-
-        //draws each object
-        this.level.drawObjects(ctx);
+        
     }
-
-    
-
-    /**
-     * Draw the score on a canvas
-     * @param ctx
-     */
-    private drawScore(ctx: CanvasRenderingContext2D): void {
-        this.writeTextToCanvas(ctx, `Score: ${this.level.getTotalScore()}`, this.canvas.width / 2, 80, 16);
-    }
-
     /**
      * Create a random scoring object and clear the other scoring objects by setting them to `null`.
      */
@@ -180,25 +181,18 @@ class Game {
    * @param {string} alignment - Where to align the text
    * @param {string} color - The color of the text
    */
-    public writeTextToCanvas(
-        ctx: CanvasRenderingContext2D,
-        text: string,
-        xCoordinate: number,
-        yCoordinate: number,
-        fontSize: number = 20,
-        color: string = "red",
-        alignment: CanvasTextAlign = "center"
-    ) {
-        ctx.font = `${fontSize}px sans-serif`;
-        ctx.fillStyle = color;
-        ctx.textAlign = alignment;
-        ctx.fillText(text, xCoordinate, yCoordinate);
-    }
-
-
-    
-
-
-
-    
+  protected writeTextToCanvas(
+    ctx: CanvasRenderingContext2D,
+    text: string,
+    xCoordinate: number,
+    yCoordinate: number,
+    fontSize: number = 20,
+    color: string = "red",
+    alignment: CanvasTextAlign = "center"
+) {
+    ctx.font = `${fontSize}px sans-serif`;
+    ctx.fillStyle = color;
+    ctx.textAlign = alignment;
+    ctx.fillText(text, xCoordinate, yCoordinate);
+}
 }

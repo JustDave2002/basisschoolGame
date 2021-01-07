@@ -8,7 +8,7 @@ class Level1 extends Level {
 
         super(canvas,player)
     this.baseSpawnRate = 100; 
-     this.maxPoints= 100;
+     this.maxPoints= 10;
      this.speedMultiplier= 0,5;
     }
 }

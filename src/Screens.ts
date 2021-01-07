@@ -1,13 +1,20 @@
 abstract class Screens{
 
+    protected won: boolean = false;
+
+    protected keyListener: KeyListener = new KeyListener
+    
     protected constructor(){
 
         
     }
-
-    protected draw() {
-        
+    isComplete(): boolean {
+        return this.won
     }
+
+    //protected draw(ctx:CanvasRenderingContext2D) {
+        
+    //}
 
     /**
      * Create a random scoring object and clear the other scoring objects by setting them to `null`.
@@ -22,7 +29,7 @@ abstract class Screens{
    * @param {string} alignment - Where to align the text
    * @param {string} color - The color of the text
    */
-  public writeTextToCanvas(
+  protected writeTextToCanvas(
     ctx: CanvasRenderingContext2D,
     text: string,
     xCoordinate: number,

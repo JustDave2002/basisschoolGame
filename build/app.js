@@ -47,7 +47,8 @@ class Game {
             new Level7(this.canvas, this.player),
             new Level8(this.canvas, this.player)
         ];
-        this.advanceToNextLevel();
+        this.betweenLevel = new LevelWon(this.canvas);
+        this.newLevel();
         this.frameIndex = 0;
         this.paused = true;
         this.keyListener = new KeyListener();
@@ -55,6 +56,11 @@ class Game {
         requestAnimationFrame(this.step);
     }
     advanceToNextLevel() {
+        if (this.betweenLevel.isComplete()) {
+            this.newLevel();
+        }
+    }
+    newLevel() {
         this.level = this.levelArray[this.levelIndex];
         this.levelIndex++;
     }
@@ -72,12 +78,6 @@ class Game {
     draw() {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
-        this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
-        this.writeTextToCanvas(ctx, `Lives: ${this.level.getTotalLives()}`, this.canvas.width / 2 + 250, 20, 16);
-        if (this.level.isComplete() === true) {
-            this.writeTextToCanvas(ctx, `You Won!`, this.canvas.width / 2, 200, 40);
-        }
         if (this.level.getTotalLives() <= 0) {
             this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
         }
@@ -85,12 +85,13 @@ class Game {
             this.writeTextToCanvas(ctx, `Paused`, this.canvas.width / 2, 200, 40);
             this.writeTextToCanvas(ctx, `Press P to start`, this.canvas.width / 2, 250, 35);
         }
-        this.drawScore(ctx);
+        if (this.level.isComplete() === false) {
+            this.level.draw(ctx, this.levelIndex);
+        }
+        else if (this.level.isComplete() === true) {
+            this.betweenLevel.draw();
+        }
         this.player.draw(ctx);
-        this.level.drawObjects(ctx);
-    }
-    drawScore(ctx) {
-        this.writeTextToCanvas(ctx, `Score: ${this.level.getTotalScore()}`, this.canvas.width / 2, 80, 16);
     }
     writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
         ctx.font = `${fontSize}px sans-serif`;
@@ -176,8 +177,11 @@ KeyListener.KEY_Y = 89;
 KeyListener.KEY_Z = 90;
 class Screens {
     constructor() {
+        this.won = false;
+        this.keyListener = new KeyListener;
     }
-    draw() {
+    isComplete() {
+        return this.won;
     }
     writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
         ctx.font = `${fontSize}px sans-serif`;
@@ -186,12 +190,12 @@ class Screens {
         ctx.fillText(text, xCoordinate, yCoordinate);
     }
 }
-class Level {
+class Level extends Screens {
     constructor(canvas, player) {
+        super();
         this.totalScore = 0;
         this.scoringObject = new Array();
         this.speedSwitch = true;
-        this.won = false;
         this.canvas = canvas;
         this.player = player;
         this.totalLives = 5;
@@ -206,9 +210,6 @@ class Level {
     }
     getTotalScore() {
         return this.totalScore;
-    }
-    isComplete() {
-        return this.won;
     }
     logic(frameIndex) {
         this.frameIndex = frameIndex;
@@ -236,12 +237,22 @@ class Level {
             this.frameIndex = 0;
         }
     }
+    draw(ctx, levelIndex) {
+        this.writeTextToCanvas(ctx, ` Level: ${levelIndex}`, this.canvas.width / 2, 20, 18);
+        this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
+        this.writeTextToCanvas(ctx, `Lives: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
+        this.drawScore(ctx);
+        this.drawObjects(ctx);
+    }
     drawObjects(ctx) {
         this.scoringObject.forEach((object) => {
             if (object !== null) {
                 object.draw(ctx);
             }
         });
+    }
+    drawScore(ctx) {
+        this.writeTextToCanvas(ctx, `Score: ${this.totalScore}`, this.canvas.width / 2, 45, 18);
     }
     collision() {
         this.scoringObject.forEach((object, index) => {
@@ -288,6 +299,49 @@ class Level {
     }
     changeTheme(img) {
         document.body.style.backgroundImage = img;
+    }
+}
+class Player {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.delay = new Delay;
+        this.leftLane = this.canvas.width / 6;
+        this.middleLane = this.canvas.width / 2;
+        this.rightLane = this.canvas.width / 6 * 5;
+        this.keyListener = new KeyListener();
+        this.keyUp = true;
+        this.image = this.loadNewImage("./assets/img/players/carplayer.png");
+        this.positionX = this.canvas.width / 2;
+    }
+    move() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== this.leftLane) {
+                this.positionX = this.leftLane;
+            }
+            if (this.keyListener.isKeyDown(KeyListener.KEY_UP) && this.positionX !== this.middleLane) {
+                this.positionX = this.middleLane;
+            }
+            if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX !== this.rightLane) {
+                this.positionX = this.rightLane;
+            }
+        });
+    }
+    draw(ctx) {
+        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 150);
+    }
+    collidesWith(scoringObject) {
+        if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()
+            && this.positionX + this.image.width > scoringObject.getPositionX()
+            && this.canvas.height - 150 < scoringObject.getPositionY() + scoringObject.getImageHeight()
+            && this.canvas.height - 150 + this.image.height > scoringObject.getPositionY()) {
+            return true;
+        }
+        return false;
+    }
+    loadNewImage(source) {
+        const img = new Image();
+        img.src = source;
+        return img;
     }
 }
 class ScoringObject {
@@ -359,7 +413,7 @@ class Level1 extends Level {
     constructor(canvas, player) {
         super(canvas, player);
         this.baseSpawnRate = 100;
-        this.maxPoints = 100;
+        this.maxPoints = 10;
         this.speedMultiplier = 0, 5;
     }
 }
@@ -464,49 +518,6 @@ class Heart extends ScoringObject {
         this._lives = 1;
     }
 }
-class Player {
-    constructor(canvas) {
-        this.canvas = canvas;
-        this.delay = new Delay;
-        this.leftLane = this.canvas.width / 6;
-        this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 6 * 5;
-        this.keyListener = new KeyListener();
-        this.keyUp = true;
-        this.image = this.loadNewImage("./assets/img/players/carplayer.png");
-        this.positionX = this.canvas.width / 2;
-    }
-    move() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== this.leftLane) {
-                this.positionX = this.leftLane;
-            }
-            if (this.keyListener.isKeyDown(KeyListener.KEY_UP) && this.positionX !== this.middleLane) {
-                this.positionX = this.middleLane;
-            }
-            if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX !== this.rightLane) {
-                this.positionX = this.rightLane;
-            }
-        });
-    }
-    draw(ctx) {
-        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 150);
-    }
-    collidesWith(scoringObject) {
-        if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()
-            && this.positionX + this.image.width > scoringObject.getPositionX()
-            && this.canvas.height - 150 < scoringObject.getPositionY() + scoringObject.getImageHeight()
-            && this.canvas.height - 150 + this.image.height > scoringObject.getPositionY()) {
-            return true;
-        }
-        return false;
-    }
-    loadNewImage(source) {
-        const img = new Image();
-        img.src = source;
-        return img;
-    }
-}
 class SilverCoin extends ScoringObject {
     constructor(canvas) {
         super(canvas);
@@ -520,8 +531,25 @@ class DeathScreen extends Screens {
     constructor(canvas, level) {
         super();
     }
+    draw(ctx) {
+    }
+}
+class LevelWon extends Screens {
+    constructor(canvas) {
+        super();
+        this.canvas = canvas;
+        this.draw();
+    }
     draw() {
-        super.draw();
+        const ctx = this.canvas.getContext('2d');
+        this.writeTextToCanvas(ctx, `You won the level!`, this.canvas.width / 2, 200, 40);
+        this.writeTextToCanvas(ctx, `Press P to start the next level`, this.canvas.width / 2, 250, 40);
+        if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+            this.pog = true;
+        }
+    }
+    isComplete() {
+        return this.pog;
     }
 }
 //# sourceMappingURL=app.js.map

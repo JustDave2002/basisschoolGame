@@ -1,0 +1,31 @@
+/// <reference path="../Screens.ts"/>
+
+class LevelWon extends Screens {
+
+    private pog: boolean;
+    private canvas: HTMLCanvasElement
+    public constructor(canvas: HTMLCanvasElement) {
+        super()
+        this.canvas = canvas
+    
+        this.draw()
+    }
+    public draw(){
+
+        
+        // Get the canvas rendering context
+        const ctx = this.canvas.getContext('2d');
+
+        this.writeTextToCanvas(ctx, `You won the level!`, this.canvas.width / 2, 200, 40);
+        this.writeTextToCanvas(ctx, `Press P to start the next level`, this.canvas.width / 2, 250, 40);
+
+        if (this.keyListener.isKeyDown(KeyListener.KEY_P)){
+            this.pog = true;
+        }
+    }
+
+    
+    isComplete(): boolean {
+        return this.pog
+    }
+}
