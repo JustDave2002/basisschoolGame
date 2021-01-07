@@ -369,7 +369,7 @@ class ScoringObject {
         if (random === 3) {
             this.positionX = this.rightLane;
         }
-        this.positionY = 60;
+        this.positionY = -50;
     }
     move() {
         this.positionY += this.speed;
