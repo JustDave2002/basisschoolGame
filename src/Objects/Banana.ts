@@ -1,4 +1,4 @@
-/// <reference path="ScoringObject.ts"/>
+/// <reference path="../ScoringObject.ts"/>
 
 class Banana extends ScoringObject {
 

@@ -1,5 +1,5 @@
 
-/// <reference path="ScoringObject.ts"/>
+/// <reference path="../ScoringObject.ts"/>
 
 class Heart extends ScoringObject {
 

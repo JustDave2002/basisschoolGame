@@ -1,4 +1,4 @@
-/// <reference path="ScoringObject.ts"/>
+/// <reference path="../ScoringObject.ts"/>
 
 class SilverCoin extends ScoringObject {
 

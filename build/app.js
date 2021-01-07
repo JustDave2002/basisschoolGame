@@ -7,113 +7,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class ScoringObject {
-    constructor(canvas) {
-        this.canvas = canvas;
-        this.leftLane = this.canvas.width / 6;
-        this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 6 * 5;
-        const random = this.randomInteger(1, 3);
-        if (random === 1) {
-            this.positionX = this.leftLane;
-        }
-        if (random === 2) {
-            this.positionX = this.middleLane;
-        }
-        if (random === 3) {
-            this.positionX = this.rightLane;
-        }
-        this.positionY = 60;
-    }
-    move() {
-        this.positionY += this.speed;
-    }
-    draw(ctx) {
-        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.positionY);
-    }
-    collidesWithCanvasBottom() {
-        if (this.positionY + this.image.height > this.canvas.height) {
-            return true;
-        }
-        return false;
-    }
-    getPositionX() {
-        return this.positionX;
-    }
-    getPositionY() {
-        return this.positionY;
-    }
-    getImageWidth() {
-        return this.image.width;
-    }
-    getImageHeight() {
-        return this.image.height;
-    }
-    getPoints() {
-        return this.points;
-    }
-    getLives() {
-        return this._lives;
-    }
-    setSpeed(v) {
-        this.speed += v;
-    }
-    loadNewImage(source) {
-        const img = new Image();
-        img.src = source;
-        return img;
-    }
-    randomInteger(min, max) {
-        return Math.round(Math.random() * (max - min) + min);
-    }
-}
-class Banana extends ScoringObject {
-    constructor(canvas) {
-        super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/banana.png");
-        this.speed = 7;
-        this.points = -10;
-        this._lives = 0;
-    }
-}
-class Box extends ScoringObject {
-    constructor(canvas) {
-        super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/box1.png");
-        this.speed = 7;
-        this.points = 0;
-        this._lives = -1;
-    }
-}
-class Cone extends ScoringObject {
-    constructor(canvas) {
-        super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/cone.png");
-        this.speed = 6;
-        this.points = 0;
-        this._lives = -1;
-    }
-}
-class Screens {
-    constructor() {
-    }
-    draw() {
-    }
-    writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
-        ctx.font = `${fontSize}px sans-serif`;
-        ctx.fillStyle = color;
-        ctx.textAlign = alignment;
-        ctx.fillText(text, xCoordinate, yCoordinate);
-    }
-}
-class DeathScreen extends Screens {
-    constructor(canvas, level) {
-        super();
-    }
-    draw() {
-        super.draw();
-    }
-}
 class Delay {
     constructor() {
     }
@@ -206,24 +99,6 @@ class Game {
         ctx.fillText(text, xCoordinate, yCoordinate);
     }
 }
-class GoldCoin extends ScoringObject {
-    constructor(canvas) {
-        super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/goldcoin.png");
-        this.speed = 5;
-        this.points = 10;
-        this._lives = 0;
-    }
-}
-class Heart extends ScoringObject {
-    constructor(canvas) {
-        super(canvas);
-        this.image = this.loadNewImage("assets/img/objects/heart.png");
-        this.speed = 9;
-        this.points = 0;
-        this._lives = 1;
-    }
-}
 class KeyListener {
     constructor() {
         this.keyCodeStates = new Array();
@@ -299,6 +174,18 @@ KeyListener.KEY_W = 87;
 KeyListener.KEY_X = 88;
 KeyListener.KEY_Y = 89;
 KeyListener.KEY_Z = 90;
+class Screens {
+    constructor() {
+    }
+    draw() {
+    }
+    writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
+        ctx.font = `${fontSize}px sans-serif`;
+        ctx.fillStyle = color;
+        ctx.textAlign = alignment;
+        ctx.fillText(text, xCoordinate, yCoordinate);
+    }
+}
 class Level {
     constructor(canvas, player) {
         this.totalScore = 0;
@@ -403,6 +290,71 @@ class Level {
         document.body.style.backgroundImage = img;
     }
 }
+class ScoringObject {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.leftLane = this.canvas.width / 6;
+        this.middleLane = this.canvas.width / 2;
+        this.rightLane = this.canvas.width / 6 * 5;
+        const random = this.randomInteger(1, 3);
+        if (random === 1) {
+            this.positionX = this.leftLane;
+        }
+        if (random === 2) {
+            this.positionX = this.middleLane;
+        }
+        if (random === 3) {
+            this.positionX = this.rightLane;
+        }
+        this.positionY = 60;
+    }
+    move() {
+        this.positionY += this.speed;
+    }
+    draw(ctx) {
+        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.positionY);
+    }
+    collidesWithCanvasBottom() {
+        if (this.positionY + this.image.height > this.canvas.height) {
+            return true;
+        }
+        return false;
+    }
+    getPositionX() {
+        return this.positionX;
+    }
+    getPositionY() {
+        return this.positionY;
+    }
+    getImageWidth() {
+        return this.image.width;
+    }
+    getImageHeight() {
+        return this.image.height;
+    }
+    getPoints() {
+        return this.points;
+    }
+    getLives() {
+        return this._lives;
+    }
+    setSpeed(v) {
+        this.speed += v;
+    }
+    loadNewImage(source) {
+        const img = new Image();
+        img.src = source;
+        return img;
+    }
+    randomInteger(min, max) {
+        return Math.round(Math.random() * (max - min) + min);
+    }
+}
+console.log("Javascript is working!");
+window.addEventListener('load', () => {
+    console.log("Handling the Load event");
+    const game = new Game(document.getElementById('canvas'));
+});
 class Level1 extends Level {
     constructor(canvas, player) {
         super(canvas, player);
@@ -467,6 +419,51 @@ class Level8 extends Level {
         this.speedMultiplier = 3.5;
     }
 }
+class Banana extends ScoringObject {
+    constructor(canvas) {
+        super(canvas);
+        this.image = this.loadNewImage("assets/img/objects/banana.png");
+        this.speed = 7;
+        this.points = -10;
+        this._lives = 0;
+    }
+}
+class Box extends ScoringObject {
+    constructor(canvas) {
+        super(canvas);
+        this.image = this.loadNewImage("assets/img/objects/box1.png");
+        this.speed = 7;
+        this.points = 0;
+        this._lives = -1;
+    }
+}
+class Cone extends ScoringObject {
+    constructor(canvas) {
+        super(canvas);
+        this.image = this.loadNewImage("assets/img/objects/cone.png");
+        this.speed = 6;
+        this.points = 0;
+        this._lives = -1;
+    }
+}
+class GoldCoin extends ScoringObject {
+    constructor(canvas) {
+        super(canvas);
+        this.image = this.loadNewImage("assets/img/objects/goldcoin.png");
+        this.speed = 5;
+        this.points = 10;
+        this._lives = 0;
+    }
+}
+class Heart extends ScoringObject {
+    constructor(canvas) {
+        super(canvas);
+        this.image = this.loadNewImage("assets/img/objects/heart.png");
+        this.speed = 9;
+        this.points = 0;
+        this._lives = 1;
+    }
+}
 class Player {
     constructor(canvas) {
         this.canvas = canvas;
@@ -519,9 +516,12 @@ class SilverCoin extends ScoringObject {
         this._lives = 0;
     }
 }
-console.log("Javascript is working!");
-window.addEventListener('load', () => {
-    console.log("Handling the Load event");
-    const game = new Game(document.getElementById('canvas'));
-});
+class DeathScreen extends Screens {
+    constructor(canvas, level) {
+        super();
+    }
+    draw() {
+        super.draw();
+    }
+}
 //# sourceMappingURL=app.js.map

@@ -1,4 +1,4 @@
-/// <reference path="ScoringObject.ts"/>
+/// <reference path="../ScoringObject.ts"/>
 
 class Box extends ScoringObject {
 
