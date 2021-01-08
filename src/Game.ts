@@ -9,11 +9,11 @@ class Game {
 
   
     //9 is last level
-    private levelIndex: number = 0;
+    private screenIndex: number = 0;
 
-    private levelArray: Screens[];
+    private screenArray: Screens[];
     
-    private level: Screens;
+    private currentScreen: Screens;
 
 
     public constructor(canvas: HTMLElement) {
@@ -26,7 +26,7 @@ class Game {
         // Set the player at the center
         this.player = new Player(this.canvas);
 
-        this.levelArray = [
+        this.screenArray = [
             new Level1(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level2(this.canvas, this.player),
@@ -41,7 +41,8 @@ class Game {
             new LevelWon(this.canvas),
             new Level7(this.canvas, this.player),
             new LevelWon(this.canvas),
-            new Level8(this.canvas, this.player)]
+            new Level8(this.canvas, this.player)
+        new GameWon(this.canvas)]
 
         this.advanceToNextLevel();
 
@@ -62,9 +63,9 @@ class Game {
      */
     step = () => {
 
-        this.level.gameLogic();
+        this.currentScreen.gameLogic();
 
-        if (this.level.getState()== ScreenState.NEXT_SCREEN){
+        if (this.currentScreen.getState()== ScreenState.NEXT_SCREEN){
             this.advanceToNextLevel();
         }
 
@@ -76,8 +77,8 @@ class Game {
     }
 
     private advanceToNextLevel() {
-        this.level = this.levelArray[this.levelIndex];
-        this.levelIndex++;
+        this.currentScreen = this.screenArray[this.screenIndex];
+        this.screenIndex++;
 
     }
 
@@ -95,11 +96,11 @@ class Game {
 
         
         //writes you lost when you lost
-        if (this.level.getState()== ScreenState.DIED) {
+        if (this.currentScreen.getState()== ScreenState.DIED) {
             this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
         }
         //writes the pause message when game is paused
-        else if (this.level.getState()== ScreenState.PAUSED) {
+        else if (this.currentScreen.getState()== ScreenState.PAUSED) {
             this.writeTextToCanvas(ctx, `Paused`, this.canvas.width / 2, 200, 40);
             this.writeTextToCanvas(ctx, `Press P to start`, this.canvas.width / 2, 250, 35);
         }
@@ -107,7 +108,7 @@ class Game {
         
 
        
-        this.level.draw(ctx);  
+        this.currentScreen.draw(ctx);  
         
         
         this.player.draw(ctx);

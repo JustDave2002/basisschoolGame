@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 class Game {
     constructor(canvas) {
-        this.levelIndex = 0;
+        this.screenIndex = 0;
         this.step = () => {
-            this.level.gameLogic();
-            if (this.level.getState() == ScreenState.NEXT_SCREEN) {
+            this.currentScreen.gameLogic();
+            if (this.currentScreen.getState() == ScreenState.NEXT_SCREEN) {
                 this.advanceToNextLevel();
             }
             this.draw();
@@ -22,7 +22,7 @@ class Game {
         this.canvas.width = 650;
         this.canvas.height = window.innerHeight;
         this.player = new Player(this.canvas);
-        this.levelArray = [
+        this.screenArray = [
             new Level1(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level2(this.canvas, this.player),
@@ -44,20 +44,20 @@ class Game {
         requestAnimationFrame(this.step);
     }
     advanceToNextLevel() {
-        this.level = this.levelArray[this.levelIndex];
-        this.levelIndex++;
+        this.currentScreen = this.screenArray[this.screenIndex];
+        this.screenIndex++;
     }
     draw() {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        if (this.level.getState() == ScreenState.DIED) {
+        if (this.currentScreen.getState() == ScreenState.DIED) {
             this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
         }
-        else if (this.level.getState() == ScreenState.PAUSED) {
+        else if (this.currentScreen.getState() == ScreenState.PAUSED) {
             this.writeTextToCanvas(ctx, `Paused`, this.canvas.width / 2, 200, 40);
             this.writeTextToCanvas(ctx, `Press P to start`, this.canvas.width / 2, 250, 35);
         }
-        this.level.draw(ctx);
+        this.currentScreen.draw(ctx);
         this.player.draw(ctx);
     }
     writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
@@ -180,8 +180,8 @@ class Level extends Screens {
             if (this.totalScore >= this.maxPoints) {
                 this.state = ScreenState.NEXT_SCREEN;
             }
-            if (this.totalScore < 0) {
-                this.totalLives = 0;
+            if (this.totalScore < 0 || this.totalLives <= 0) {
+                this.state = ScreenState.DIED;
             }
             const number = this.totalScore / 20;
             let difficultyVariable = this.baseSpawnRate - number;
@@ -196,9 +196,23 @@ class Level extends Screens {
                 this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
             }
             if (this.frameIndex >= difficultyVariable) {
-                console.log(difficultyVariable);
-                this.createRandomScoringObject();
-                this.frameIndex = 0;
+                const number = this.totalScore / 20;
+                let difficultyVariable = this.baseSpawnRate - number;
+                if (difficultyVariable < 15) {
+                    difficultyVariable = 15;
+                }
+                if (this.speedBoost < 5 && this.speedSwitch === true) {
+                    this.speedBoost = this.totalScore * 0.015;
+                }
+                else {
+                    this.speedSwitch = false;
+                    this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
+                }
+                if (this.frameIndex >= difficultyVariable) {
+                    console.log(difficultyVariable);
+                    this.createRandomScoringObject();
+                    this.frameIndex = 0;
+                }
             }
         }
     }
@@ -213,32 +227,12 @@ class Level extends Screens {
             }
         });
     }
-
-    logic(frameIndex) {
-        this.frameIndex = frameIndex;
-        if (this.totalScore >= this.maxPoints) {
-            this.won = true;
-        }
-        if (this.totalScore < 0) {
-            this.totalLives = 0;
-        }
-        const number = this.totalScore / 20;
-        let difficultyVariable = this.baseSpawnRate - number;
-        if (difficultyVariable < 15) {
-            difficultyVariable = 15;
-        }
-        if (this.speedBoost < 5 && this.speedSwitch === true) {
-            this.speedBoost = this.totalScore * 0.015;
-        }
-        else {
-            this.speedSwitch = false;
-            this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
-        }
-        if (frameIndex >= difficultyVariable) {
-            this.createRandomScoringObject();
-            this.frameIndex = 0;
-        }
-
+    draw(ctx) {
+        this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
+        this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
+        this.writeTextToCanvas(ctx, `Lives: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
+        this.drawScore(ctx);
+        this.drawObjects(ctx);
     }
     drawObjects(ctx) {
         this.scoringObject.forEach((object) => {
@@ -301,50 +295,9 @@ class Level extends Screens {
 }
 class Player {
     constructor(canvas) {
-        this.canvas = canvas;
-        this.leftLane = this.canvas.width / 6;
-        this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 6 * 5;
-        this.keyListener = new KeyListener();
-        this.keyUp = true;
-        this.image = this.loadNewImage("./assets/img/players/carplayer.png");
-        this.positionX = this.canvas.width / 2;
-    }
-    move() {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== this.leftLane) {
-            this.positionX = this.leftLane;
-        }
-        if (this.keyListener.isKeyDown(KeyListener.KEY_UP) && this.positionX !== this.middleLane) {
-            this.positionX = this.middleLane;
-        }
-        if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX !== this.rightLane) {
-            this.positionX = this.rightLane;
-        }
-    }
-    draw(ctx) {
-        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 150);
-    }
-    collidesWith(scoringObject) {
-        if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()
-            && this.positionX + this.image.width > scoringObject.getPositionX()
-            && this.canvas.height - 150 < scoringObject.getPositionY() + scoringObject.getImageHeight()
-            && this.canvas.height - 150 + this.image.height > scoringObject.getPositionY()) {
-            return true;
-        }
-        return false;
-    }
-    loadNewImage(source) {
-        const img = new Image();
-        img.src = source;
-        return img;
-    }
-}
-class Player {
-    constructor(canvas) {
         this.Left = 0;
         this.Right = 0;
         this.canvas = canvas;
-        this.delay = new Delay;
         this.leftLane = this.canvas.width / 6;
         this.middleLane = this.canvas.width / 2;
         this.rightLane = this.canvas.width / 6 * 5;
@@ -624,6 +577,21 @@ class SilverCoin extends ScoringObject {
         this.speed = 5;
         this.points = 5;
         this._lives = 0;
+    }
+}
+class GameWon extends Screens {
+    constructor(canvas) {
+        super();
+        this.canvas = canvas;
+    }
+    gameLogic() {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+            this.state = ScreenState.NEXT_SCREEN;
+        }
+    }
+    draw() {
+        const ctx = this.canvas.getContext('2d');
+        this.writeTextToCanvas(ctx, `You won the Game!`, this.canvas.width / 2, 200, 40);
     }
 }
 class LevelWon extends Screens {

@@ -78,8 +78,8 @@ abstract class Level extends Screens {
                 this.state = ScreenState.NEXT_SCREEN;
             }
             //makes you lose if you have minus points
-            if (this.totalScore < 0) {
-                this.totalLives = 0;
+            if (this.totalScore < 0|| this.totalLives <= 0) {
+                this.state = ScreenState.DIED
             }
 
 
@@ -95,7 +95,7 @@ abstract class Level extends Screens {
             this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
         }
         //spawns an item every x frames & decides the speed boost and frequency of items
-        if (frameIndex >= difficultyVariable) {
+        if (this.frameIndex >= difficultyVariable) {
             //console.log(difficultyVariable);
 
 
@@ -119,6 +119,7 @@ abstract class Level extends Screens {
             }
         }
     }
+}
 
     /**
      * pauses the game on button press and start back up 1000 ms after pressing start
