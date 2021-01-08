@@ -39,7 +39,7 @@ class Game {
     /**
      * loads an instance of the game
      */
-    private load(screenIndex:number){
+    private load(screenIndex: number) {
 
         this.screenIndex = screenIndex;
         // Set the player at the center
@@ -61,7 +61,7 @@ class Game {
             new Level6(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level7(this.canvas, this.player),
-            new LevelWon(this.canvas), 
+            new LevelWon(this.canvas),
             new Level8(this.canvas, this.player),
             new GameWon(this.canvas),
             new DeathScreen(this.canvas)]
@@ -83,7 +83,7 @@ class Game {
     private animate = () => {
 
         console.log(this.screenIndex);
-        
+
         // request another frame
 
         requestAnimationFrame(this.animate);
@@ -106,13 +106,13 @@ class Game {
 
             if (this.currentScreen.getState() == ScreenState.NEXT_SCREEN) {
                 this.advanceToNextLevel();
-            } 
-            else if (this.currentScreen.getState() == ScreenState.RESTART){
+            }
+            else if (this.currentScreen.getState() == ScreenState.RESTART) {
                 this.load(1);
-            }else if (this.currentScreen.getState() == ScreenState.DIED){
+            } else if (this.currentScreen.getState() == ScreenState.DIED) {
                 this.screenIndex = this.screenArray.length - 1;
                 this.advanceToNextLevel();
-               
+
             }
 
 
@@ -120,8 +120,8 @@ class Game {
 
 
             let sinceStart = this.now - this.startTime;
-        let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
-        //console.log("Elapsed time= " + Math.round(sinceStart / 1000 * 100) / 100 + " secs @ " + currentFps + " fps.");
+            let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
+            //console.log("Elapsed time= " + Math.round(sinceStart / 1000 * 100) / 100 + " secs @ " + currentFps + " fps.");
         }
     }
 
@@ -167,14 +167,14 @@ class Game {
 
 
         //writes you lost when you lost
-        
 
 
 
 
-            this.currentScreen.draw(ctx);
 
-        
+        this.currentScreen.draw(ctx);
+
+
         this.player.draw(ctx);
 
     }

@@ -1,4 +1,4 @@
-enum ScreenState{
+enum ScreenState {
     PLAYING,
     NEXT_SCREEN,
     DIED,
