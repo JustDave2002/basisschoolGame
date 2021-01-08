@@ -100,7 +100,7 @@ class Player {
 
             if (this.positionX >= goToCoords) {
                 //console.log("moving 15 px");
-                this.positionX = this.positionX - 10;
+                this.positionX = this.positionX - 22;
 
                 if (this.positionX < goToCoords) {
                     this.positionX = goToCoords;
@@ -109,7 +109,7 @@ class Player {
         } else if (this.goLeft == false) {
             if (this.positionX <= goToCoords) {
                 //console.log("moving 15 px");
-                this.positionX = this.positionX + 10;
+                this.positionX = this.positionX + 22;
                 if (this.positionX > goToCoords) {
                     this.positionX = goToCoords;
                 }

@@ -41,8 +41,8 @@ class Game {
             new LevelWon(this.canvas),
             new Level7(this.canvas, this.player),
             new LevelWon(this.canvas),
-            new Level8(this.canvas, this.player)
-        new GameWon(this.canvas)]
+            new Level8(this.canvas, this.player),
+            new GameWon(this.canvas)]
 
         this.advanceToNextLevel();
 

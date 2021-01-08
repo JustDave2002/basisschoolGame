@@ -37,7 +37,8 @@ class Game {
             new LevelWon(this.canvas),
             new Level7(this.canvas, this.player),
             new LevelWon(this.canvas),
-            new Level8(this.canvas, this.player)
+            new Level8(this.canvas, this.player),
+            new GameWon(this.canvas)
         ];
         this.advanceToNextLevel();
         console.log('start animation');
@@ -356,7 +357,7 @@ class Player {
         }
         if (this.goLeft == true) {
             if (this.positionX >= goToCoords) {
-                this.positionX = this.positionX - 10;
+                this.positionX = this.positionX - 22;
                 if (this.positionX < goToCoords) {
                     this.positionX = goToCoords;
                 }
@@ -364,7 +365,7 @@ class Player {
         }
         else if (this.goLeft == false) {
             if (this.positionX <= goToCoords) {
-                this.positionX = this.positionX + 10;
+                this.positionX = this.positionX + 22;
                 if (this.positionX > goToCoords) {
                     this.positionX = goToCoords;
                 }
