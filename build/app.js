@@ -231,7 +231,6 @@ class Level {
             this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
         }
         if (frameIndex >= difficultyVariable) {
-            console.log(difficultyVariable);
             this.createRandomScoringObject();
             this.frameIndex = 0;
         }
@@ -280,7 +279,6 @@ class Level {
             this.scoringObject.push(new Box(this.canvas));
         }
         const last_element = this.scoringObject.length - 1;
-        console.log(this.speedBoost + this.speedMultiplier);
         this.scoringObject[last_element].setSpeed(this.speedBoost + this.speedMultiplier);
     }
     randomInteger(min, max) {
@@ -306,6 +304,7 @@ class Player {
         this.positionX = this.canvas.width / 2;
     }
     move() {
+        this.animatePlayer();
         if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT)) {
             this.Left += 1;
         }
@@ -314,26 +313,67 @@ class Player {
         }
         if (this.Left === 1) {
             if (this.positionX == this.rightLane) {
-                this.positionX = this.middleLane;
+                this.animate = 1;
+                this.goLeft = true;
             }
             else if (this.positionX == this.middleLane) {
-                this.positionX = this.leftLane;
+                this.animate = 0;
+                this.goLeft = true;
             }
         }
         if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT)) {
             this.Right += 1;
             if (this.Right === 1) {
                 if (this.positionX == this.leftLane) {
-                    this.positionX = this.middleLane;
+                    this.animate = 1;
+                    this.goLeft = false;
                 }
                 else if (this.positionX == this.middleLane) {
-                    this.positionX = this.rightLane;
+                    this.animate = 2;
+                    this.goLeft = false;
                 }
             }
         }
         else {
             this.Right = 0;
         }
+    }
+    animatePlayer() {
+        console.log("position of car", this.positionX);
+        let goToCoords;
+        const lanes = [
+            this.leftLane,
+            this.middleLane,
+            this.rightLane
+        ];
+        console.log("lane number", this.animate);
+        for (let i = 0; i < lanes.length; i++) {
+            if (this.animate == i) {
+                goToCoords = lanes[i];
+                console.log("goToLane coords", goToCoords);
+            }
+        }
+        console.log("go left", this.goLeft);
+        if (this.goLeft == true) {
+            if (this.positionX >= goToCoords) {
+                console.log("moving 2 px");
+                this.positionX = this.positionX - 15;
+                if (this.positionX < goToCoords) {
+                    this.positionX = goToCoords;
+                }
+            }
+        }
+        else if (this.goLeft == false) {
+            console.log("go left", this.goLeft);
+            if (this.positionX <= goToCoords) {
+                console.log("moving 15 px");
+                this.positionX = this.positionX + 15;
+                if (this.positionX > goToCoords) {
+                    this.positionX = goToCoords;
+                }
+            }
+        }
+        console.log("position of car", this.positionX);
     }
     draw(ctx) {
         ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 150);

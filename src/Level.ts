@@ -91,7 +91,7 @@ abstract class Level {
         }
         //spawns an item every x frames & decides the speed boost and frequency of items
         if (frameIndex >= difficultyVariable) {
-            console.log(difficultyVariable);
+            //console.log(difficultyVariable);
 
             this.createRandomScoringObject();
             this.frameIndex = 0;
@@ -153,7 +153,7 @@ abstract class Level {
         }
 
         const last_element: number = this.scoringObject.length - 1;
-        console.log(this.speedBoost + this.speedMultiplier);
+        //console.log(this.speedBoost + this.speedMultiplier);
 
         this.scoringObject[last_element].setSpeed(this.speedBoost + this.speedMultiplier);
     }
