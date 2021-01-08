@@ -7,7 +7,6 @@ class Player {
     private rightLane: number;
 
     private keyListener: KeyListener;
-    private keyUp: boolean;
 
     private image: HTMLImageElement;
     private positionX: number;
@@ -15,10 +14,10 @@ class Player {
 
     private Left: number = 0;
     private Right: number = 0;
-    private animate: number;
+    private toGoLane: number;
     private goLeft: boolean;
 
-    private log: HTMLElement;
+
     public constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
 
@@ -28,8 +27,7 @@ class Player {
         this.rightLane = this.canvas.width / 6 * 5;
 
         this.keyListener = new KeyListener();
-        this.log = document.getElementById('log')
-        this.keyUp = true;
+
 
         this.image = this.loadNewImage("./assets/img/players/carplayer.png");
         this.positionX = this.canvas.width / 2;
@@ -49,11 +47,11 @@ class Player {
 
             if (this.positionX == this.rightLane) {
                 //this.positionX = this.middleLane;
-                this.animate = 1
+                this.toGoLane = this.middleLane
                 this.goLeft = true
             } else if (this.positionX == this.middleLane) {
                 //this.positionX = this.leftLane;
-                this.animate = 0
+                this.toGoLane = this.leftLane
                 this.goLeft = true
             }
 
@@ -64,11 +62,11 @@ class Player {
             if (this.Right === 1) {
                 if (this.positionX == this.leftLane) {
                     //this.positionX = this.middleLane;
-                    this.animate = 1
+                    this.toGoLane = this.middleLane
                     this.goLeft = false
                 } else if (this.positionX == this.middleLane) {
                     //this.positionX = this.rightLane;
-                    this.animate = 2
+                    this.toGoLane = this.rightLane
                     this.goLeft = false
                 }
             }
@@ -76,46 +74,27 @@ class Player {
             this.Right = 0;
         }
     }
+
+
     private animatePlayer() {
 
-        //console.log("position of car", this.positionX);
-
-        let goToCoords: number;
-        const lanes: number[] = [
-            this.leftLane,
-            this.middleLane,
-            this.rightLane
-        ];
-        //console.log("lane number", this.animate);
-
-        for (let i = 0; i < lanes.length; i++) {
-            if (this.animate == i) {
-                goToCoords = lanes[i];
-               // console.log("goToLane coords", goToCoords);
-            }
-        }
-
-        //console.log("go left", this.goLeft);
         if (this.goLeft == true) {
 
-            if (this.positionX >= goToCoords) {
-                //console.log("moving 15 px");
+            if (this.positionX >= this.toGoLane) {
                 this.positionX = this.positionX - 22;
 
-                if (this.positionX < goToCoords) {
-                    this.positionX = goToCoords;
+                if (this.positionX < this.toGoLane) {
+                    this.positionX = this.toGoLane;
                 }
             }
         } else if (this.goLeft == false) {
-            if (this.positionX <= goToCoords) {
-                //console.log("moving 15 px");
+            if (this.positionX <= this.toGoLane) {
                 this.positionX = this.positionX + 22;
-                if (this.positionX > goToCoords) {
-                    this.positionX = goToCoords;
+                if (this.positionX > this.toGoLane) {
+                    this.positionX = this.toGoLane;
                 }
             }
         }
-        //console.log("position of car", this.positionX);
 
     }
 
@@ -130,8 +109,7 @@ class Player {
     }
 
     /**
-     * Collision detection of scoringObject and player
-     * Use bounding box detection method: https://computersciencewiki.org/index.php/Bounding_boxes
+     * Collision detection of scoringObject and playerS
      */
     public collidesWith(scoringObject: ScoringObject): boolean {
         if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()

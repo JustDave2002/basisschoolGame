@@ -9,18 +9,37 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 class Game {
     constructor(canvas) {
-        this.screenIndex = 0;
-        this.step = () => {
-            this.currentScreen.gameLogic();
-            if (this.currentScreen.getState() == ScreenState.NEXT_SCREEN) {
-                this.advanceToNextLevel();
+        this.frameCount = 0;
+        this.animate = () => {
+            console.log(this.screenIndex);
+            requestAnimationFrame(this.animate);
+            this.now = Date.now();
+            this.elapsed = this.now - this.then;
+            if (this.elapsed > this.fpsInterval) {
+                this.then = this.now - (this.elapsed % this.fpsInterval);
+                this.currentScreen.gameLogic();
+                if (this.currentScreen.getState() == ScreenState.NEXT_SCREEN) {
+                    this.advanceToNextLevel();
+                }
+                else if (this.currentScreen.getState() == ScreenState.RESTART) {
+                    this.load();
+                }
+                else if (this.currentScreen.getState() == ScreenState.DIED) {
+                    this.screenIndex = 16;
+                    this.advanceToNextLevel();
+                }
+                this.draw();
+                let sinceStart = this.now - this.startTime;
+                let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
             }
-            this.draw();
-            requestAnimationFrame(this.step);
         };
         this.canvas = canvas;
         this.canvas.width = 650;
         this.canvas.height = window.innerHeight;
+        this.load();
+    }
+    load() {
+        this.screenIndex = 0;
         this.player = new Player(this.canvas);
         this.screenArray = [
             new Level1(this.canvas, this.player),
@@ -38,22 +57,27 @@ class Game {
             new Level7(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level8(this.canvas, this.player),
-            new GameWon(this.canvas)
+            new GameWon(this.canvas),
+            new DeathScreen(this.canvas)
         ];
         this.advanceToNextLevel();
         console.log('start animation');
-        requestAnimationFrame(this.step);
+        this.startAnimating(70);
     }
     advanceToNextLevel() {
         this.currentScreen = this.screenArray[this.screenIndex];
         this.screenIndex++;
     }
+    startAnimating(fps) {
+        this.fpsInterval = 1000 / fps;
+        this.then = Date.now();
+        this.startTime = this.then;
+        console.log(this.startTime);
+        this.animate();
+    }
     draw() {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        if (this.currentScreen.getState() == ScreenState.DIED) {
-            new DeathScreen(this.canvas);
-        }
         this.currentScreen.draw(ctx);
         this.player.draw(ctx);
     }
@@ -297,8 +321,6 @@ class Player {
         this.middleLane = this.canvas.width / 2;
         this.rightLane = this.canvas.width / 6 * 5;
         this.keyListener = new KeyListener();
-        this.log = document.getElementById('log');
-        this.keyUp = true;
         this.image = this.loadNewImage("./assets/img/players/carplayer.png");
         this.positionX = this.canvas.width / 2;
     }
@@ -312,11 +334,11 @@ class Player {
         }
         if (this.Left === 1) {
             if (this.positionX == this.rightLane) {
-                this.animate = 1;
+                this.toGoLane = this.middleLane;
                 this.goLeft = true;
             }
             else if (this.positionX == this.middleLane) {
-                this.animate = 0;
+                this.toGoLane = this.leftLane;
                 this.goLeft = true;
             }
         }
@@ -324,11 +346,11 @@ class Player {
             this.Right += 1;
             if (this.Right === 1) {
                 if (this.positionX == this.leftLane) {
-                    this.animate = 1;
+                    this.toGoLane = this.middleLane;
                     this.goLeft = false;
                 }
                 else if (this.positionX == this.middleLane) {
-                    this.animate = 2;
+                    this.toGoLane = this.rightLane;
                     this.goLeft = false;
                 }
             }
@@ -338,30 +360,19 @@ class Player {
         }
     }
     animatePlayer() {
-        let goToCoords;
-        const lanes = [
-            this.leftLane,
-            this.middleLane,
-            this.rightLane
-        ];
-        for (let i = 0; i < lanes.length; i++) {
-            if (this.animate == i) {
-                goToCoords = lanes[i];
-            }
-        }
         if (this.goLeft == true) {
-            if (this.positionX >= goToCoords) {
+            if (this.positionX >= this.toGoLane) {
                 this.positionX = this.positionX - 22;
-                if (this.positionX < goToCoords) {
-                    this.positionX = goToCoords;
+                if (this.positionX < this.toGoLane) {
+                    this.positionX = this.toGoLane;
                 }
             }
         }
         else if (this.goLeft == false) {
-            if (this.positionX <= goToCoords) {
+            if (this.positionX <= this.toGoLane) {
                 this.positionX = this.positionX + 22;
-                if (this.positionX > goToCoords) {
-                    this.positionX = goToCoords;
+                if (this.positionX > this.toGoLane) {
+                    this.positionX = this.toGoLane;
                 }
             }
         }
@@ -453,7 +464,7 @@ class Level1 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 1);
         this.baseSpawnRate = 100;
-        this.maxPoints = 10;
+        this.maxPoints = 100;
         this.speedMultiplier = 0, 5;
     }
 }
@@ -513,13 +524,6 @@ class Level8 extends Level {
         this.speedMultiplier = 3.5;
     }
 }
-var ScreenState;
-(function (ScreenState) {
-    ScreenState[ScreenState["PLAYING"] = 0] = "PLAYING";
-    ScreenState[ScreenState["NEXT_SCREEN"] = 1] = "NEXT_SCREEN";
-    ScreenState[ScreenState["DIED"] = 2] = "DIED";
-    ScreenState[ScreenState["PAUSED"] = 3] = "PAUSED";
-})(ScreenState || (ScreenState = {}));
 class Banana extends ScoringObject {
     constructor(canvas) {
         super(canvas);
@@ -581,12 +585,13 @@ class DeathScreen extends Screens {
     }
     gameLogic() {
         if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
-            this.state = ScreenState.NEXT_SCREEN;
+            this.state = ScreenState.RESTART;
         }
     }
     draw() {
         const ctx = this.canvas.getContext('2d');
         this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
+        this.writeTextToCanvas(ctx, `Press P to try again.`, this.canvas.width / 2, 250, 40);
     }
 }
 class GameWon extends Screens {
@@ -596,12 +601,13 @@ class GameWon extends Screens {
     }
     gameLogic() {
         if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
-            this.state = ScreenState.NEXT_SCREEN;
+            this.state = ScreenState.RESTART;
         }
     }
     draw() {
         const ctx = this.canvas.getContext('2d');
         this.writeTextToCanvas(ctx, `You won the Game!`, this.canvas.width / 2, 200, 40);
+        this.writeTextToCanvas(ctx, `Press P to play again.`, this.canvas.width / 2, 250, 40);
     }
 }
 class LevelWon extends Screens {
@@ -620,4 +626,12 @@ class LevelWon extends Screens {
         this.writeTextToCanvas(ctx, `Press P to start the next level`, this.canvas.width / 2, 250, 40);
     }
 }
+var ScreenState;
+(function (ScreenState) {
+    ScreenState[ScreenState["PLAYING"] = 0] = "PLAYING";
+    ScreenState[ScreenState["NEXT_SCREEN"] = 1] = "NEXT_SCREEN";
+    ScreenState[ScreenState["DIED"] = 2] = "DIED";
+    ScreenState[ScreenState["PAUSED"] = 3] = "PAUSED";
+    ScreenState[ScreenState["RESTART"] = 4] = "RESTART";
+})(ScreenState || (ScreenState = {}));
 //# sourceMappingURL=app.js.map
