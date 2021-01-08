@@ -339,41 +339,33 @@ class Player {
         }
     }
     animatePlayer() {
-        console.log("position of car", this.positionX);
         let goToCoords;
         const lanes = [
             this.leftLane,
             this.middleLane,
             this.rightLane
         ];
-        console.log("lane number", this.animate);
         for (let i = 0; i < lanes.length; i++) {
             if (this.animate == i) {
                 goToCoords = lanes[i];
-                console.log("goToLane coords", goToCoords);
             }
         }
-        console.log("go left", this.goLeft);
         if (this.goLeft == true) {
             if (this.positionX >= goToCoords) {
-                console.log("moving 2 px");
-                this.positionX = this.positionX - 15;
+                this.positionX = this.positionX - 10;
                 if (this.positionX < goToCoords) {
                     this.positionX = goToCoords;
                 }
             }
         }
         else if (this.goLeft == false) {
-            console.log("go left", this.goLeft);
             if (this.positionX <= goToCoords) {
-                console.log("moving 15 px");
-                this.positionX = this.positionX + 15;
+                this.positionX = this.positionX + 10;
                 if (this.positionX > goToCoords) {
                     this.positionX = goToCoords;
                 }
             }
         }
-        console.log("position of car", this.positionX);
     }
     draw(ctx) {
         ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 150);

@@ -78,7 +78,7 @@ class Player {
     }
     private animatePlayer() {
 
-        console.log("position of car", this.positionX);
+        //console.log("position of car", this.positionX);
 
         let goToCoords: number;
         const lanes: number[] = [
@@ -86,37 +86,36 @@ class Player {
             this.middleLane,
             this.rightLane
         ];
-        console.log("lane number", this.animate);
+        //console.log("lane number", this.animate);
 
         for (let i = 0; i < lanes.length; i++) {
             if (this.animate == i) {
                 goToCoords = lanes[i];
-                console.log("goToLane coords", goToCoords);
+               // console.log("goToLane coords", goToCoords);
             }
         }
 
-        console.log("go left", this.goLeft);
+        //console.log("go left", this.goLeft);
         if (this.goLeft == true) {
 
             if (this.positionX >= goToCoords) {
-                console.log("moving 2 px");
-                this.positionX = this.positionX - 15;
+                //console.log("moving 15 px");
+                this.positionX = this.positionX - 10;
 
                 if (this.positionX < goToCoords) {
                     this.positionX = goToCoords;
                 }
             }
         } else if (this.goLeft == false) {
-            console.log("go left", this.goLeft);
             if (this.positionX <= goToCoords) {
-                console.log("moving 15 px");
-                this.positionX = this.positionX + 15
+                //console.log("moving 15 px");
+                this.positionX = this.positionX + 10;
                 if (this.positionX > goToCoords) {
                     this.positionX = goToCoords;
                 }
             }
         }
-        console.log("position of car", this.positionX);
+        //console.log("position of car", this.positionX);
 
     }
 
