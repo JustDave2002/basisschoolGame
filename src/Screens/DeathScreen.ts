@@ -1,5 +1,5 @@
 /// <reference path="../Screens.ts"/>
-
+/**
 class DeathScreen extends Screens {
 
     
@@ -14,4 +14,4 @@ class DeathScreen extends Screens {
 
         
     }
-}
+} */

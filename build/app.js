@@ -7,90 +7,57 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class Delay {
-    constructor() {
-    }
-    delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-}
 class Game {
     constructor(canvas) {
         this.levelIndex = 0;
         this.step = () => {
-            this.pause();
-            if (this.paused === false && this.level.getTotalLives() > 0 && this.level.isComplete() === false) {
-                this.level.logic(this.frameIndex);
-                this.frameIndex = this.level.getFrameIndex();
-                this.frameIndex++;
-                this.player.move();
-                this.level.collision();
-                if (this.level.isComplete()) {
-                    this.advanceToNextLevel();
-                }
+            this.level.gameLogic();
+            if (this.level.getState() == ScreenState.NEXT_SCREEN) {
+                this.advanceToNextLevel();
             }
             this.draw();
             requestAnimationFrame(this.step);
         };
         this.canvas = canvas;
-        this.delay = new Delay;
         this.canvas.width = 650;
         this.canvas.height = window.innerHeight;
         this.player = new Player(this.canvas);
         this.levelArray = [
             new Level1(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level2(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level3(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level4(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level5(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level6(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level7(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level8(this.canvas, this.player)
         ];
-        this.betweenLevel = new LevelWon(this.canvas);
-        this.newLevel();
-        this.frameIndex = 0;
-        this.paused = true;
-        this.keyListener = new KeyListener();
+        this.advanceToNextLevel();
         console.log('start animation');
         requestAnimationFrame(this.step);
     }
     advanceToNextLevel() {
-        if (this.betweenLevel.isComplete()) {
-            this.newLevel();
-        }
-    }
-    newLevel() {
         this.level = this.levelArray[this.levelIndex];
         this.levelIndex++;
-    }
-    pause() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.keyListener.isKeyDown(KeyListener.KEY_ESC)) {
-                this.paused = true;
-            }
-            else if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
-                yield this.delay.delay(1000);
-                this.paused = false;
-            }
-        });
     }
     draw() {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        if (this.level.getTotalLives() <= 0) {
+        if (this.level.getState() == ScreenState.DIED) {
             this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
         }
-        else if (this.paused === true) {
+        else if (this.level.getState() == ScreenState.PAUSED) {
             this.writeTextToCanvas(ctx, `Paused`, this.canvas.width / 2, 200, 40);
             this.writeTextToCanvas(ctx, `Press P to start`, this.canvas.width / 2, 250, 35);
         }
-        if (this.level.isComplete() === false) {
-            this.level.draw(ctx, this.levelIndex);
-        }
-        else if (this.level.isComplete() === true) {
-            this.betweenLevel.draw();
-        }
+        this.level.draw(ctx);
         this.player.draw(ctx);
     }
     writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
@@ -177,11 +144,11 @@ KeyListener.KEY_Y = 89;
 KeyListener.KEY_Z = 90;
 class Screens {
     constructor() {
-        this.won = false;
+        this.state = ScreenState.PLAYING;
         this.keyListener = new KeyListener;
     }
-    isComplete() {
-        return this.won;
+    getState() {
+        return this.state;
     }
     writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
         ctx.font = `${fontSize}px sans-serif`;
@@ -191,54 +158,63 @@ class Screens {
     }
 }
 class Level extends Screens {
-    constructor(canvas, player) {
+    constructor(canvas, player, levelIndex) {
         super();
         this.totalScore = 0;
         this.scoringObject = new Array();
         this.speedSwitch = true;
+        this.frameIndex = 0;
         this.canvas = canvas;
         this.player = player;
+        this.levelIndex = levelIndex;
         this.totalLives = 5;
         this.speedBoost = 0;
         this.totalScore = 0;
     }
-    getTotalLives() {
-        return this.totalLives;
-    }
-    getFrameIndex() {
-        return this.frameIndex;
-    }
-    getTotalScore() {
-        return this.totalScore;
-    }
-    logic(frameIndex) {
-        this.frameIndex = frameIndex;
-        if (this.totalScore >= this.maxPoints) {
-            this.won = true;
-        }
-        if (this.totalScore < 0) {
-            this.totalLives = 0;
-        }
-        const number = this.totalScore / 20;
-        let difficultyVariable = this.baseSpawnRate - number;
-        if (difficultyVariable < 15) {
-            difficultyVariable = 15;
-        }
-        if (this.speedBoost < 5 && this.speedSwitch === true) {
-            this.speedBoost = this.totalScore * 0.015;
-        }
-        else {
-            this.speedSwitch = false;
-            this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
-        }
-        if (frameIndex >= difficultyVariable) {
-            console.log(difficultyVariable);
-            this.createRandomScoringObject();
-            this.frameIndex = 0;
+    gameLogic() {
+        this.pause();
+        if (this.getState() === ScreenState.PLAYING) {
+            this.frameIndex++;
+            this.player.move();
+            this.collision();
+            if (this.totalScore >= this.maxPoints) {
+                this.state = ScreenState.NEXT_SCREEN;
+            }
+            if (this.totalScore < 0) {
+                this.totalLives = 0;
+            }
+            const number = this.totalScore / 20;
+            let difficultyVariable = this.baseSpawnRate - number;
+            if (difficultyVariable < 15) {
+                difficultyVariable = 15;
+            }
+            if (this.speedBoost < 5 && this.speedSwitch === true) {
+                this.speedBoost = this.totalScore * 0.015;
+            }
+            else {
+                this.speedSwitch = false;
+                this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
+            }
+            if (this.frameIndex >= difficultyVariable) {
+                console.log(difficultyVariable);
+                this.createRandomScoringObject();
+                this.frameIndex = 0;
+            }
         }
     }
-    draw(ctx, levelIndex) {
-        this.writeTextToCanvas(ctx, ` Level: ${levelIndex}`, this.canvas.width / 2, 20, 18);
+    pause() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.keyListener.isKeyDown(KeyListener.KEY_ESC)) {
+                this.state = ScreenState.PAUSED;
+            }
+            else if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+                yield this.delay(1000);
+                this.state = ScreenState.PLAYING;
+            }
+        });
+    }
+    draw(ctx) {
+        this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
         this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
         this.writeTextToCanvas(ctx, `Lives: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
         this.drawScore(ctx);
@@ -300,11 +276,13 @@ class Level extends Screens {
     changeTheme(img) {
         document.body.style.backgroundImage = img;
     }
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }
 class Player {
     constructor(canvas) {
         this.canvas = canvas;
-        this.delay = new Delay;
         this.leftLane = this.canvas.width / 6;
         this.middleLane = this.canvas.width / 2;
         this.rightLane = this.canvas.width / 6 * 5;
@@ -314,17 +292,15 @@ class Player {
         this.positionX = this.canvas.width / 2;
     }
     move() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== this.leftLane) {
-                this.positionX = this.leftLane;
-            }
-            if (this.keyListener.isKeyDown(KeyListener.KEY_UP) && this.positionX !== this.middleLane) {
-                this.positionX = this.middleLane;
-            }
-            if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX !== this.rightLane) {
-                this.positionX = this.rightLane;
-            }
-        });
+        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== this.leftLane) {
+            this.positionX = this.leftLane;
+        }
+        if (this.keyListener.isKeyDown(KeyListener.KEY_UP) && this.positionX !== this.middleLane) {
+            this.positionX = this.middleLane;
+        }
+        if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX !== this.rightLane) {
+            this.positionX = this.rightLane;
+        }
     }
     draw(ctx) {
         ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 150);
@@ -411,7 +387,7 @@ window.addEventListener('load', () => {
 });
 class Level1 extends Level {
     constructor(canvas, player) {
-        super(canvas, player);
+        super(canvas, player, 1);
         this.baseSpawnRate = 100;
         this.maxPoints = 10;
         this.speedMultiplier = 0, 5;
@@ -419,7 +395,7 @@ class Level1 extends Level {
 }
 class Level2 extends Level {
     constructor(canvas, player) {
-        super(canvas, player);
+        super(canvas, player, 2);
         this.baseSpawnRate = 90;
         this.maxPoints = 200;
         this.speedMultiplier = 1;
@@ -427,7 +403,7 @@ class Level2 extends Level {
 }
 class Level3 extends Level {
     constructor(canvas, player) {
-        super(canvas, player);
+        super(canvas, player, 3);
         this.baseSpawnRate = 75;
         this.maxPoints = 400;
         this.speedMultiplier = 1;
@@ -435,7 +411,7 @@ class Level3 extends Level {
 }
 class Level4 extends Level {
     constructor(canvas, player) {
-        super(canvas, player);
+        super(canvas, player, 4);
         this.baseSpawnRate = 70;
         this.maxPoints = 800;
         this.speedMultiplier = 1.5;
@@ -443,7 +419,7 @@ class Level4 extends Level {
 }
 class Level5 extends Level {
     constructor(canvas, player) {
-        super(canvas, player);
+        super(canvas, player, 5);
         this.baseSpawnRate = 65;
         this.maxPoints = 1000;
         this.speedMultiplier = 2;
@@ -451,7 +427,7 @@ class Level5 extends Level {
 }
 class Level6 extends Level {
     constructor(canvas, player) {
-        super(canvas, player);
+        super(canvas, player, 6);
         this.baseSpawnRate = 60;
         this.maxPoints = 1200;
         this.speedMultiplier = 2.5;
@@ -459,7 +435,7 @@ class Level6 extends Level {
 }
 class Level7 extends Level {
     constructor(canvas, player) {
-        super(canvas, player);
+        super(canvas, player, 7);
         this.baseSpawnRate = 55;
         this.maxPoints = 1400;
         this.speedMultiplier = 3;
@@ -467,12 +443,19 @@ class Level7 extends Level {
 }
 class Level8 extends Level {
     constructor(canvas, player) {
-        super(canvas, player);
+        super(canvas, player, 8);
         this.baseSpawnRate = 50;
         this.maxPoints = 1600;
         this.speedMultiplier = 3.5;
     }
 }
+var ScreenState;
+(function (ScreenState) {
+    ScreenState[ScreenState["PLAYING"] = 0] = "PLAYING";
+    ScreenState[ScreenState["NEXT_SCREEN"] = 1] = "NEXT_SCREEN";
+    ScreenState[ScreenState["DIED"] = 2] = "DIED";
+    ScreenState[ScreenState["PAUSED"] = 3] = "PAUSED";
+})(ScreenState || (ScreenState = {}));
 class Banana extends ScoringObject {
     constructor(canvas) {
         super(canvas);
@@ -527,29 +510,20 @@ class SilverCoin extends ScoringObject {
         this._lives = 0;
     }
 }
-class DeathScreen extends Screens {
-    constructor(canvas, level) {
-        super();
-    }
-    draw(ctx) {
-    }
-}
 class LevelWon extends Screens {
     constructor(canvas) {
         super();
         this.canvas = canvas;
-        this.draw();
+    }
+    gameLogic() {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+            this.state = ScreenState.NEXT_SCREEN;
+        }
     }
     draw() {
         const ctx = this.canvas.getContext('2d');
         this.writeTextToCanvas(ctx, `You won the level!`, this.canvas.width / 2, 200, 40);
         this.writeTextToCanvas(ctx, `Press P to start the next level`, this.canvas.width / 2, 250, 40);
-        if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
-            this.pog = true;
-        }
-    }
-    isComplete() {
-        return this.pog;
     }
 }
 //# sourceMappingURL=app.js.map

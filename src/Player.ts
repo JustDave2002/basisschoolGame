@@ -12,12 +12,10 @@ class Player {
     private image: HTMLImageElement;
     private positionX: number;
 
-    private delay: Delay;
 
     public constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
 
-        this.delay = new Delay;
 
         this.leftLane = this.canvas.width / 6;
         this.middleLane = this.canvas.width / 2;
@@ -31,19 +29,8 @@ class Player {
         this.positionX = this.canvas.width / 2;
     }
 
-    public async move() {
-        /**console.log(this.keyUp);
-        
-        if(this.keyUp == false){
-            this.delay.delay(500);
-            this.keyUp= true;
-        }
-        
-        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.keyUp == true){
-            console.log("pressed");
-            await this.delay.delay(11500)
-        }*/
-        
+    public move() {
+    
         if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== this.leftLane) {
             this.positionX = this.leftLane;
         }

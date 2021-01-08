@@ -23,18 +23,24 @@ abstract class Level extends Screens {
     protected maxPoints: number;
 
     //TODO change when won
-    
+
+    protected levelIndex: number;
 
     protected frameIndex: number;
 
     protected canvas: HTMLCanvasElement
 
 
-    constructor(canvas: HTMLCanvasElement, player: Player) {
+    
+
+
+    constructor(canvas: HTMLCanvasElement, player: Player, levelIndex: number) {
 
         super();
+        this.frameIndex = 0
         this.canvas = canvas;
         this.player = player;
+        this.levelIndex = levelIndex;
 
         // Score is zero at start
         this.totalLives = 5;
@@ -48,63 +54,75 @@ abstract class Level extends Screens {
     }
 
 
-    public getTotalLives(): number {
-        return this.totalLives
+
+    public gameLogic() {
+   
+        //makes sure the pause logic is not frozen when the game is paused
+        this.pause();
+
+        //only executes the game when the game is not paused
+        if (this.getState() === ScreenState.PLAYING) {
+            this.frameIndex++
+
+            this.player.move();
+            //console.log(this.frameIndex);
+
+
+
+            // checks if player collides
+            this.collision();
+
+
+
+            if (this.totalScore >= this.maxPoints) {
+                this.state = ScreenState.NEXT_SCREEN;
+            }
+            //makes you lose if you have minus points
+            if (this.totalScore < 0) {
+                this.totalLives = 0;
+            }
+
+
+            const number = this.totalScore / 20;
+            let difficultyVariable: number = this.baseSpawnRate - number;
+            if (difficultyVariable < 15) {
+                difficultyVariable = 15;
+            }
+            if (this.speedBoost < 5 && this.speedSwitch === true) {
+                this.speedBoost = this.totalScore * 0.015
+            } else {
+                this.speedSwitch = false;
+                this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
+            }
+            //spawns an item every x frames & decides the speed boost and frequency of items
+            if (this.frameIndex >= difficultyVariable) {
+                console.log(difficultyVariable);
+
+                this.createRandomScoringObject();
+                this.frameIndex = 0;
+            }
+        }
     }
 
-    public getFrameIndex(): number {
-        return this.frameIndex
+    /**
+     * pauses the game on button press and start back up 1000 ms after pressing start
+     */
+    private async pause() {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_ESC)) {
+            this.state = ScreenState.PAUSED;
+        } else if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+            await this.delay(1000);
+            this.state = ScreenState.PLAYING;
+        }
     }
+    /**
+     * draws everything on screen for a level
+     * @param ctx 
+     * @param levelIndex shows which level the player is currently at
+     */
+    public draw(ctx: CanvasRenderingContext2D) {
 
-
-    public getTotalScore(): number {
-        return this.totalScore
-    }
-
-    
-
-
-
-
-    public logic(frameIndex: number) {
-        this.frameIndex = frameIndex
-        if (this.totalScore >= this.maxPoints) {
-            this.won = true;
-        }
-        //makes you lose if you have minus points
-        if (this.totalScore < 0) {
-            this.totalLives = 0;
-        }
-
-
-        const number = this.totalScore / 20;
-        let difficultyVariable: number = this.baseSpawnRate - number;
-        if (difficultyVariable < 15) {
-            difficultyVariable = 15;      
-        }
-        if (this.speedBoost < 5 && this.speedSwitch === true) {
-            this.speedBoost = this.totalScore * 0.015
-        } else {
-            this.speedSwitch = false;
-            this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
-        }
-        //spawns an item every x frames & decides the speed boost and frequency of items
-        if (frameIndex >= difficultyVariable) {
-            console.log(difficultyVariable);
-
-            this.createRandomScoringObject();
-            this.frameIndex = 0;
-        }
-
-    }
-/**
- * draws everything on screen for a level
- * @param ctx 
- * @param levelIndex shows which level the player is currently at
- */
-    public draw(ctx:CanvasRenderingContext2D, levelIndex: number) {
-
-        this.writeTextToCanvas(ctx,` Level: ${levelIndex}`, this.canvas.width / 2,  20, 18);
+        this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
         this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
         this.writeTextToCanvas(ctx, `Lives: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
 
@@ -195,5 +213,13 @@ abstract class Level extends Screens {
 
     protected changeTheme(img: string) {
         document.body.style.backgroundImage = img;
+    }
+
+    /**
+     * pauses the game for ms amount of time
+     * @param ms amount of time in MS
+     */
+    public delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }

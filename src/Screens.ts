@@ -1,6 +1,6 @@
 abstract class Screens{
 
-    protected won: boolean = false;
+    protected state: ScreenState = ScreenState.PLAYING
 
     protected keyListener: KeyListener = new KeyListener
     
@@ -8,14 +8,15 @@ abstract class Screens{
 
         
     }
-    isComplete(): boolean {
-        return this.won
+    getState(): ScreenState {
+        return this.state
     }
 
-    //protected draw(ctx:CanvasRenderingContext2D) {
-        
-    //}
+    abstract gameLogic(): void;
 
+    abstract draw(ctx:CanvasRenderingContext2D): void; 
+        
+    
     /**
      * Create a random scoring object and clear the other scoring objects by setting them to `null`.
      */
