@@ -213,12 +213,32 @@ class Level extends Screens {
             }
         });
     }
-    draw(ctx) {
-        this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
-        this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
-        this.writeTextToCanvas(ctx, `Lives: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
-        this.drawScore(ctx);
-        this.drawObjects(ctx);
+
+    logic(frameIndex) {
+        this.frameIndex = frameIndex;
+        if (this.totalScore >= this.maxPoints) {
+            this.won = true;
+        }
+        if (this.totalScore < 0) {
+            this.totalLives = 0;
+        }
+        const number = this.totalScore / 20;
+        let difficultyVariable = this.baseSpawnRate - number;
+        if (difficultyVariable < 15) {
+            difficultyVariable = 15;
+        }
+        if (this.speedBoost < 5 && this.speedSwitch === true) {
+            this.speedBoost = this.totalScore * 0.015;
+        }
+        else {
+            this.speedSwitch = false;
+            this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
+        }
+        if (frameIndex >= difficultyVariable) {
+            this.createRandomScoringObject();
+            this.frameIndex = 0;
+        }
+
     }
     drawObjects(ctx) {
         this.scoringObject.forEach((object) => {
@@ -267,7 +287,6 @@ class Level extends Screens {
             this.scoringObject.push(new Box(this.canvas));
         }
         const last_element = this.scoringObject.length - 1;
-        console.log(this.speedBoost + this.speedMultiplier);
         this.scoringObject[last_element].setSpeed(this.speedBoost + this.speedMultiplier);
     }
     randomInteger(min, max) {
@@ -320,6 +339,103 @@ class Player {
         return img;
     }
 }
+class Player {
+    constructor(canvas) {
+        this.Left = 0;
+        this.Right = 0;
+        this.canvas = canvas;
+        this.delay = new Delay;
+        this.leftLane = this.canvas.width / 6;
+        this.middleLane = this.canvas.width / 2;
+        this.rightLane = this.canvas.width / 6 * 5;
+        this.keyListener = new KeyListener();
+        this.log = document.getElementById('log');
+        this.keyUp = true;
+        this.image = this.loadNewImage("./assets/img/players/carplayer.png");
+        this.positionX = this.canvas.width / 2;
+    }
+    move() {
+        this.animatePlayer();
+        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT)) {
+            this.Left += 1;
+        }
+        else {
+            this.Left = 0;
+        }
+        if (this.Left === 1) {
+            if (this.positionX == this.rightLane) {
+                this.animate = 1;
+                this.goLeft = true;
+            }
+            else if (this.positionX == this.middleLane) {
+                this.animate = 0;
+                this.goLeft = true;
+            }
+        }
+        if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT)) {
+            this.Right += 1;
+            if (this.Right === 1) {
+                if (this.positionX == this.leftLane) {
+                    this.animate = 1;
+                    this.goLeft = false;
+                }
+                else if (this.positionX == this.middleLane) {
+                    this.animate = 2;
+                    this.goLeft = false;
+                }
+            }
+        }
+        else {
+            this.Right = 0;
+        }
+    }
+    animatePlayer() {
+        let goToCoords;
+        const lanes = [
+            this.leftLane,
+            this.middleLane,
+            this.rightLane
+        ];
+        for (let i = 0; i < lanes.length; i++) {
+            if (this.animate == i) {
+                goToCoords = lanes[i];
+            }
+        }
+        if (this.goLeft == true) {
+            if (this.positionX >= goToCoords) {
+                this.positionX = this.positionX - 10;
+                if (this.positionX < goToCoords) {
+                    this.positionX = goToCoords;
+                }
+            }
+        }
+        else if (this.goLeft == false) {
+            if (this.positionX <= goToCoords) {
+                this.positionX = this.positionX + 10;
+                if (this.positionX > goToCoords) {
+                    this.positionX = goToCoords;
+                }
+            }
+        }
+    }
+    draw(ctx) {
+        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 150);
+    }
+    collidesWith(scoringObject) {
+        if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()
+            && this.positionX + this.image.width > scoringObject.getPositionX()
+            && this.canvas.height - 150 < scoringObject.getPositionY() + scoringObject.getImageHeight()
+            && this.canvas.height - 150 + this.image.height > scoringObject.getPositionY()) {
+            return true;
+        }
+        return false;
+    }
+    loadNewImage(source) {
+        const img = new Image();
+        img.src = source;
+        return img;
+    }
+}
 class ScoringObject {
     constructor(canvas) {
         this.canvas = canvas;
@@ -336,7 +452,7 @@ class ScoringObject {
         if (random === 3) {
             this.positionX = this.rightLane;
         }
-        this.positionY = 60;
+        this.positionY = -50;
     }
     move() {
         this.positionY += this.speed;

@@ -83,6 +83,22 @@ abstract class Level extends Screens {
             }
 
 
+        const number = this.totalScore / 20;
+        let difficultyVariable: number = this.baseSpawnRate - number;
+        if (difficultyVariable < 15) {
+            difficultyVariable = 15;      
+        }
+        if (this.speedBoost < 5 && this.speedSwitch === true) {
+            this.speedBoost = this.totalScore * 0.015
+        } else {
+            this.speedSwitch = false;
+            this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
+        }
+        //spawns an item every x frames & decides the speed boost and frequency of items
+        if (frameIndex >= difficultyVariable) {
+            //console.log(difficultyVariable);
+
+
             const number = this.totalScore / 20;
             let difficultyVariable: number = this.baseSpawnRate - number;
             if (difficultyVariable < 15) {
@@ -195,7 +211,7 @@ abstract class Level extends Screens {
         }
 
         const last_element: number = this.scoringObject.length - 1;
-        console.log(this.speedBoost + this.speedMultiplier);
+        //console.log(this.speedBoost + this.speedMultiplier);
 
         this.scoringObject[last_element].setSpeed(this.speedBoost + this.speedMultiplier);
     }

@@ -33,7 +33,7 @@ abstract class ScoringObject {
         }
 
 
-        this.positionY = 60;
+        this.positionY = -50;
 
 
 
