@@ -97,13 +97,9 @@ class Game {
         
         //writes you lost when you lost
         if (this.currentScreen.getState()== ScreenState.DIED) {
-            this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
+            new DeathScreen(this.canvas)
         }
-        //writes the pause message when game is paused
-        else if (this.currentScreen.getState()== ScreenState.PAUSED) {
-            this.writeTextToCanvas(ctx, `Paused`, this.canvas.width / 2, 200, 40);
-            this.writeTextToCanvas(ctx, `Press P to start`, this.canvas.width / 2, 250, 35);
-        }
+        
 
         
 
@@ -114,31 +110,5 @@ class Game {
         this.player.draw(ctx);
         
     }
-    /**
-     * Create a random scoring object and clear the other scoring objects by setting them to `null`.
-     */
     
-    /**
-   * Writes text to the canvas
-   * @param {string} text - Text to write
-   * @param {number} fontSize - Font size in pixels
-   * @param {number} xCoordinate - Horizontal coordinate in pixels
-   * @param {number} yCoordinate - Vertical coordinate in pixels
-   * @param {string} alignment - Where to align the text
-   * @param {string} color - The color of the text
-   */
-  protected writeTextToCanvas(
-    ctx: CanvasRenderingContext2D,
-    text: string,
-    xCoordinate: number,
-    yCoordinate: number,
-    fontSize: number = 20,
-    color: string = "red",
-    alignment: CanvasTextAlign = "center"
-) {
-    ctx.font = `${fontSize}px sans-serif`;
-    ctx.fillStyle = color;
-    ctx.textAlign = alignment;
-    ctx.fillText(text, xCoordinate, yCoordinate);
-}
 }

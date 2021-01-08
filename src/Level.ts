@@ -143,6 +143,12 @@ abstract class Level extends Screens {
         this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
         this.writeTextToCanvas(ctx, `Lives: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
 
+        //writes the pause message when game is paused
+        if (this.getState()== ScreenState.PAUSED) {
+            
+            this.writeTextToCanvas(ctx, `Paused`, this.canvas.width / 2, 200, 40);
+            this.writeTextToCanvas(ctx, `Press P to start`, this.canvas.width / 2, 250, 35);
+        }
         this.drawScore(ctx);
         this.drawObjects(ctx);
     }

@@ -52,20 +52,10 @@ class Game {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         if (this.currentScreen.getState() == ScreenState.DIED) {
-            this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
-        }
-        else if (this.currentScreen.getState() == ScreenState.PAUSED) {
-            this.writeTextToCanvas(ctx, `Paused`, this.canvas.width / 2, 200, 40);
-            this.writeTextToCanvas(ctx, `Press P to start`, this.canvas.width / 2, 250, 35);
+            new DeathScreen(this.canvas);
         }
         this.currentScreen.draw(ctx);
         this.player.draw(ctx);
-    }
-    writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
-        ctx.font = `${fontSize}px sans-serif`;
-        ctx.fillStyle = color;
-        ctx.textAlign = alignment;
-        ctx.fillText(text, xCoordinate, yCoordinate);
     }
 }
 class KeyListener {
@@ -232,6 +222,10 @@ class Level extends Screens {
         this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
         this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
         this.writeTextToCanvas(ctx, `Lives: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
+        if (this.getState() == ScreenState.PAUSED) {
+            this.writeTextToCanvas(ctx, `Paused`, this.canvas.width / 2, 200, 40);
+            this.writeTextToCanvas(ctx, `Press P to start`, this.canvas.width / 2, 250, 35);
+        }
         this.drawScore(ctx);
         this.drawObjects(ctx);
     }
@@ -578,6 +572,21 @@ class SilverCoin extends ScoringObject {
         this.speed = 5;
         this.points = 5;
         this._lives = 0;
+    }
+}
+class DeathScreen extends Screens {
+    constructor(canvas) {
+        super();
+        this.canvas = canvas;
+    }
+    gameLogic() {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+            this.state = ScreenState.NEXT_SCREEN;
+        }
+    }
+    draw() {
+        const ctx = this.canvas.getContext('2d');
+        this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
     }
 }
 class GameWon extends Screens {
