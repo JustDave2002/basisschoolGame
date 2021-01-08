@@ -12,7 +12,6 @@ class Player {
     private image: HTMLImageElement;
     private positionX: number;
 
-    private delay: Delay;
 
     private Left: number = 0;
     private Right: number = 0;
@@ -23,7 +22,6 @@ class Player {
     public constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
 
-        this.delay = new Delay;
 
         this.leftLane = this.canvas.width / 6;
         this.middleLane = this.canvas.width / 2;
@@ -38,6 +36,7 @@ class Player {
     }
 
     public move() {
+
 
         this.animatePlayer();
 
@@ -57,6 +56,7 @@ class Player {
                 this.animate = 0
                 this.goLeft = true
             }
+
         }
 
         if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT)) {

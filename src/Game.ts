@@ -7,31 +7,17 @@ class Game {
     // The player on the canvas
     private player: Player;
 
-    
-
-    private level: Level;
-    // KeyListener so the user can give input
-    private keyListener: KeyListener;
-
-    // Score
-    
-    // amount of frames
-    private frameIndex: number;
-
-
-    //paused or not
-    private paused: boolean;
+  
     //9 is last level
     private levelIndex: number = 0;
-    private levelArray: Level[];
 
-    private delay: Delay;
+    private levelArray: Screens[];
     
+    private level: Screens;
+
 
     public constructor(canvas: HTMLElement) {
         this.canvas = <HTMLCanvasElement>canvas;
-
-        this.delay = new Delay
 
         // Resize the canvas so it looks more like a Runner game
         this.canvas.width = 650;
@@ -42,24 +28,28 @@ class Game {
 
         this.levelArray = [
             new Level1(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level2(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level3(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level4(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level5(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level6(this.canvas, this.player),
+            new LevelWon(this.canvas),
             new Level7(this.canvas, this.player),
-            new Level8(this.canvas, this.player)
-        ]
+            new LevelWon(this.canvas),
+            new Level8(this.canvas, this.player)]
+
         this.advanceToNextLevel();
 
         
 
-        this.frameIndex = 0;
 
-        //pause state
-        this.paused = true;
 
-        this.keyListener = new KeyListener();
+
         // Start the animation
         console.log('start animation');
         requestAnimationFrame(this.step);
@@ -72,27 +62,11 @@ class Game {
      */
     step = () => {
 
-        //makes sure the pause logic is not frozen when the game is paused
-        this.pause();
+        this.level.gameLogic();
 
-        //only executes the game when the game is not paused
-        if (this.paused === false && this.level.getTotalLives() > 0 && this.level.isComplete() === false) {
-            this.level.logic(this.frameIndex);
-            this.frameIndex = this.level.getFrameIndex();
-            this.frameIndex++
-            
-            this.player.move();
-            //console.log(this.frameIndex);
-            
-
-
-            // checks if player collides
-            this.level.collision();
-            
-            if (this.level.isComplete()){
-                this.advanceToNextLevel();
-            }
-        } 
+        if (this.level.getState()== ScreenState.NEXT_SCREEN){
+            this.advanceToNextLevel();
+        }
 
         this.draw();
 
@@ -102,23 +76,9 @@ class Game {
     }
 
     private advanceToNextLevel() {
-        
         this.level = this.levelArray[this.levelIndex];
-        this.levelIndex ++
-    }
+        this.levelIndex++;
 
-    
-
-    /**
-     * pauses the game on button press and start back up 1000 ms after pressing start
-     */
-    private async pause() {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_ESC)) {
-            this.paused = true
-        } else if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
-            await this.delay.delay(1000);
-            this.paused = false
-        }
     }
 
 
@@ -131,42 +91,28 @@ class Game {
         // Clear the entire canvas 
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.writeTextToCanvas(ctx,` Level: ${this.levelIndex}`, this.canvas.width / 2,  20, 18);
-        this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
-        this.writeTextToCanvas(ctx, `Lives: ${this.level.getTotalLives()}`, this.canvas.width / 2 + 250, 20, 16);
+        
 
-        //writes you won when you win
-        if (this.level.isComplete()  === true) {
-            this.writeTextToCanvas(ctx, `You Won!`, this.canvas.width / 2, 200, 40);
-        }
+        
         //writes you lost when you lost
-        if (this.level.getTotalLives() <= 0) {
+        if (this.level.getState()== ScreenState.DIED) {
             this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
         }
         //writes the pause message when game is paused
-        else if (this.paused === true) {
+        else if (this.level.getState()== ScreenState.PAUSED) {
             this.writeTextToCanvas(ctx, `Paused`, this.canvas.width / 2, 200, 40);
             this.writeTextToCanvas(ctx, `Press P to start`, this.canvas.width / 2, 250, 35);
         }
 
-        this.drawScore(ctx);
+        
 
+       
+        this.level.draw(ctx);  
+        
+        
         this.player.draw(ctx);
-
-        //draws each object
-        this.level.drawObjects(ctx);
+        
     }
-
-    
-
-    /**
-     * Draw the score on a canvas
-     * @param ctx
-     */
-    private drawScore(ctx: CanvasRenderingContext2D): void {
-        this.writeTextToCanvas(ctx, `Score: ${this.level.getTotalScore()}`, this.canvas.width / 2, 80, 16);
-    }
-
     /**
      * Create a random scoring object and clear the other scoring objects by setting them to `null`.
      */
@@ -180,25 +126,18 @@ class Game {
    * @param {string} alignment - Where to align the text
    * @param {string} color - The color of the text
    */
-    public writeTextToCanvas(
-        ctx: CanvasRenderingContext2D,
-        text: string,
-        xCoordinate: number,
-        yCoordinate: number,
-        fontSize: number = 20,
-        color: string = "red",
-        alignment: CanvasTextAlign = "center"
-    ) {
-        ctx.font = `${fontSize}px sans-serif`;
-        ctx.fillStyle = color;
-        ctx.textAlign = alignment;
-        ctx.fillText(text, xCoordinate, yCoordinate);
-    }
-
-
-    
-
-
-
-    
+  protected writeTextToCanvas(
+    ctx: CanvasRenderingContext2D,
+    text: string,
+    xCoordinate: number,
+    yCoordinate: number,
+    fontSize: number = 20,
+    color: string = "red",
+    alignment: CanvasTextAlign = "center"
+) {
+    ctx.font = `${fontSize}px sans-serif`;
+    ctx.fillStyle = color;
+    ctx.textAlign = alignment;
+    ctx.fillText(text, xCoordinate, yCoordinate);
+}
 }

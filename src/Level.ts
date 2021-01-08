@@ -2,7 +2,7 @@
 /**
  * this class is responsible for the state of the level
  */
-abstract class Level {
+abstract class Level extends Screens {
 
     protected totalScore: number = 0;
 
@@ -23,17 +23,24 @@ abstract class Level {
     protected maxPoints: number;
 
     //TODO change when won
-    protected won: boolean = false;
+
+    protected levelIndex: number;
 
     protected frameIndex: number;
 
     protected canvas: HTMLCanvasElement
 
 
-    constructor(canvas: HTMLCanvasElement, player: Player) {
+    
 
+
+    constructor(canvas: HTMLCanvasElement, player: Player, levelIndex: number) {
+
+        super();
+        this.frameIndex = 0
         this.canvas = canvas;
         this.player = player;
+        this.levelIndex = levelIndex;
 
         // Score is zero at start
         this.totalLives = 5;
@@ -47,35 +54,33 @@ abstract class Level {
     }
 
 
-    public getTotalLives(): number {
-        return this.totalLives
-    }
 
-    public getFrameIndex(): number {
-        return this.frameIndex
-    }
+    public gameLogic() {
+   
+        //makes sure the pause logic is not frozen when the game is paused
+        this.pause();
 
+        //only executes the game when the game is not paused
+        if (this.getState() === ScreenState.PLAYING) {
+            this.frameIndex++
 
-    public getTotalScore(): number {
-        return this.totalScore
-    }
-
-    isComplete(): boolean {
-        return this.won
-    }
+            this.player.move();
+            //console.log(this.frameIndex);
 
 
 
+            // checks if player collides
+            this.collision();
 
-    public logic(frameIndex: number) {
-        this.frameIndex = frameIndex
-        if (this.totalScore >= this.maxPoints) {
-            this.won = true;
-        }
-        //makes you lose if you have minus points
-        if (this.totalScore < 0) {
-            this.totalLives = 0;
-        }
+
+
+            if (this.totalScore >= this.maxPoints) {
+                this.state = ScreenState.NEXT_SCREEN;
+            }
+            //makes you lose if you have minus points
+            if (this.totalScore < 0) {
+                this.totalLives = 0;
+            }
 
 
         const number = this.totalScore / 20;
@@ -93,19 +98,72 @@ abstract class Level {
         if (frameIndex >= difficultyVariable) {
             //console.log(difficultyVariable);
 
-            this.createRandomScoringObject();
-            this.frameIndex = 0;
-        }
 
+            const number = this.totalScore / 20;
+            let difficultyVariable: number = this.baseSpawnRate - number;
+            if (difficultyVariable < 15) {
+                difficultyVariable = 15;
+            }
+            if (this.speedBoost < 5 && this.speedSwitch === true) {
+                this.speedBoost = this.totalScore * 0.015
+            } else {
+                this.speedSwitch = false;
+                this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
+            }
+            //spawns an item every x frames & decides the speed boost and frequency of items
+            if (this.frameIndex >= difficultyVariable) {
+                console.log(difficultyVariable);
+
+                this.createRandomScoringObject();
+                this.frameIndex = 0;
+            }
+        }
     }
 
-    public drawObjects(ctx: CanvasRenderingContext2D) {
+    /**
+     * pauses the game on button press and start back up 1000 ms after pressing start
+     */
+    private async pause() {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_ESC)) {
+            this.state = ScreenState.PAUSED;
+        } else if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+            await this.delay(1000);
+            this.state = ScreenState.PLAYING;
+        }
+    }
+    /**
+     * draws everything on screen for a level
+     * @param ctx 
+     * @param levelIndex shows which level the player is currently at
+     */
+    public draw(ctx: CanvasRenderingContext2D) {
+
+        this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
+        this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
+        this.writeTextToCanvas(ctx, `Lives: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
+
+        this.drawScore(ctx);
+        this.drawObjects(ctx);
+    }
+    /**
+     * draws all objects within the level
+     * @param ctx 
+     */
+    protected drawObjects(ctx: CanvasRenderingContext2D) {
         this.scoringObject.forEach(
             (object) => {
                 if (object !== null) {
                     object.draw(ctx);
                 }
             });
+    }
+
+    /**
+     * Draw the score on a canvas
+     * @param ctx
+     */
+    protected drawScore(ctx: CanvasRenderingContext2D): void {
+        this.writeTextToCanvas(ctx, `Score: ${this.totalScore}`, this.canvas.width / 2, 45, 18);
     }
 
     public collision() {
@@ -171,5 +229,13 @@ abstract class Level {
 
     protected changeTheme(img: string) {
         document.body.style.backgroundImage = img;
+    }
+
+    /**
+     * pauses the game for ms amount of time
+     * @param ms amount of time in MS
+     */
+    public delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }

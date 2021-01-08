@@ -1,14 +1,22 @@
 abstract class Screens{
 
+    protected state: ScreenState = ScreenState.PLAYING
+
+    protected keyListener: KeyListener = new KeyListener
+    
     protected constructor(){
 
         
     }
-
-    protected draw() {
-        
+    getState(): ScreenState {
+        return this.state
     }
 
+    abstract gameLogic(): void;
+
+    abstract draw(ctx:CanvasRenderingContext2D): void; 
+        
+    
     /**
      * Create a random scoring object and clear the other scoring objects by setting them to `null`.
      */
@@ -22,7 +30,7 @@ abstract class Screens{
    * @param {string} alignment - Where to align the text
    * @param {string} color - The color of the text
    */
-  public writeTextToCanvas(
+  protected writeTextToCanvas(
     ctx: CanvasRenderingContext2D,
     text: string,
     xCoordinate: number,
