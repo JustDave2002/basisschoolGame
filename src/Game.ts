@@ -33,20 +33,21 @@ class Game {
         this.canvas.width = 650;
         this.canvas.height = window.innerHeight;
 
-        this.load();
+        this.load(0);
     }
 
     /**
      * loads an instance of the game
      */
-    private load(){
+    private load(screenIndex:number){
 
-        this.screenIndex = 0;
+        this.screenIndex = screenIndex;
         // Set the player at the center
         this.player = new Player(this.canvas);
 
         //array of screens
         this.screenArray = [
+            new StartScreen(this.canvas),
             new Level1(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level2(this.canvas, this.player),
@@ -107,9 +108,9 @@ class Game {
                 this.advanceToNextLevel();
             } 
             else if (this.currentScreen.getState() == ScreenState.RESTART){
-                this.load();
+                this.load(1);
             }else if (this.currentScreen.getState() == ScreenState.DIED){
-                this.screenIndex = 16;
+                this.screenIndex = this.screenArray.length - 1;
                 this.advanceToNextLevel();
                
             }

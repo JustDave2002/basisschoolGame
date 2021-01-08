@@ -22,10 +22,10 @@ class Game {
                     this.advanceToNextLevel();
                 }
                 else if (this.currentScreen.getState() == ScreenState.RESTART) {
-                    this.load();
+                    this.load(1);
                 }
                 else if (this.currentScreen.getState() == ScreenState.DIED) {
-                    this.screenIndex = 16;
+                    this.screenIndex = this.screenArray.length - 1;
                     this.advanceToNextLevel();
                 }
                 this.draw();
@@ -36,12 +36,13 @@ class Game {
         this.canvas = canvas;
         this.canvas.width = 650;
         this.canvas.height = window.innerHeight;
-        this.load();
+        this.load(0);
     }
-    load() {
-        this.screenIndex = 0;
+    load(screenIndex) {
+        this.screenIndex = screenIndex;
         this.player = new Player(this.canvas);
         this.screenArray = [
+            new StartScreen(this.canvas),
             new Level1(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level2(this.canvas, this.player),
@@ -634,4 +635,20 @@ var ScreenState;
     ScreenState[ScreenState["PAUSED"] = 3] = "PAUSED";
     ScreenState[ScreenState["RESTART"] = 4] = "RESTART";
 })(ScreenState || (ScreenState = {}));
+class StartScreen extends Screens {
+    constructor(canvas) {
+        super();
+        this.canvas = canvas;
+    }
+    gameLogic() {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+            this.state = ScreenState.NEXT_SCREEN;
+        }
+    }
+    draw() {
+        const ctx = this.canvas.getContext('2d');
+        this.writeTextToCanvas(ctx, `Welcome to ~insert game name here~`, this.canvas.width / 2, 200, 40);
+        this.writeTextToCanvas(ctx, `Press P to start the Game!`, this.canvas.width / 2, 250, 40);
+    }
+}
 //# sourceMappingURL=app.js.map
