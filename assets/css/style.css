@@ -4,7 +4,8 @@
 }
 
 canvas{
-    background-image: url(../img/road.png);
+    background-image: url(../img/street.jpg);
+    background-size: cover;
     background-repeat: no-repeat;
     margin: 0 auto;
     display: block;
