@@ -224,15 +224,7 @@ abstract class Level extends Screens {
     }
 
 
-    /**
-    * Generates a random integer number between min and max
-    *
-    * @param {number} min - minimal time
-    * @param {number} max - maximal time
-    */
-    protected randomInteger(min: number, max: number): number {
-        return Math.round(Math.random() * (max - min) + min);
-    }
+    
 
     protected changeTheme(img: string) {
         document.body.style.backgroundImage = img;

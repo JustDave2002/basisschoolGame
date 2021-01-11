@@ -11,7 +11,6 @@ class Game {
     constructor(canvas) {
         this.frameCount = 0;
         this.animate = () => {
-            console.log(this.screenIndex);
             requestAnimationFrame(this.animate);
             this.now = Date.now();
             this.elapsed = this.now - this.then;
@@ -43,7 +42,7 @@ class Game {
         this.player = new Player(this.canvas);
         this.screenArray = [
             new StartScreen(this.canvas),
-            new Level1(this.canvas, this.player),
+            new QLevel1(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level2(this.canvas, this.player),
             new LevelWon(this.canvas),
@@ -320,9 +319,16 @@ class Screens {
     }
     writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
         ctx.font = `${fontSize}px sans-serif`;
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 6;
+        ctx.strokeText(text, xCoordinate, yCoordinate);
         ctx.fillStyle = color;
+        ctx.stroke();
         ctx.textAlign = alignment;
         ctx.fillText(text, xCoordinate, yCoordinate);
+    }
+    randomInteger(min, max) {
+        return Math.round(Math.random() * (max - min) + min);
     }
 }
 console.log("Javascript is working!");
@@ -331,18 +337,89 @@ window.addEventListener('load', () => {
     const game = new Game(document.getElementById('canvas'));
 });
 class Questions extends Screens {
-    constructor() {
+    constructor(canvas, player) {
         super();
+        this.player = player;
+        this.canvas = canvas;
+        this.reset();
+    }
+    reset() {
+        this.leftOrRight = undefined;
+        this.questionIsRight = undefined;
+        this.questionConfirmed = false;
     }
     gameLogic() {
+        this.player.move();
+        this.questionI = this.randomInteger(0, this.questionArray.length);
+        for (this.questionI = 0; this.questionI < this.questionArray.length; this.questionI++) {
+            this.currentQuestion = this.questionArray[this.questionI].question;
+            this.currentOptions = this.questionArray[this.questionI].choices;
+            this.currentAnswer = this.questionArray[this.questionI].answer;
+            this.currentExplanation = this.questionArray[this.questionI].explanation;
+        }
+        if (this.questionConfirmed == false) {
+            if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) || this.leftOrRight == 1) {
+                this.leftOrRight = 1;
+            }
+            if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) || this.leftOrRight == 2) {
+                this.leftOrRight = 2;
+            }
+        }
+        this.questionCheck();
     }
-    draw() {
+    questionCheck() {
+        if (this.leftOrRight == 1 || this.leftOrRight == 2) {
+            if (this.keyListener.isKeyDown(KeyListener.KEY_UP) || this.questionConfirmed == true) {
+                this.questionConfirmed = true;
+                if (this.currentAnswer == this.leftOrRight) {
+                    this.questionIsRight = true;
+                }
+                else {
+                    this.questionIsRight = false;
+                }
+            }
+        }
+    }
+    draw(ctx) {
+        this.writeTextToCanvas(ctx, this.currentQuestion, this.canvas.width / 2, 100, 40);
+        this.writeTextToCanvas(ctx, this.currentOptions[0], this.canvas.width / 2 - 200, 150, 40);
+        this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 200, 150, 40);
+        if (this.questionIsRight != undefined) {
+            for (let i = 0; i < this.currentExplanation.length; i++) {
+                this.writeTextToCanvas(ctx, this.currentExplanation[i], this.canvas.width / 2, 400 + 50 * i, 40);
+            }
+        }
+        if (this.questionIsRight == true) {
+            this.writeTextToCanvas(ctx, "That was the correct answer!", this.canvas.width / 2, 250, 40, "white");
+        }
+        else if (this.questionIsRight == false) {
+            this.writeTextToCanvas(ctx, "That was not the correct answer!", this.canvas.width / 2, 250, 40, "white");
+        }
     }
 }
 class QLevel1 extends Questions {
-    constructor(canvas) {
-        super();
-        this.questionArray = [];
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.questionArray = [
+            {
+                question: "What is the capital of United Kingdom?",
+                choices: ["Manchester", "Birmingham"],
+                answer: 2,
+                explanation: "Elit sint sit tempor ut consequat commodo veniam mollit magna. Eu Lorem cillum minim amet enim excepteur laborum ad. Occaecat irure minim voluptate eu dolore. Magna nostrud aliquip et laborum laboris. Eiusmod fugiat anim nulla adipisicing sint sit ullamco ex. Ipsum dolore ea consectetur minim. Anim consectetur irure commodo excepteur cupidatat deserunt do nostrud ad anim ex aute."
+            },
+            {
+                question: "What is the capital of United States?",
+                choices: ["California", "New York"],
+                answer: 1,
+                explanation: ["Elit sint sit tempor ut consequat commodo veniam mollit magna.",
+                    "Eu Lorem cillum minim amet enim excepteur laborum ad.",
+                    "Occaecat irure minim voluptate eu dolore.",
+                    "Magna nostrud aliquip et laborum laboris.",
+                    "Eiusmod fugiat anim nulla adipisicing sint sit ullamco ex.",
+                    "Ipsum dolore ea consectetur minim. Anim consectetur irure commodo excepteur cupidatat",
+                    "deserunt do nostrud ad anim ex aute."]
+            }
+        ];
     }
 }
 class Level extends Screens {
@@ -475,9 +552,6 @@ class Level extends Screens {
         const last_element = this.scoringObject.length - 1;
         this.scoringObject[last_element].setSpeed(this.speedBoost + this.speedMultiplier);
     }
-    randomInteger(min, max) {
-        return Math.round(Math.random() * (max - min) + min);
-    }
     changeTheme(img) {
         document.body.style.backgroundImage = img;
     }
@@ -489,7 +563,7 @@ class Level1 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 1);
         this.baseSpawnRate = 100;
-        this.maxPoints = 100;
+        this.maxPoints = 10;
         this.speedMultiplier = 0.5;
     }
 }
