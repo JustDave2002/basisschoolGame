@@ -4,25 +4,28 @@
     choices: ["verwijder de email ", " rapporteer en blokkeer "],
     answer: 2, 
     explanation:[ "  Je kan zo zorgen dat google  er iets tegen kan doen.", 
-    "Ook zorg je ervoor dat je zelf geen e-mails meer krijgt van die persoon."]
+    "Ook krijg je dan geen emails meer."]
 
 },{
      question: "Wat is een goed wachtwoord?",
      choices: ["1234", " W0nderwa11$"],
      answer: 2, 
-    explanation: "1234 is heel makkelijk om voor hackers achter te komen doordat best  veel mensen 1234 gebruiken als antwoord W0nderwa11$ is een beter wachtwoord doordat het een best lang woord is ook heeft het cijfers en een raar teken zoals de $ dit zorgt ervoor dat hackers het moeilijk vinden om erachter te komen"
+    explanation: ["1234 is heel makkelijk om voor hackers achter te komen.","
+    W0nderwa11$ is dat niet door de tekens"]
 
 },{
     question: "Tegen welke mensen vertel je inloggegevens",
     choices: ["Niemand of je ouders", "Je vrienden"],
     answer: 1, 
-    explanation: " Je kan op je ouders vertrouwen om jou informatie niet te gebruiken wel je vrienden er minder waarde aan geven waardoor ze het misschien misbruiken of per ongelijk tegen iemand anders vertellen"
+    explanation: [" Je kan  je ouders vertrouwen",
+    "En je vrienden niet perse."]
 
 },{
     question: " Je krijgt van iemand die je niet kent een sms en hij stelt persoonlijke vragen wat doe je?",
     choices: ["Blokkeer diegene en vertel het aan je ouders ", " ga met de persoon in gesprek"],
     answer: 1, 
-    explanation: "Je moet nooit beantwoorden want hoe meer ze weten hoe slechter. Verder door diegene te blokkeren kunnen ze niet meer je lastigvallen ook is het handig dat je ouders het weten."  
+    explanation: ["Je moet nooit beantwoorden.",
+    "Hierdoor weten ze niks"]  
 
 },{
     question: " Welke gegevens deel je niet op je sociale media? "
