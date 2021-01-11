@@ -140,14 +140,14 @@ abstract class Level extends Screens {
     public draw(ctx: CanvasRenderingContext2D) {
 
         this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
-        this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
-        this.writeTextToCanvas(ctx, `Lives: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
+        this.writeTextToCanvas(ctx, `Druk op ESC om te pauzeren`, this.canvas.width / 2 - 250, 20, 16);
+        this.writeTextToCanvas(ctx, `Levens: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
 
         //writes the pause message when game is paused
         if (this.getState() == ScreenState.PAUSED) {
 
-            this.writeTextToCanvas(ctx, `Paused`, this.canvas.width / 2, 200, 40);
-            this.writeTextToCanvas(ctx, `Press P to start`, this.canvas.width / 2, 250, 35);
+            this.writeTextToCanvas(ctx, `Gepauzeerd`, this.canvas.width / 2, 200, 40);
+            this.writeTextToCanvas(ctx, `Druk op P om door te gaan`, this.canvas.width / 2, 250, 35);
         }
         this.drawScore(ctx);
         this.drawObjects(ctx);
