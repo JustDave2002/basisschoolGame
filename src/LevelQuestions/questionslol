@@ -31,19 +31,20 @@
     question: " Welke gegevens deel je niet op je sociale media? "
     choices: ["je adres en je persoonlijke telefoonnummer ", " je naam"],
     answer: 1, 
-    explanation: "Het is niet goed wanneer mensen die je account bekijken  zoals mensen die je niet kent achter persoonlijke info zoals je adres en telefoonnummer kunnen komen."
+    explanation:[ "Deze info is voor vrienden niet iedereen."]
 
 },{
     question: "Is het oké om je je ouders betalings informatie op het internet te delen?"
     choices: "ja", "nee"],
     answer: 2, 
-    explanation: "Het is nooit goed om persoonlijke gegevens van je ouders te delen zonder hun toestemming en zeker niet creditcard informatie dit is de grootste NO GO die er is."
+    explanation:[ "Nooit Betalingsgegevens delen."]
 
 },{
    question: " Je zit op een chatbox website iemand stelt wat rare persoonlijk vragen wat doe je?"
     choices: "rapporteer en blokkeer en vertel je ouders", " je beantwoordt de vragen"],
     answer: 1, 
-    explanation: " Je moet nooit beantwoorden want hoe meer ze weten hoe slechter. Verder door diegene te blokkeren kunnen ze niet meer je lastigvallen ook is het handig dat je ouders het weten."
+    explanation: ["Je moet nooit beantwoorden.",
+    "Hierdoor weten ze niks"]   "
 
 },{
     question: "",
