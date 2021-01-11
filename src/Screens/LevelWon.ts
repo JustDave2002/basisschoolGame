@@ -20,8 +20,8 @@ class LevelWon extends Screens {
         // Get the canvas rendering context
         const ctx = this.canvas.getContext('2d');
 
-        this.writeTextToCanvas(ctx, `You won the level!`, this.canvas.width / 2, 200, 40);
-        this.writeTextToCanvas(ctx, `Press P to start the next level`, this.canvas.width / 2, 250, 40);
+        this.writeTextToCanvas(ctx, `Gefeliciteerd, je hebt het level gehaald!`, this.canvas.width / 2, 200, 40);
+        this.writeTextToCanvas(ctx, `Druk op P om de volgende level te starten`, this.canvas.width / 2, 250, 40);
     }
 
 
