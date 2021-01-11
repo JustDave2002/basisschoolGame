@@ -40,9 +40,23 @@ abstract class Screens{
     alignment: CanvasTextAlign = "center"
 ) {
     ctx.font = `${fontSize}px sans-serif`;
-    ctx.fillStyle = color;
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 6;
+    ctx.strokeText(text, xCoordinate, yCoordinate);
+    ctx.fillStyle = color
+    ctx.stroke();
     ctx.textAlign = alignment;
     ctx.fillText(text, xCoordinate, yCoordinate);
+}
+
+/**
+    * Generates a random integer number between min and max
+    *
+    * @param {number} min - minimal time
+    * @param {number} max - maximal time
+    */
+   protected randomInteger(min: number, max: number): number {
+    return Math.round(Math.random() * (max - min) + min);
 }
 
 }
