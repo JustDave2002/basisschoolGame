@@ -1,19 +1,22 @@
 // level 1
 {
-    question: "",
-    choices: ["", ""],
+    question: " Wat moet je doen wanneer je een email krijgt van een onbekenden?",
+    choices: ["verwijder de email ", " rapporteer en blokkeer "],
     answer: 2, 
-    explanation: ""
+    explanation: " Je moet rapporteren en blokkeren en niet alleen de email verwijderen omdat je zo kan zorgen dat google of degene die de email manier die jij gebruikt er iets tegen kan doen. Ook zorg je ervoor dat je zelf geen e-mails meer kan krijgen van die persoon"
+
 },{
-    question: "",
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ""
+     question: "Wat is een goed wachtwoord?",
+     choices: ["1234", " W0nderwa11$"],
+     answer: 2, 
+    explanation: "1234 is heel makkelijk om voor hackers achter te komen doordat best  veel mensen 1234 gebruiken als antwoord W0nderwa11$ is een beter wachtwoord doordat het een best lang woord is ook heeft het cijfers en een raar teken zoals de $ dit zorgt ervoor dat hackers het moeilijk vinden om erachter te komen"
+
 },{
-    question: "",
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ""
+    question: "Tegen welke mensen vertel je inloggegevens",
+    choices: ["Niemand of je ouders", "Je vrienden"],
+    answer: 1, 
+    explanation: " je kan op je ouders vertrouwen om jou informatie niet te gebruiken wel je vrienden er minder waarde aan geven waardoor ze het misschien misbruiken of per ongelijk tegen iemand anders vertellen"
+
 },{
     question: "",
     choices: ["", ""],
