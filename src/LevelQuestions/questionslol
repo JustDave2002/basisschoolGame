@@ -53,15 +53,17 @@
     explanation: ["Nooit delen kan nep zijn"]
 
 },{
-    question: "",
-    choices: ["", ""],
+   question: " Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"
+    choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Kan een virus bevatten doe het niet"]
+
 },{
-    question: "",
-    choices: ["", ""],
+   question: " Je krijgt een vriendschapsverzoek van iemand die je niet kent wat doe je?"
+    choices: ["je accepteert het vriendschapsverzoek", " je weigert het vriendschapsverzoek "],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Als je iemand niet kent doe het niet"]
+
 },
 
 //level 2
