@@ -6,7 +6,6 @@
 canvas{
     background-image: url(../img/road.png);
     background-repeat: no-repeat;
-    background-size: auto;
     margin: 0 auto;
     display: block;
 }
