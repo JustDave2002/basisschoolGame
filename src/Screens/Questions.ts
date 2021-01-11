@@ -68,7 +68,7 @@ abstract class Questions extends Screens {
             }
         }
         this.questionCheck();
-        if(this.questionConfirmed == true && this.keyListener.isKeyDown(KeyListener.KEY_P)){
+        if(this.questionConfirmed == true && this.keyListener.isKeyDown(KeyListener.KEY_ENTER)){
             this.questionCounter ++
             if (this.questionCounter ==2){
                 this.state = ScreenState.NEXT_SCREEN;
@@ -99,11 +99,14 @@ abstract class Questions extends Screens {
     public draw(ctx: CanvasRenderingContext2D) {
 
         if(this.questionConfirmed == false){
-        this.writeTextToCanvas(ctx, this.currentQuestion, this.canvas.width / 2, 100, 40);
-        this.writeTextToCanvas(ctx, this.currentOptions[0], this.canvas.width / 2 - 200, 150, 40);
-        this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 200, 150, 40);    
+            for (let i = 0; i < this.currentQuestion.length; i++) {
+                this.writeTextToCanvas(ctx, this.currentQuestion[i], this.canvas.width / 2, 50 +i*50, 40);
+            }
+        
+        this.writeTextToCanvas(ctx, this.currentOptions[0], this.canvas.width / 2 - 350, 170, 40);
+        this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 350, 170, 40);    
         } else {
-            this.writeTextToCanvas(ctx, "Press P for the next question!", this.canvas.width / 2, 150, 45);
+            this.writeTextToCanvas(ctx, "Press ENTER for the next question!", this.canvas.width / 2, 150, 45);
         }
         
         

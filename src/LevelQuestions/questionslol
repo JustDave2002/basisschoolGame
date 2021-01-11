@@ -53,12 +53,12 @@
     explanation: ["Nooit delen kan nep zijn"]
 
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
@@ -66,52 +66,52 @@
 
 //level 2
 {
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
@@ -119,52 +119,52 @@
 
 //level 3
 {
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
@@ -172,52 +172,52 @@
 
 //level 4
 {
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
@@ -225,52 +225,52 @@
 
 //level 5
 {
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
@@ -278,52 +278,52 @@
 
 //level 6
 {
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
@@ -331,52 +331,52 @@
 
 //level 7
 {
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
@@ -389,47 +389,47 @@
     answer: 2, 
     explanation: ["Het veiligst is om dat niet te doen. Het is altijd veiliger om iemand toe te voegen in je vriendenlijst "]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
 },{
-    question: "",
+    question: ["", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
