@@ -33,28 +33,28 @@
     question: "Is het oké om je je ouders creditcard informatie op het internet te delen?"
     choices: "ja", "nee"],
     answer: 2, 
-    explanation: "Het is nooit oke om persoonlijke gegevens van je ouders te delen zonder hun toestemming en zeker niet creditcard informatie dit is de grootste NO GO die er is."
+    explanation: "Het is nooit goed om persoonlijke gegevens van je ouders te delen zonder hun toestemming en zeker niet creditcard informatie dit is de grootste NO GO die er is."
 
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },
 
 //level 2
@@ -62,52 +62,52 @@
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 }
 
 //level 3
@@ -115,52 +115,52 @@
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 }
 
 //level 4
@@ -168,52 +168,52 @@
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 }
 
 //level 5
@@ -221,52 +221,52 @@
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 }
 
 //level 6
@@ -274,52 +274,52 @@
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 }
 
 //level 7
@@ -327,103 +327,103 @@
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 }
 
 //level 8
 {
-    question: "",
-    choices: ["", ""],
+    question: "Iemand stuurt je een vriendverzoek. Je kent hem niet maar je vriend zegt dat hij hem misschien kent. Accepteer je het vriendverzoek?",
+    choices: ["Ja", "Nee"],
     answer: 2, 
-    explanation: ""
+    explanation: ["Het veiligst is om dat niet te doen. Het is altijd veiliger om iemand toe te voegen in je vriendenlijst "]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 },{
     question: "",
     choices: ["", ""],
     answer: 2, 
-    explanation: ""
+    explanation: ["",""]
 }
