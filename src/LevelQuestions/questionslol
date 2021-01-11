@@ -15,23 +15,26 @@
     question: "Tegen welke mensen vertel je inloggegevens",
     choices: ["Niemand of je ouders", "Je vrienden"],
     answer: 1, 
-    explanation: " je kan op je ouders vertrouwen om jou informatie niet te gebruiken wel je vrienden er minder waarde aan geven waardoor ze het misschien misbruiken of per ongelijk tegen iemand anders vertellen"
+    explanation: " Je kan op je ouders vertrouwen om jou informatie niet te gebruiken wel je vrienden er minder waarde aan geven waardoor ze het misschien misbruiken of per ongelijk tegen iemand anders vertellen"
 
 },{
-    question: "",
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ""
+    question: " Je krijgt van iemand die je niet kent een sms en hij stelt persoonlijke vragen wat doe je?",
+    choices: ["Blokkeer diegene en vertel het aan je ouders ", " ga met de persoon in gesprek"],
+    answer: 1, 
+    explanation: "Je moet nooit beantwoorden want hoe meer ze weten hoe slechter. Verder door diegene te blokkeren kunnen ze niet meer je lastigvallen ook is het handig dat je ouders het weten."  
+
 },{
-    question: "",
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ""
+    question: " Welke gegevens deel je niet op je sociale media? "
+    choices: ["je adres en je persoonlijke telefoonnummer ", " je naam"],
+    answer: 1, 
+    explanation: "Het is niet goed wanneer mensen die je account bekijken  zoals mensen die je niet kent achter persoonlijke info zoals je adres en telefoonnummer kunnen komen."
+
 },{
-    question: "",
-    choices: ["", ""],
+    question: "Is het oké om je je ouders creditcard informatie op het internet te delen?"
+    choices: "ja", "nee"],
     answer: 2, 
-    explanation: ""
+    explanation: "Het is nooit oke om persoonlijke gegevens van je ouders te delen zonder hun toestemming en zeker niet creditcard informatie dit is de grootste NO GO die er is."
+
 },{
     question: "",
     choices: ["", ""],
