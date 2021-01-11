@@ -104,7 +104,7 @@ class Player {
             this.image,
             // Center the image in the lane with the x coordinates
             this.positionX - this.image.width / 2,
-            this.canvas.height - 150
+            this.canvas.height - 200
         );
     }
 
@@ -114,8 +114,8 @@ class Player {
     public collidesWith(scoringObject: ScoringObject): boolean {
         if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()
             && this.positionX + this.image.width > scoringObject.getPositionX()
-            && this.canvas.height - 150 < scoringObject.getPositionY() + scoringObject.getImageHeight()
-            && this.canvas.height - 150 + this.image.height > scoringObject.getPositionY()
+            && this.canvas.height - 200 < scoringObject.getPositionY() + scoringObject.getImageHeight()
+            && this.canvas.height - 200 + this.image.height > scoringObject.getPositionY()
         ) {
             return true;
         }

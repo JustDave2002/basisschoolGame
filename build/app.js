@@ -158,6 +158,158 @@ KeyListener.KEY_W = 87;
 KeyListener.KEY_X = 88;
 KeyListener.KEY_Y = 89;
 KeyListener.KEY_Z = 90;
+class Player {
+    constructor(canvas) {
+        this.Left = 0;
+        this.Right = 0;
+        this.canvas = canvas;
+        this.leftLane = this.canvas.width / 6;
+        this.middleLane = this.canvas.width / 2;
+        this.rightLane = this.canvas.width / 6 * 5;
+        this.keyListener = new KeyListener();
+        this.image = this.loadNewImage("./assets/img/players/carplayer.png");
+        this.positionX = this.canvas.width / 2;
+    }
+    move() {
+        this.animatePlayer();
+        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT)) {
+            this.Left += 1;
+        }
+        else {
+            this.Left = 0;
+        }
+        if (this.Left === 1) {
+            if (this.positionX == this.rightLane) {
+                this.toGoLane = this.middleLane;
+                this.goLeft = true;
+            }
+            else if (this.positionX == this.middleLane) {
+                this.toGoLane = this.leftLane;
+                this.goLeft = true;
+            }
+        }
+        if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT)) {
+            this.Right += 1;
+            if (this.Right === 1) {
+                if (this.positionX == this.leftLane) {
+                    this.toGoLane = this.middleLane;
+                    this.goLeft = false;
+                }
+                else if (this.positionX == this.middleLane) {
+                    this.toGoLane = this.rightLane;
+                    this.goLeft = false;
+                }
+            }
+        }
+        else {
+            this.Right = 0;
+        }
+    }
+    animatePlayer() {
+        if (this.goLeft == true) {
+            if (this.positionX >= this.toGoLane) {
+                this.positionX = this.positionX - 22;
+                if (this.positionX < this.toGoLane) {
+                    this.positionX = this.toGoLane;
+                }
+            }
+        }
+        else if (this.goLeft == false) {
+            if (this.positionX <= this.toGoLane) {
+                this.positionX = this.positionX + 22;
+                if (this.positionX > this.toGoLane) {
+                    this.positionX = this.toGoLane;
+                }
+            }
+        }
+    }
+    draw(ctx) {
+        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 200);
+    }
+    collidesWith(scoringObject) {
+        if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()
+            && this.positionX + this.image.width > scoringObject.getPositionX()
+            && this.canvas.height - 200 < scoringObject.getPositionY() + scoringObject.getImageHeight()
+            && this.canvas.height - 200 + this.image.height > scoringObject.getPositionY()) {
+            return true;
+        }
+        return false;
+    }
+    loadNewImage(source) {
+        const img = new Image();
+        img.src = source;
+        return img;
+    }
+}
+class ScoringObject {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.leftLane = this.canvas.width / 6;
+        this.middleLane = this.canvas.width / 2;
+        this.rightLane = this.canvas.width / 6 * 5;
+        const random = this.randomInteger(1, 3);
+        if (random === 1) {
+            this.positionX = this.leftLane;
+        }
+        if (random === 2) {
+            this.positionX = this.middleLane;
+        }
+        if (random === 3) {
+            this.positionX = this.rightLane;
+        }
+        this.positionY = -50;
+    }
+    move() {
+        this.positionY += this.speed;
+    }
+    draw(ctx) {
+        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.positionY);
+    }
+    collidesWithCanvasBottom() {
+        if (this.positionY + this.image.height > this.canvas.height) {
+            return true;
+        }
+        return false;
+    }
+    getPositionX() {
+        return this.positionX;
+    }
+    getPositionY() {
+        return this.positionY;
+    }
+    getImageWidth() {
+        return this.image.width;
+    }
+    getImageHeight() {
+        return this.image.height;
+    }
+    getPoints() {
+        return this.points;
+    }
+    getLives() {
+        return this._lives;
+    }
+    setSpeed(v) {
+        this.speed += v;
+    }
+    loadNewImage(source) {
+        const img = new Image();
+        img.src = source;
+        return img;
+    }
+    randomInteger(min, max) {
+        return Math.round(Math.random() * (max - min) + min);
+    }
+}
+var ScreenState;
+(function (ScreenState) {
+    ScreenState[ScreenState["PLAYING"] = 0] = "PLAYING";
+    ScreenState[ScreenState["NEXT_SCREEN"] = 1] = "NEXT_SCREEN";
+    ScreenState[ScreenState["DIED"] = 2] = "DIED";
+    ScreenState[ScreenState["PAUSED"] = 3] = "PAUSED";
+    ScreenState[ScreenState["QUESTION"] = 4] = "QUESTION";
+    ScreenState[ScreenState["RESTART"] = 5] = "RESTART";
+})(ScreenState || (ScreenState = {}));
 class Screens {
     constructor() {
         this.state = ScreenState.PLAYING;
@@ -171,6 +323,26 @@ class Screens {
         ctx.fillStyle = color;
         ctx.textAlign = alignment;
         ctx.fillText(text, xCoordinate, yCoordinate);
+    }
+}
+console.log("Javascript is working!");
+window.addEventListener('load', () => {
+    console.log("Handling the Load event");
+    const game = new Game(document.getElementById('canvas'));
+});
+class Questions extends Screens {
+    constructor() {
+        super();
+    }
+    gameLogic() {
+    }
+    draw() {
+    }
+}
+class QLevel1 extends Questions {
+    constructor(canvas) {
+        super();
+        this.questionArray = [];
     }
 }
 class Level extends Screens {
@@ -245,11 +417,11 @@ class Level extends Screens {
     }
     draw(ctx) {
         this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
-        this.writeTextToCanvas(ctx, `Press ESC to pause`, this.canvas.width / 2 - 250, 20, 16);
-        this.writeTextToCanvas(ctx, `Lives: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
+        this.writeTextToCanvas(ctx, `Druk op ESC om te pauzeren`, this.canvas.width / 2 - 250, 20, 16);
+        this.writeTextToCanvas(ctx, `Levens: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
         if (this.getState() == ScreenState.PAUSED) {
-            this.writeTextToCanvas(ctx, `Paused`, this.canvas.width / 2, 200, 40);
-            this.writeTextToCanvas(ctx, `Press P to start`, this.canvas.width / 2, 250, 35);
+            this.writeTextToCanvas(ctx, `Gepauzeerd`, this.canvas.width / 2, 200, 40);
+            this.writeTextToCanvas(ctx, `Druk op P om door te gaan`, this.canvas.width / 2, 250, 35);
         }
         this.drawScore(ctx);
         this.drawObjects(ctx);
@@ -313,160 +485,12 @@ class Level extends Screens {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
-class Player {
-    constructor(canvas) {
-        this.Left = 0;
-        this.Right = 0;
-        this.canvas = canvas;
-        this.leftLane = this.canvas.width / 6;
-        this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 6 * 5;
-        this.keyListener = new KeyListener();
-        this.image = this.loadNewImage("./assets/img/players/carplayer.png");
-        this.positionX = this.canvas.width / 2;
-    }
-    move() {
-        this.animatePlayer();
-        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT)) {
-            this.Left += 1;
-        }
-        else {
-            this.Left = 0;
-        }
-        if (this.Left === 1) {
-            if (this.positionX == this.rightLane) {
-                this.toGoLane = this.middleLane;
-                this.goLeft = true;
-            }
-            else if (this.positionX == this.middleLane) {
-                this.toGoLane = this.leftLane;
-                this.goLeft = true;
-            }
-        }
-        if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT)) {
-            this.Right += 1;
-            if (this.Right === 1) {
-                if (this.positionX == this.leftLane) {
-                    this.toGoLane = this.middleLane;
-                    this.goLeft = false;
-                }
-                else if (this.positionX == this.middleLane) {
-                    this.toGoLane = this.rightLane;
-                    this.goLeft = false;
-                }
-            }
-        }
-        else {
-            this.Right = 0;
-        }
-    }
-    animatePlayer() {
-        if (this.goLeft == true) {
-            if (this.positionX >= this.toGoLane) {
-                this.positionX = this.positionX - 22;
-                if (this.positionX < this.toGoLane) {
-                    this.positionX = this.toGoLane;
-                }
-            }
-        }
-        else if (this.goLeft == false) {
-            if (this.positionX <= this.toGoLane) {
-                this.positionX = this.positionX + 22;
-                if (this.positionX > this.toGoLane) {
-                    this.positionX = this.toGoLane;
-                }
-            }
-        }
-    }
-    draw(ctx) {
-        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 150);
-    }
-    collidesWith(scoringObject) {
-        if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()
-            && this.positionX + this.image.width > scoringObject.getPositionX()
-            && this.canvas.height - 150 < scoringObject.getPositionY() + scoringObject.getImageHeight()
-            && this.canvas.height - 150 + this.image.height > scoringObject.getPositionY()) {
-            return true;
-        }
-        return false;
-    }
-    loadNewImage(source) {
-        const img = new Image();
-        img.src = source;
-        return img;
-    }
-}
-class ScoringObject {
-    constructor(canvas) {
-        this.canvas = canvas;
-        this.leftLane = this.canvas.width / 6;
-        this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 6 * 5;
-        const random = this.randomInteger(1, 3);
-        if (random === 1) {
-            this.positionX = this.leftLane;
-        }
-        if (random === 2) {
-            this.positionX = this.middleLane;
-        }
-        if (random === 3) {
-            this.positionX = this.rightLane;
-        }
-        this.positionY = -50;
-    }
-    move() {
-        this.positionY += this.speed;
-    }
-    draw(ctx) {
-        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.positionY);
-    }
-    collidesWithCanvasBottom() {
-        if (this.positionY + this.image.height > this.canvas.height) {
-            return true;
-        }
-        return false;
-    }
-    getPositionX() {
-        return this.positionX;
-    }
-    getPositionY() {
-        return this.positionY;
-    }
-    getImageWidth() {
-        return this.image.width;
-    }
-    getImageHeight() {
-        return this.image.height;
-    }
-    getPoints() {
-        return this.points;
-    }
-    getLives() {
-        return this._lives;
-    }
-    setSpeed(v) {
-        this.speed += v;
-    }
-    loadNewImage(source) {
-        const img = new Image();
-        img.src = source;
-        return img;
-    }
-    randomInteger(min, max) {
-        return Math.round(Math.random() * (max - min) + min);
-    }
-}
-console.log("Javascript is working!");
-window.addEventListener('load', () => {
-    console.log("Handling the Load event");
-    const game = new Game(document.getElementById('canvas'));
-});
 class Level1 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 1);
         this.baseSpawnRate = 100;
         this.maxPoints = 100;
-        this.speedMultiplier = 0, 5;
+        this.speedMultiplier = 0.5;
     }
 }
 class Level2 extends Level {
@@ -481,7 +505,7 @@ class Level3 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 3);
         this.baseSpawnRate = 75;
-        this.maxPoints = 400;
+        this.maxPoints = 300;
         this.speedMultiplier = 1;
     }
 }
@@ -489,7 +513,7 @@ class Level4 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 4);
         this.baseSpawnRate = 70;
-        this.maxPoints = 800;
+        this.maxPoints = 400;
         this.speedMultiplier = 1.5;
     }
 }
@@ -497,7 +521,7 @@ class Level5 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 5);
         this.baseSpawnRate = 65;
-        this.maxPoints = 1000;
+        this.maxPoints = 600;
         this.speedMultiplier = 2;
     }
 }
@@ -505,7 +529,7 @@ class Level6 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 6);
         this.baseSpawnRate = 60;
-        this.maxPoints = 1200;
+        this.maxPoints = 800;
         this.speedMultiplier = 2.5;
     }
 }
@@ -513,7 +537,7 @@ class Level7 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 7);
         this.baseSpawnRate = 55;
-        this.maxPoints = 1400;
+        this.maxPoints = 1000;
         this.speedMultiplier = 3;
     }
 }
@@ -521,7 +545,7 @@ class Level8 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 8);
         this.baseSpawnRate = 50;
-        this.maxPoints = 1600;
+        this.maxPoints = 1200;
         this.speedMultiplier = 3.5;
     }
 }
@@ -591,8 +615,8 @@ class DeathScreen extends Screens {
     }
     draw() {
         const ctx = this.canvas.getContext('2d');
-        this.writeTextToCanvas(ctx, `You Lost`, this.canvas.width / 2, 200, 40);
-        this.writeTextToCanvas(ctx, `Press P to try again.`, this.canvas.width / 2, 250, 40);
+        this.writeTextToCanvas(ctx, `Helaas, je hebt verloren`, this.canvas.width / 2, 200, 40);
+        this.writeTextToCanvas(ctx, `Druk op P om opnieuw te proberen`, this.canvas.width / 2, 250, 40);
     }
 }
 class GameWon extends Screens {
@@ -607,8 +631,8 @@ class GameWon extends Screens {
     }
     draw() {
         const ctx = this.canvas.getContext('2d');
-        this.writeTextToCanvas(ctx, `You won the Game!`, this.canvas.width / 2, 200, 40);
-        this.writeTextToCanvas(ctx, `Press P to play again.`, this.canvas.width / 2, 250, 40);
+        this.writeTextToCanvas(ctx, `Gefeliciteerd! Je hebt alle levels gehaald!`, this.canvas.width / 2, 200, 40);
+        this.writeTextToCanvas(ctx, `Druk op P om opnieuw te spelen`, this.canvas.width / 2, 250, 40);
     }
 }
 class LevelWon extends Screens {
@@ -623,18 +647,10 @@ class LevelWon extends Screens {
     }
     draw() {
         const ctx = this.canvas.getContext('2d');
-        this.writeTextToCanvas(ctx, `You won the level!`, this.canvas.width / 2, 200, 40);
-        this.writeTextToCanvas(ctx, `Press P to start the next level`, this.canvas.width / 2, 250, 40);
+        this.writeTextToCanvas(ctx, `Gefeliciteerd, je hebt het level gehaald!`, this.canvas.width / 2, 200, 40);
+        this.writeTextToCanvas(ctx, `Druk op P om de volgende level te starten`, this.canvas.width / 2, 250, 40);
     }
 }
-var ScreenState;
-(function (ScreenState) {
-    ScreenState[ScreenState["PLAYING"] = 0] = "PLAYING";
-    ScreenState[ScreenState["NEXT_SCREEN"] = 1] = "NEXT_SCREEN";
-    ScreenState[ScreenState["DIED"] = 2] = "DIED";
-    ScreenState[ScreenState["PAUSED"] = 3] = "PAUSED";
-    ScreenState[ScreenState["RESTART"] = 4] = "RESTART";
-})(ScreenState || (ScreenState = {}));
 class StartScreen extends Screens {
     constructor(canvas) {
         super();
@@ -647,8 +663,8 @@ class StartScreen extends Screens {
     }
     draw() {
         const ctx = this.canvas.getContext('2d');
-        this.writeTextToCanvas(ctx, `Welcome to ~insert game name here~`, this.canvas.width / 2, 200, 40);
-        this.writeTextToCanvas(ctx, `Press P to start the Game!`, this.canvas.width / 2, 250, 40);
+        this.writeTextToCanvas(ctx, `Welkom bij ~naam hier~`, this.canvas.width / 2, 200, 40);
+        this.writeTextToCanvas(ctx, `Druk op P om de game te starten!`, this.canvas.width / 2, 250, 40);
     }
 }
 //# sourceMappingURL=app.js.map
