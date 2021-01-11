@@ -42,6 +42,7 @@ class Game {
         this.player = new Player(this.canvas);
         this.screenArray = [
             new StartScreen(this.canvas),
+            new Level1(this.canvas, this.player),
             new QLevel1(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level2(this.canvas, this.player),
@@ -313,6 +314,7 @@ class Screens {
     constructor() {
         this.state = ScreenState.PLAYING;
         this.keyListener = new KeyListener;
+        this.state = ScreenState.PLAYING;
     }
     getState() {
         return this.state;
@@ -320,7 +322,7 @@ class Screens {
     writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
         ctx.font = `${fontSize}px sans-serif`;
         ctx.strokeStyle = 'black';
-        ctx.lineWidth = 6;
+        ctx.lineWidth = 4;
         ctx.strokeText(text, xCoordinate, yCoordinate);
         ctx.fillStyle = color;
         ctx.stroke();
@@ -339,24 +341,31 @@ window.addEventListener('load', () => {
 class Questions extends Screens {
     constructor(canvas, player) {
         super();
+        this.questionCounter = 0;
         this.player = player;
         this.canvas = canvas;
-        this.reset();
+        this.reset(0);
     }
-    reset() {
-        this.leftOrRight = undefined;
-        this.questionIsRight = undefined;
+    reset(resetNumber) {
+        if (resetNumber == 1) {
+            this.questionArray.splice(this.questionI, 1);
+            this.leftOrRight = undefined;
+            this.questionIsRight = undefined;
+        }
         this.questionConfirmed = false;
+        this.pickedQuestion = false;
     }
     gameLogic() {
         this.player.move();
-        this.questionI = this.randomInteger(0, this.questionArray.length);
-        for (this.questionI = 0; this.questionI < this.questionArray.length; this.questionI++) {
+        if (this.pickedQuestion == false) {
+            this.questionI = this.randomInteger(0, this.questionArray.length);
             this.currentQuestion = this.questionArray[this.questionI].question;
             this.currentOptions = this.questionArray[this.questionI].choices;
             this.currentAnswer = this.questionArray[this.questionI].answer;
             this.currentExplanation = this.questionArray[this.questionI].explanation;
+            this.pickedQuestion = true;
         }
+        console.log(this.leftOrRight, this.questionConfirmed);
         if (this.questionConfirmed == false) {
             if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) || this.leftOrRight == 1) {
                 this.leftOrRight = 1;
@@ -366,6 +375,16 @@ class Questions extends Screens {
             }
         }
         this.questionCheck();
+        if (this.questionConfirmed == true && this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+            this.questionCounter++;
+            if (this.questionCounter == 2) {
+                this.state = ScreenState.NEXT_SCREEN;
+                this.questionCounter = 0;
+            }
+            else {
+                this.reset(1);
+            }
+        }
     }
     questionCheck() {
         if (this.leftOrRight == 1 || this.leftOrRight == 2) {
@@ -381,9 +400,14 @@ class Questions extends Screens {
         }
     }
     draw(ctx) {
-        this.writeTextToCanvas(ctx, this.currentQuestion, this.canvas.width / 2, 100, 40);
-        this.writeTextToCanvas(ctx, this.currentOptions[0], this.canvas.width / 2 - 200, 150, 40);
-        this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 200, 150, 40);
+        if (this.questionConfirmed == false) {
+            this.writeTextToCanvas(ctx, this.currentQuestion, this.canvas.width / 2, 100, 40);
+            this.writeTextToCanvas(ctx, this.currentOptions[0], this.canvas.width / 2 - 200, 150, 40);
+            this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 200, 150, 40);
+        }
+        else {
+            this.writeTextToCanvas(ctx, "Press P for the next question!", this.canvas.width / 2, 150, 45);
+        }
         if (this.questionIsRight != undefined) {
             for (let i = 0; i < this.currentExplanation.length; i++) {
                 this.writeTextToCanvas(ctx, this.currentExplanation[i], this.canvas.width / 2, 400 + 50 * i, 40);
@@ -405,7 +429,7 @@ class QLevel1 extends Questions {
                 question: "What is the capital of United Kingdom?",
                 choices: ["Manchester", "Birmingham"],
                 answer: 2,
-                explanation: "Elit sint sit tempor ut consequat commodo veniam mollit magna. Eu Lorem cillum minim amet enim excepteur laborum ad. Occaecat irure minim voluptate eu dolore. Magna nostrud aliquip et laborum laboris. Eiusmod fugiat anim nulla adipisicing sint sit ullamco ex. Ipsum dolore ea consectetur minim. Anim consectetur irure commodo excepteur cupidatat deserunt do nostrud ad anim ex aute."
+                explanation: ["Elit sint sit tempor ut consequat commodo veniam mollit magna. Eu Lorem cillum minim amet enim excepteur laborum ad. Occaecat irure minim voluptate eu dolore. Magna nostrud aliquip et laborum laboris. Eiusmod fugiat anim nulla adipisicing sint sit ullamco ex. Ipsum dolore ea consectetur minim. Anim consectetur irure commodo excepteur cupidatat deserunt do nostrud ad anim ex aute."]
             },
             {
                 question: "What is the capital of United States?",
