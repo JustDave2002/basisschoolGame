@@ -34,7 +34,7 @@ class Game {
             }
         };
         this.canvas = canvas;
-        this.canvas.width = 650;
+        this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
         this.load(0);
     }

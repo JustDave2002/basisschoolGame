@@ -30,7 +30,7 @@ class Game {
         this.canvas = <HTMLCanvasElement>canvas;
 
         // Resize the canvas so it looks more like a Runner game
-        this.canvas.width = 650;
+        this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
 
         this.load(0);
