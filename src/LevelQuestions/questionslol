@@ -53,33 +53,38 @@
     explanation: ["Nooit delen kan nep zijn"]
 
 },{
-    question: ["", ""]
-    choices: ["", ""],
+   question: " Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"
+    choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Kan een virus bevatten doe het niet"]
+
 },{
-    question: ["", ""]
-    choices: ["", ""],
+   question: " Je krijgt een vriendschapsverzoek van iemand die je niet kent wat doe je?"
+    choices: ["je accepteert het vriendschapsverzoek", " je weigert het vriendschapsverzoek "],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Als je iemand niet kent doe het niet"]
+
 },
 
 //level 2
 {
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+   question: " Je krijgt een e-mail met een hilarisch onderwerp dat duidelijk een scam is wat doe je?"
+    choices: ["Vermijd te klikken op de links en markeer ze als spam", " Stuur de e-mail door naar je vrienden maar zeg er niet op te klikken "],
+    answer: 1, 
+    explanation: ["links zijn gevaarlijk "]
+
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: " Welk e-mailadres lijkt echt?"
+    choices: ["HenkBakplaat@gmal.com", "KarelVisser@gmail.com"],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["gmal is fout want het is gmail  "]
+
 },{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+   question: " Je krijgt een e-mail van je neef in de bijlage staat een bestand in de e-mail staat “je zal nooit geloven wat er is gebeurt” wat doe je?"
+   choices: ["Verwijder de E-mail en vertel je ouders dat je neef gehackt is ", " Open hem hij is toch familie"],
+    answer: 1, 
+    explanation: ["Nooit rare emails vetrouwen"]
+
 },{
     question: ["", ""]
     choices: ["", ""],
