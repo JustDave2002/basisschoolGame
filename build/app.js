@@ -163,12 +163,12 @@ class Player {
         this.Left = 0;
         this.Right = 0;
         this.canvas = canvas;
-        this.leftLane = this.canvas.width / 6;
+        this.leftLane = this.canvas.width / 24 * 9;
         this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 6 * 5;
+        this.rightLane = this.canvas.width / 24 * 15;
         this.keyListener = new KeyListener();
         this.image = this.loadNewImage("./assets/img/players/carplayer.png");
-        this.positionX = this.canvas.width / 2;
+        this.positionX = this.middleLane;
     }
     move() {
         this.animatePlayer();
@@ -224,13 +224,13 @@ class Player {
         }
     }
     draw(ctx) {
-        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 200);
+        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 175);
     }
     collidesWith(scoringObject) {
         if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()
             && this.positionX + this.image.width > scoringObject.getPositionX()
-            && this.canvas.height - 200 < scoringObject.getPositionY() + scoringObject.getImageHeight()
-            && this.canvas.height - 200 + this.image.height > scoringObject.getPositionY()) {
+            && this.canvas.height - 175 < scoringObject.getPositionY() + scoringObject.getImageHeight()
+            && this.canvas.height - 175 + this.image.height > scoringObject.getPositionY()) {
             return true;
         }
         return false;
@@ -244,9 +244,9 @@ class Player {
 class ScoringObject {
     constructor(canvas) {
         this.canvas = canvas;
-        this.leftLane = this.canvas.width / 6;
+        this.leftLane = this.canvas.width / 24 * 9;
         this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 6 * 5;
+        this.rightLane = this.canvas.width / 24 * 15;
         const random = this.randomInteger(1, 3);
         if (random === 1) {
             this.positionX = this.leftLane;
@@ -257,7 +257,7 @@ class ScoringObject {
         if (random === 3) {
             this.positionX = this.rightLane;
         }
-        this.positionY = -50;
+        this.positionY = window.innerHeight - (window.innerHeight + 50);
     }
     move() {
         this.positionY += this.speed;

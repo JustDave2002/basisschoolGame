@@ -22,15 +22,15 @@ class Player {
         this.canvas = canvas;
 
 
-        this.leftLane = this.canvas.width / 6;
+        this.leftLane = this.canvas.width / 24 * 9;
         this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 6 * 5;
+        this.rightLane = this.canvas.width / 24 * 15;
 
         this.keyListener = new KeyListener();
 
 
         this.image = this.loadNewImage("./assets/img/players/carplayer.png");
-        this.positionX = this.canvas.width / 2;
+        this.positionX = this.middleLane;
     }
 
     public move() {
@@ -104,7 +104,7 @@ class Player {
             this.image,
             // Center the image in the lane with the x coordinates
             this.positionX - this.image.width / 2,
-            this.canvas.height - 200
+            this.canvas.height - 175
         );
     }
 
@@ -114,8 +114,8 @@ class Player {
     public collidesWith(scoringObject: ScoringObject): boolean {
         if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()
             && this.positionX + this.image.width > scoringObject.getPositionX()
-            && this.canvas.height - 200 < scoringObject.getPositionY() + scoringObject.getImageHeight()
-            && this.canvas.height - 200 + this.image.height > scoringObject.getPositionY()
+            && this.canvas.height - 175 < scoringObject.getPositionY() + scoringObject.getImageHeight()
+            && this.canvas.height - 175 + this.image.height > scoringObject.getPositionY()
         ) {
             return true;
         }
