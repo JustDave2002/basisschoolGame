@@ -6,7 +6,7 @@
 canvas{
     background-image: url(../img/road.png);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: auto;
     margin: 0 auto;
     display: block;
 }
@@ -40,8 +40,7 @@ html {
     overflow-y: hidden ! important;
     overflow-x: hidden ! important;
     background-color: #f8f8f8;
-    /*background-size: cover;*/
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
