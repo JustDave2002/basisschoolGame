@@ -544,7 +544,7 @@ class Level extends Screens {
             if (this.keyListener.isKeyDown(KeyListener.KEY_ESC)) {
                 this.state = ScreenState.PAUSED;
             }
-            else if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+            else if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
                 yield this.delay(1000);
                 this.state = ScreenState.PLAYING;
             }
@@ -556,7 +556,7 @@ class Level extends Screens {
         this.writeTextToCanvas(ctx, `Levens: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
         if (this.getState() == ScreenState.PAUSED) {
             this.writeTextToCanvas(ctx, `Gepauzeerd`, this.canvas.width / 2, 200, 40);
-            this.writeTextToCanvas(ctx, `Druk op P om door te gaan`, this.canvas.width / 2, 250, 35);
+            this.writeTextToCanvas(ctx, `Druk op CTRL om door te gaan`, this.canvas.width / 2, 250, 35);
         }
         this.drawScore(ctx);
         this.drawObjects(ctx);
