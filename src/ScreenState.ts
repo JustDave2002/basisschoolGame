@@ -3,5 +3,6 @@ enum ScreenState {
     NEXT_SCREEN,
     DIED,
     PAUSED,
+    QUESTION,
     RESTART
 }
