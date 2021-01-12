@@ -60,7 +60,7 @@ abstract class ScoringObject {
     }
 
     public collidesWithCanvasBottom(): boolean {
-        if (this.positionY + this.image.height > this.canvas.height) {
+        if (this.positionY > this.canvas.height) {
             return true;
         }
 
