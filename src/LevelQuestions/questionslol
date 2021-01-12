@@ -230,25 +230,25 @@
 
 //level 5
 {
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    question: ["Wat is de correcte naam van deze app?", ""]
+    choices: ["WhatsApp", "WhatsApping!"],
+    answer: 1, 
+    explanation: ["Soms zijn er neppe versies van een app, let daarop. 'WhatsApp' is de juiste!",""]
 },{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    question: ["Terwijl je op sites zit te kijken, krijg je plots allemaal advertenties. Wat doe je?", ""]
+    choices: ["je klikt de site weg", "je kijkt naar de advertenties"],
+    answer: 1, 
+    explanation: ["Als je plots allemaal advertenties krijgt, kan het zo zijn dat de website waar je op zit niet betrouwbaar is.","Kijk dus uit!"]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: ["Op je telefoon, waar installeer je apps mee?", ""]
+    choices: ["Op een website", "op een 'store'"],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Op je telefoon gebruik je de 'App Store' or 'Play Store' om veilig apps te downloaden.",""]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: ["Iemand die je niet kent belt je. Neem je op?", ""]
+    choices: ["Ja", "Nee"],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Het veiligst is om niet op te nemen.","Vraag je ouders om hulp als je het niet zeker weet."]
 },{
     question: ["", ""]
     choices: ["", ""],
@@ -283,10 +283,10 @@
 
 //level 6
 {
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    question: ["Wat is een goed wachtwoord?", ""]
+    choices: ["!H0i.", "54321"],
+    answer: 1, 
+    explanation: ["Meer verschillende tekens als wachtwoord is altijd beter.",""]
 },{
     question: ["", ""]
     choices: ["", ""],
@@ -336,7 +336,7 @@
 
 //level 7
 {
-    question: ["", ""]
+    question: ["wat is een betrouwbare emailadres?", ""]
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
