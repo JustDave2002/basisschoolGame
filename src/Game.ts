@@ -12,7 +12,6 @@ class Game {
     private screenIndex: number;
 
     private screenArray: Screens[];
-    private deathScreen: Screens;
 
     private currentScreen: Screens;
 
@@ -25,6 +24,9 @@ class Game {
     private then: number
     private elapsed: number
 
+    //Background Image related
+    private background: HTMLImageElement;
+
 
     public constructor(canvas: HTMLElement) {
         this.canvas = <HTMLCanvasElement>canvas;
@@ -34,6 +36,8 @@ class Game {
         this.canvas.height = window.innerHeight;
 
         this.load(0);
+
+        this.background = this.loadNewImage( "./assets/img/street.jpg");
     }
 
     /**
@@ -83,7 +87,7 @@ class Game {
      */
     private animate = () => {
 
-        
+        this.imageChanger();
 
         // request another frame
 
@@ -120,8 +124,8 @@ class Game {
             this.draw();
 
 
-            let sinceStart = this.now - this.startTime;
-            let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
+            //let sinceStart = this.now - this.startTime;
+            //let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
             //console.log("Elapsed time= " + Math.round(sinceStart / 1000 * 100) / 100 + " secs @ " + currentFps + " fps.");
         }
     }
@@ -131,7 +135,6 @@ class Game {
     private advanceToNextLevel() {
         this.currentScreen = this.screenArray[this.screenIndex];
         this.screenIndex++;
-
     }
 
 
@@ -147,9 +150,30 @@ class Game {
         this.animate();
     }
 
+    /**
+    * Loads an image in such a way that the screen doesn't constantly flicker
+    * @param {HTMLImageElement} source
+    * @return HTMLImageElement - returns an image
+    */
+   private loadNewImage(source: string): HTMLImageElement {
+    const img = new Image();
+    img.src = source;
+    return img;
+}
 
-
-
+    private imageChanger() {
+        
+        switch (this.currentScreen.getLevelIndex()) {
+            case 2:
+                this.background = this.loadNewImage( "./assets/img/street2.jpg");
+                break;
+            case 1:
+                this.background = this.loadNewImage( "./assets/img/street.jpg");
+                break;
+            default:
+                break;
+        }
+    }
 
 
 
@@ -164,12 +188,14 @@ class Game {
         // Clear the entire canvas 
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-
-
-
-        //writes you lost when you lost
-
-
+        ctx.drawImage(
+            this.background,
+            // Center the image in the lane with the x coordinates
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+        );
 
 
 

@@ -1,15 +1,15 @@
-.gameBackground {
+/*.gameBackground {
     overflow: hidden;
     background-image: url(../img/grass.jpg);
-}
+}*/
 
-canvas{
+/*canvas{
     background-image: url(../img/street.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0 auto;
     display: block;
-}
+}*/
 
 button {
     text-align: center;

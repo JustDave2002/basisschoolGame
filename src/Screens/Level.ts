@@ -22,10 +22,6 @@ abstract class Level extends Screens {
     protected baseSpawnRate: number;
     protected maxPoints: number;
 
-    //TODO change when won
-
-    protected levelIndex: number;
-
     protected frameIndex: number;
 
     protected canvas: HTMLCanvasElement
@@ -151,6 +147,9 @@ abstract class Level extends Screens {
         }
         this.drawScore(ctx);
         this.drawObjects(ctx);
+
+        console.log(this.levelIndex);
+        
     }
     /**
      * draws all objects within the level

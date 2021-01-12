@@ -11,6 +11,7 @@ class Game {
     constructor(canvas) {
         this.frameCount = 0;
         this.animate = () => {
+            this.imageChanger();
             requestAnimationFrame(this.animate);
             this.now = Date.now();
             this.elapsed = this.now - this.then;
@@ -28,14 +29,13 @@ class Game {
                     this.advanceToNextLevel();
                 }
                 this.draw();
-                let sinceStart = this.now - this.startTime;
-                let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
             }
         };
         this.canvas = canvas;
         this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
         this.load(0);
+        this.background = this.loadNewImage("./assets/img/street.jpg");
     }
     load(screenIndex) {
         this.screenIndex = screenIndex;
@@ -76,9 +76,27 @@ class Game {
         console.log(this.startTime);
         this.animate();
     }
+    loadNewImage(source) {
+        const img = new Image();
+        img.src = source;
+        return img;
+    }
+    imageChanger() {
+        switch (this.currentScreen.getLevelIndex()) {
+            case 2:
+                this.background = this.loadNewImage("./assets/img/street2.jpg");
+                break;
+            case 1:
+                this.background = this.loadNewImage("./assets/img/street.jpg");
+                break;
+            default:
+                break;
+        }
+    }
     draw() {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
         this.currentScreen.draw(ctx);
         this.player.draw(ctx);
     }
@@ -318,6 +336,9 @@ class Screens {
     }
     getState() {
         return this.state;
+    }
+    getLevelIndex() {
+        return this.levelIndex;
     }
     writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
         ctx.font = `${fontSize}px sans-serif`;
@@ -560,6 +581,7 @@ class Level extends Screens {
         }
         this.drawScore(ctx);
         this.drawObjects(ctx);
+        console.log(this.levelIndex);
     }
     drawObjects(ctx) {
         this.scoringObject.forEach((object) => {
@@ -629,7 +651,7 @@ class Level2 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 2);
         this.baseSpawnRate = 90;
-        this.maxPoints = 200;
+        this.maxPoints = 10;
         this.speedMultiplier = 1;
     }
 }
