@@ -173,25 +173,15 @@
     answer: 2, 
     explanation: ["Het veiligst is om niet op te nemen.","Vraag je ouders om hulp als je het niet zeker weet."]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: ["Je krijgt een link voor Google Meet. 1 van je juf/meester, maar ook 1 van een andere persoon", "Welke klik je aan?"]
+    choices: ["Je Juf", "De andere persoon"],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Vertrouw nooit links van onbekenden.",""]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: ["Je laptop loopt vast. Wat doe je?", ""]
+    choices: ["Je slaat erop", "Roep je ouders"],
     answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    explanation: ["Sommige mensen slaan op hun apparaat in de hoop dat het weer gaat werken.","Niet doen! Het is niet slim en je kan je laptop meer schade aanrichten."]
 },{
     question: ["", ""]
     choices: ["", ""],
@@ -245,34 +235,14 @@
     choices: ["", ""],
     answer: 2, 
     explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
 }
 
 //level 7
 {
     question: ["wat is een betrouwbare emailadres?", ""]
-    choices: ["", ""],
+    choices: ["choochoo@outlook.com", "info@zeelandnet.nl"],
     answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    explanation: ["Misschien geen van beide, maar als je moet kiezen is de 2de betrouwbaarder.",""]
 },{
     question: ["", ""]
     choices: ["", ""],
@@ -347,18 +317,8 @@
     answer: 2, 
     explanation: ["",""]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: ["Dit is een geheime vraag. Als je deze hebt, heel cool B)", ""]
+    choices: ["Ik ben cool", "Ik ben cool"],
     answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    explanation: ["Jij bent cool B)",""]
 }
