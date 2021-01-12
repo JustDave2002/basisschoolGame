@@ -25,7 +25,7 @@ class Game {
     private elapsed: number
 
     //Background Image related
-    private background: HTMLImageElement;
+    
 
 
     public constructor(canvas: HTMLElement) {
@@ -35,9 +35,7 @@ class Game {
         this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
 
-        this.load(0);
-
-        this.background = this.loadNewImage( "./assets/img/street.jpg");
+        this.load(0); 
     }
 
     /**
@@ -87,7 +85,7 @@ class Game {
      */
     private animate = () => {
 
-        this.imageChanger();
+        
 
         // request another frame
 
@@ -161,19 +159,7 @@ class Game {
     return img;
 }
 
-    private imageChanger() {
-        
-        switch (this.currentScreen.getLevelIndex()) {
-            case 2:
-                this.background = this.loadNewImage( "./assets/img/street2.jpg");
-                break;
-            case 1:
-                this.background = this.loadNewImage( "./assets/img/street.jpg");
-                break;
-            default:
-                break;
-        }
-    }
+    
 
 
 
@@ -188,15 +174,7 @@ class Game {
         // Clear the entire canvas 
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        ctx.drawImage(
-            this.background,
-            // Center the image in the lane with the x coordinates
-            0,
-            0,
-            this.canvas.width,
-            this.canvas.height
-        );
-
+        
 
 
         this.currentScreen.draw(ctx);
@@ -205,5 +183,9 @@ class Game {
         this.player.draw(ctx);
 
     }
+
+
+
+
 
 }

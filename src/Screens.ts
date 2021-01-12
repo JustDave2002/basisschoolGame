@@ -2,7 +2,6 @@ abstract class Screens{
 
     protected state: ScreenState = ScreenState.PLAYING
 
-    protected levelIndex: number;
     protected keyListener: KeyListener = new KeyListener
     
     protected constructor(){
@@ -17,9 +16,6 @@ abstract class Screens{
 
     abstract draw(ctx:CanvasRenderingContext2D): void; 
 
-    public getLevelIndex():number {
-        return this.levelIndex
-    }
         
     
     /**

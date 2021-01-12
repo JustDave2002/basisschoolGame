@@ -106,7 +106,7 @@ abstract class Questions extends Screens {
         this.writeTextToCanvas(ctx, this.currentOptions[0], this.canvas.width / 2 - 350, 170, 40);
         this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 350, 170, 40);    
         } else {
-            this.writeTextToCanvas(ctx, "Press ENTER for the next question!", this.canvas.width / 2, 150, 45);
+            this.writeTextToCanvas(ctx, "Druk op ENTER om door te gaan!", this.canvas.width / 2, 150, 45);
         }
         
         
@@ -119,9 +119,9 @@ abstract class Questions extends Screens {
 
         }
         if (this.questionIsRight == true) {
-            this.writeTextToCanvas(ctx, "That was the correct answer!", this.canvas.width / 2, 250, 40, "white");
+            this.writeTextToCanvas(ctx, "Dat was het goede antwoord!", this.canvas.width / 2, 250, 40, "white");
         } else if (this.questionIsRight == false) {
-            this.writeTextToCanvas(ctx, "That was not the correct answer!", this.canvas.width / 2, 250, 40, "white");
+            this.writeTextToCanvas(ctx, "Dat was niet het goede antwoord!", this.canvas.width / 2, 250, 40, "white");
         }
 
     }

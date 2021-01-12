@@ -24,7 +24,11 @@ abstract class Level extends Screens {
 
     protected frameIndex: number;
 
-    protected canvas: HTMLCanvasElement
+    protected canvas: HTMLCanvasElement;
+
+    protected backgroundArray: Array<Background> = new Array();
+
+    protected levelIndex: number;
 
 
 
@@ -46,6 +50,7 @@ abstract class Level extends Screens {
 
         this.totalScore = 0;
 
+        this.backgroundArray.push(new Background(this.canvas, levelIndex, -20)); 
 
     }
 
@@ -60,7 +65,9 @@ abstract class Level extends Screens {
         if (this.getState() === ScreenState.PLAYING) {
             this.frameIndex++
 
+            
             this.player.move();
+            this.backgroundLogic();
             //console.log(this.frameIndex);
 
 
@@ -117,6 +124,8 @@ abstract class Level extends Screens {
         }
     }
 
+   
+
     /**
      * pauses the game on button press and start back up 1000 ms after pressing start
      */
@@ -134,6 +143,19 @@ abstract class Level extends Screens {
      * @param levelIndex shows which level the player is currently at
      */
     public draw(ctx: CanvasRenderingContext2D) {
+        this.backgroundArray.forEach(background => {
+         ctx.drawImage(
+            background.background,
+            // Center the image in the lane with the x coordinates
+            
+            background.getPositionX(),
+            background.getPositionY(),
+            this.canvas.width,
+            this.canvas.height
+        );   
+        });
+        
+
 
         this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
         this.writeTextToCanvas(ctx, `Druk op ESC om te pauzeren`, this.canvas.width / 2 - 250, 20, 16);
@@ -148,7 +170,6 @@ abstract class Level extends Screens {
         this.drawScore(ctx);
         this.drawObjects(ctx);
 
-        console.log(this.levelIndex);
         
     }
     /**
@@ -164,6 +185,7 @@ abstract class Level extends Screens {
             });
     }
 
+    
     /**
      * Draw the score on a canvas
      * @param ctx
@@ -172,6 +194,32 @@ abstract class Level extends Screens {
         this.writeTextToCanvas(ctx, `Score: ${this.totalScore}`, this.canvas.width / 2, 45, 18);
     }
 
+ private backgroundLogic() {
+       
+        
+        this.backgroundArray.forEach(
+            (background, index) => {
+                //background.setSpeed(this.speedBoost + this.speedMultiplier);
+                if(background.backgroundCollision()){
+                    console.log("new BG spawned");
+                    
+                    this.backgroundArray.push(new Background(this.canvas, this.levelIndex)); 
+                }
+                if (background !== null) {
+                    //console.log("moving BG");
+                    
+                    background.move();
+                     if (background.collidesWithCanvasBottom()) {
+                         console.log("BG collission detected", index);
+                         
+                        this.backgroundArray.splice(index, 1);
+
+                    }
+                }
+            }
+        );
+        
+    }
     public collision() {
         this.scoringObject.forEach(
             (object, index) => {
@@ -220,6 +268,8 @@ abstract class Level extends Screens {
         //console.log(this.speedBoost + this.speedMultiplier);
 
         this.scoringObject[last_element].setSpeed(this.speedBoost + this.speedMultiplier);
+        
+        //this.backgroundArray[last_element].setSpeed(this.speedBoost + this.speedMultiplier);
     }
 
 

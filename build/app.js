@@ -11,7 +11,6 @@ class Game {
     constructor(canvas) {
         this.frameCount = 0;
         this.animate = () => {
-            this.imageChanger();
             requestAnimationFrame(this.animate);
             this.now = Date.now();
             this.elapsed = this.now - this.then;
@@ -35,7 +34,6 @@ class Game {
         this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
         this.load(0);
-        this.background = this.loadNewImage("./assets/img/street.jpg");
     }
     load(screenIndex) {
         this.screenIndex = screenIndex;
@@ -81,22 +79,9 @@ class Game {
         img.src = source;
         return img;
     }
-    imageChanger() {
-        switch (this.currentScreen.getLevelIndex()) {
-            case 2:
-                this.background = this.loadNewImage("./assets/img/street2.jpg");
-                break;
-            case 1:
-                this.background = this.loadNewImage("./assets/img/street.jpg");
-                break;
-            default:
-                break;
-        }
-    }
     draw() {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
         this.currentScreen.draw(ctx);
         this.player.draw(ctx);
     }
@@ -284,7 +269,7 @@ class ScoringObject {
         ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.positionY);
     }
     collidesWithCanvasBottom() {
-        if (this.positionY + this.image.height > this.canvas.height) {
+        if (this.positionY > this.canvas.height) {
             return true;
         }
         return false;
@@ -336,9 +321,6 @@ class Screens {
     }
     getState() {
         return this.state;
-    }
-    getLevelIndex() {
-        return this.levelIndex;
     }
     writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
         ctx.font = `${fontSize}px sans-serif`;
@@ -429,7 +411,7 @@ class Questions extends Screens {
             this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 350, 170, 40);
         }
         else {
-            this.writeTextToCanvas(ctx, "Press ENTER for the next question!", this.canvas.width / 2, 150, 45);
+            this.writeTextToCanvas(ctx, "Druk op ENTER om door te gaan!", this.canvas.width / 2, 150, 45);
         }
         if (this.questionIsRight != undefined) {
             for (let i = 0; i < this.currentExplanation.length; i++) {
@@ -437,10 +419,10 @@ class Questions extends Screens {
             }
         }
         if (this.questionIsRight == true) {
-            this.writeTextToCanvas(ctx, "That was the correct answer!", this.canvas.width / 2, 250, 40, "white");
+            this.writeTextToCanvas(ctx, "Dat was het goede antwoord!", this.canvas.width / 2, 250, 40, "white");
         }
         else if (this.questionIsRight == false) {
-            this.writeTextToCanvas(ctx, "That was not the correct answer!", this.canvas.width / 2, 250, 40, "white");
+            this.writeTextToCanvas(ctx, "Dat was niet het goede antwoord!", this.canvas.width / 2, 250, 40, "white");
         }
     }
 }
@@ -507,6 +489,7 @@ class Level extends Screens {
         this.totalScore = 0;
         this.scoringObject = new Array();
         this.speedSwitch = true;
+        this.backgroundArray = new Array();
         this.frameIndex = 0;
         this.canvas = canvas;
         this.player = player;
@@ -514,12 +497,14 @@ class Level extends Screens {
         this.totalLives = 5;
         this.speedBoost = 0;
         this.totalScore = 0;
+        this.backgroundArray.push(new Background(this.canvas, levelIndex, -20));
     }
     gameLogic() {
         this.pause();
         if (this.getState() === ScreenState.PLAYING) {
             this.frameIndex++;
             this.player.move();
+            this.backgroundLogic();
             this.collision();
             if (this.totalScore >= this.maxPoints) {
                 this.state = ScreenState.NEXT_SCREEN;
@@ -572,6 +557,9 @@ class Level extends Screens {
         });
     }
     draw(ctx) {
+        this.backgroundArray.forEach(background => {
+            ctx.drawImage(background.background, background.getPositionX(), background.getPositionY(), this.canvas.width, this.canvas.height);
+        });
         this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
         this.writeTextToCanvas(ctx, `Druk op ESC om te pauzeren`, this.canvas.width / 2 - 250, 20, 16);
         this.writeTextToCanvas(ctx, `Levens: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
@@ -581,7 +569,6 @@ class Level extends Screens {
         }
         this.drawScore(ctx);
         this.drawObjects(ctx);
-        console.log(this.levelIndex);
     }
     drawObjects(ctx) {
         this.scoringObject.forEach((object) => {
@@ -592,6 +579,21 @@ class Level extends Screens {
     }
     drawScore(ctx) {
         this.writeTextToCanvas(ctx, `Score: ${this.totalScore}`, this.canvas.width / 2, 45, 18);
+    }
+    backgroundLogic() {
+        this.backgroundArray.forEach((background, index) => {
+            if (background.backgroundCollision()) {
+                console.log("new BG spawned");
+                this.backgroundArray.push(new Background(this.canvas, this.levelIndex));
+            }
+            if (background !== null) {
+                background.move();
+                if (background.collidesWithCanvasBottom()) {
+                    console.log("BG collission detected", index);
+                    this.backgroundArray.splice(index, 1);
+                }
+            }
+        });
     }
     collision() {
         this.scoringObject.forEach((object, index) => {
@@ -643,7 +645,7 @@ class Level1 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 1);
         this.baseSpawnRate = 100;
-        this.maxPoints = 10;
+        this.maxPoints = 100;
         this.speedMultiplier = 0.5;
     }
 }
@@ -651,7 +653,7 @@ class Level2 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 2);
         this.baseSpawnRate = 90;
-        this.maxPoints = 10;
+        this.maxPoints = 200;
         this.speedMultiplier = 1;
     }
 }
@@ -703,6 +705,40 @@ class Level8 extends Level {
         this.speedMultiplier = 3.5;
     }
 }
+class Background extends ScoringObject {
+    constructor(canvas, currentLevel, yPos = canvas.height * -1) {
+        super(canvas);
+        this.collidedSwitch = false;
+        this.speed = 7;
+        this.points = 0;
+        this._lives = 0;
+        this.positionX = 0;
+        this.positionY = yPos;
+        this.currentLevel = currentLevel;
+        this.background = this.loadNewImage("assets/img/street.jpg");
+        this.imageChanger();
+    }
+    imageChanger() {
+        switch (this.currentLevel) {
+            case 2:
+                this.background = this.loadNewImage("assets/img/street2.jpg");
+                break;
+            case 1:
+                this.background = this.loadNewImage("assets/img/street.jpg");
+                break;
+            default:
+                break;
+        }
+    }
+    backgroundCollision() {
+        if (this.positionY + this.background.height - 20 > this.canvas.height && this.collidedSwitch == false) {
+            this.collidedSwitch = true;
+            console.log("yes");
+            return true;
+        }
+        return false;
+    }
+}
 class Banana extends ScoringObject {
     constructor(canvas) {
         super(canvas);
@@ -725,7 +761,7 @@ class Cone extends ScoringObject {
     constructor(canvas) {
         super(canvas);
         this.image = this.loadNewImage("assets/img/objects/cone.png");
-        this.speed = 6;
+        this.speed = 7;
         this.points = 0;
         this._lives = -1;
     }
@@ -734,7 +770,7 @@ class GoldCoin extends ScoringObject {
     constructor(canvas) {
         super(canvas);
         this.image = this.loadNewImage("assets/img/objects/goldcoin.png");
-        this.speed = 5;
+        this.speed = 7;
         this.points = 10;
         this._lives = 0;
     }
@@ -743,7 +779,7 @@ class Heart extends ScoringObject {
     constructor(canvas) {
         super(canvas);
         this.image = this.loadNewImage("assets/img/objects/heart.png");
-        this.speed = 9;
+        this.speed = 10;
         this.points = 0;
         this._lives = 1;
     }
@@ -752,7 +788,7 @@ class SilverCoin extends ScoringObject {
     constructor(canvas) {
         super(canvas);
         this.image = this.loadNewImage("assets/img/objects/silvercoin.png");
-        this.speed = 5;
+        this.speed = 7;
         this.points = 5;
         this._lives = 0;
     }
