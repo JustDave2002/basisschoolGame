@@ -42,6 +42,7 @@ class Game {
         this.player = new Player(this.canvas);
         this.screenArray = [
             new StartScreen(this.canvas),
+            new Level1(this.canvas, this.player),
             new QLevel1(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level2(this.canvas, this.player),
@@ -313,6 +314,7 @@ class Screens {
     constructor() {
         this.state = ScreenState.PLAYING;
         this.keyListener = new KeyListener;
+        this.state = ScreenState.PLAYING;
     }
     getState() {
         return this.state;
@@ -320,7 +322,7 @@ class Screens {
     writeTextToCanvas(ctx, text, xCoordinate, yCoordinate, fontSize = 20, color = "red", alignment = "center") {
         ctx.font = `${fontSize}px sans-serif`;
         ctx.strokeStyle = 'black';
-        ctx.lineWidth = 6;
+        ctx.lineWidth = 4;
         ctx.strokeText(text, xCoordinate, yCoordinate);
         ctx.fillStyle = color;
         ctx.stroke();
@@ -339,24 +341,31 @@ window.addEventListener('load', () => {
 class Questions extends Screens {
     constructor(canvas, player) {
         super();
+        this.questionCounter = 0;
         this.player = player;
         this.canvas = canvas;
-        this.reset();
+        this.reset(0);
     }
-    reset() {
-        this.leftOrRight = undefined;
-        this.questionIsRight = undefined;
+    reset(resetNumber) {
+        if (resetNumber == 1) {
+            this.questionArray.splice(this.questionI, 1);
+            this.leftOrRight = undefined;
+            this.questionIsRight = undefined;
+        }
         this.questionConfirmed = false;
+        this.pickedQuestion = false;
     }
     gameLogic() {
         this.player.move();
-        this.questionI = this.randomInteger(0, this.questionArray.length);
-        for (this.questionI = 0; this.questionI < this.questionArray.length; this.questionI++) {
+        if (this.pickedQuestion == false) {
+            this.questionI = this.randomInteger(0, this.questionArray.length);
             this.currentQuestion = this.questionArray[this.questionI].question;
             this.currentOptions = this.questionArray[this.questionI].choices;
             this.currentAnswer = this.questionArray[this.questionI].answer;
             this.currentExplanation = this.questionArray[this.questionI].explanation;
+            this.pickedQuestion = true;
         }
+        console.log(this.leftOrRight, this.questionConfirmed);
         if (this.questionConfirmed == false) {
             if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) || this.leftOrRight == 1) {
                 this.leftOrRight = 1;
@@ -366,6 +375,16 @@ class Questions extends Screens {
             }
         }
         this.questionCheck();
+        if (this.questionConfirmed == true && this.keyListener.isKeyDown(KeyListener.KEY_ENTER)) {
+            this.questionCounter++;
+            if (this.questionCounter == 2) {
+                this.state = ScreenState.NEXT_SCREEN;
+                this.questionCounter = 0;
+            }
+            else {
+                this.reset(1);
+            }
+        }
     }
     questionCheck() {
         if (this.leftOrRight == 1 || this.leftOrRight == 2) {
@@ -381,9 +400,16 @@ class Questions extends Screens {
         }
     }
     draw(ctx) {
-        this.writeTextToCanvas(ctx, this.currentQuestion, this.canvas.width / 2, 100, 40);
-        this.writeTextToCanvas(ctx, this.currentOptions[0], this.canvas.width / 2 - 200, 150, 40);
-        this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 200, 150, 40);
+        if (this.questionConfirmed == false) {
+            for (let i = 0; i < this.currentQuestion.length; i++) {
+                this.writeTextToCanvas(ctx, this.currentQuestion[i], this.canvas.width / 2, 50 + i * 50, 40);
+            }
+            this.writeTextToCanvas(ctx, this.currentOptions[0], this.canvas.width / 2 - 350, 170, 40);
+            this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 350, 170, 40);
+        }
+        else {
+            this.writeTextToCanvas(ctx, "Press ENTER for the next question!", this.canvas.width / 2, 150, 45);
+        }
         if (this.questionIsRight != undefined) {
             for (let i = 0; i < this.currentExplanation.length; i++) {
                 this.writeTextToCanvas(ctx, this.currentExplanation[i], this.canvas.width / 2, 400 + 50 * i, 40);
@@ -402,23 +428,55 @@ class QLevel1 extends Questions {
         super(canvas, player);
         this.questionArray = [
             {
-                question: "What is the capital of United Kingdom?",
-                choices: ["Manchester", "Birmingham"],
+                question: ["Wat moet je doen wanneer je een vreemde email krijgt van een onbekende?"],
+                choices: ["verwijder de email ", " rapporteer en blokkeer "],
                 answer: 2,
-                explanation: "Elit sint sit tempor ut consequat commodo veniam mollit magna. Eu Lorem cillum minim amet enim excepteur laborum ad. Occaecat irure minim voluptate eu dolore. Magna nostrud aliquip et laborum laboris. Eiusmod fugiat anim nulla adipisicing sint sit ullamco ex. Ipsum dolore ea consectetur minim. Anim consectetur irure commodo excepteur cupidatat deserunt do nostrud ad anim ex aute."
-            },
-            {
-                question: "What is the capital of United States?",
-                choices: ["California", "New York"],
+                explanation: [["Je kan zo zorgen dat google  er iets tegen kan doen."],
+                    "Ook krijg je dan geen emails meer."]
+            }, {
+                question: ["Wat is een goed wachtwoord?"],
+                choices: ["1234", " W0nderwa11$"],
+                answer: 2,
+                explanation: ["1234 is heel makkelijk om voor hackers achter te komen.",
+                    "W0nderwa11$ is dat niet door de tekens"]
+            }, {
+                question: ["Tegen welke mensen vertel je inloggegevens"],
+                choices: ["Niemand of je ouders", "Je vrienden"],
                 answer: 1,
-                explanation: ["Elit sint sit tempor ut consequat commodo veniam mollit magna.",
-                    "Eu Lorem cillum minim amet enim excepteur laborum ad.",
-                    "Occaecat irure minim voluptate eu dolore.",
-                    "Magna nostrud aliquip et laborum laboris.",
-                    "Eiusmod fugiat anim nulla adipisicing sint sit ullamco ex.",
-                    "Ipsum dolore ea consectetur minim. Anim consectetur irure commodo excepteur cupidatat",
-                    "deserunt do nostrud ad anim ex aute."]
-            }
+                explanation: [" Je kan  je ouders vertrouwen",
+                    "En je vrienden niet perse."]
+            }, {
+                question: ["Je krijgt van iemand die je niet kent een sms",
+                    "en hij stelt persoonlijke vragen wat doe je?"],
+                choices: ["Blokkeer diegene en vertel het aan je ouders ", " ga met de persoon in gesprek"],
+                answer: 1,
+                explanation: ["Je moet nooit beantwoorden.",
+                    "Hierdoor weten ze niks"]
+            }, {
+                question: ["Welke gegevens deel je niet op je sociale media?"],
+                choices: ["je adres en je persoonlijke telefoonnummer ", "je naam"],
+                answer: 1,
+                explanation: ["Deze info is voor vrienden niet iedereen."]
+            }, {
+                question: ["Is het oké om je je ouders betalings informatie op het internet te delen?"],
+                choices: ["ja", "nee"],
+                answer: 2,
+                explanation: ["Nooit Betalingsgegevens delen."]
+            }, {
+                question: ["Je zit op een chatbox website iemand stelt wat rare persoonlijk vragen.",
+                    "wat doe je?"],
+                choices: ["rapporteer en blokkeer en vertel je ouders", " je beantwoordt de vragen"],
+                answer: 1,
+                explanation: ["Je moet nooit beantwoorden.",
+                    "Hierdoor weten ze niks"]
+            }, {
+                question: ["Je krijgt een berichtje van een familie lid die vraagt of je",
+                    "even de betalingsgegevens kan sturen omdat ze die vergeten zijn. Wat doe je?"],
+                choices: ["je belt of vraagt je ouders persoonlijk", " je geeft hem de betalingsinformatie"],
+                answer: 1,
+                explanation: ["Nooit betaalinformatie aan mensen uitgeven.",
+                    "Ze kunnen gehacked zijn of het kan een nep nummer zijn."]
+            },
         ];
     }
 }
@@ -486,7 +544,7 @@ class Level extends Screens {
             if (this.keyListener.isKeyDown(KeyListener.KEY_ESC)) {
                 this.state = ScreenState.PAUSED;
             }
-            else if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+            else if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
                 yield this.delay(1000);
                 this.state = ScreenState.PLAYING;
             }
@@ -498,7 +556,7 @@ class Level extends Screens {
         this.writeTextToCanvas(ctx, `Levens: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
         if (this.getState() == ScreenState.PAUSED) {
             this.writeTextToCanvas(ctx, `Gepauzeerd`, this.canvas.width / 2, 200, 40);
-            this.writeTextToCanvas(ctx, `Druk op P om door te gaan`, this.canvas.width / 2, 250, 35);
+            this.writeTextToCanvas(ctx, `Druk op CTRL om door te gaan`, this.canvas.width / 2, 250, 35);
         }
         this.drawScore(ctx);
         this.drawObjects(ctx);
@@ -715,14 +773,14 @@ class LevelWon extends Screens {
         this.canvas = canvas;
     }
     gameLogic() {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
             this.state = ScreenState.NEXT_SCREEN;
         }
     }
     draw() {
         const ctx = this.canvas.getContext('2d');
         this.writeTextToCanvas(ctx, `Gefeliciteerd, je hebt het level gehaald!`, this.canvas.width / 2, 200, 40);
-        this.writeTextToCanvas(ctx, `Druk op P om de volgende level te starten`, this.canvas.width / 2, 250, 40);
+        this.writeTextToCanvas(ctx, `Druk op CTRL om de volgende level te starten`, this.canvas.width / 2, 250, 40);
     }
 }
 class StartScreen extends Screens {
@@ -731,14 +789,14 @@ class StartScreen extends Screens {
         this.canvas = canvas;
     }
     gameLogic() {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
             this.state = ScreenState.NEXT_SCREEN;
         }
     }
     draw() {
         const ctx = this.canvas.getContext('2d');
         this.writeTextToCanvas(ctx, `Welkom bij ~naam hier~`, this.canvas.width / 2, 200, 40);
-        this.writeTextToCanvas(ctx, `Druk op P om de game te starten!`, this.canvas.width / 2, 250, 40);
+        this.writeTextToCanvas(ctx, `Druk op CTRL om de game te starten!`, this.canvas.width / 2, 250, 40);
     }
 }
 //# sourceMappingURL=app.js.map

@@ -6,7 +6,7 @@ abstract class Screens{
     
     protected constructor(){
 
-        
+        this.state = ScreenState.PLAYING
     }
     getState(): ScreenState {
         return this.state
@@ -41,7 +41,7 @@ abstract class Screens{
 ) {
     ctx.font = `${fontSize}px sans-serif`;
     ctx.strokeStyle = 'black';
-    ctx.lineWidth = 6;
+    ctx.lineWidth = 4;
     ctx.strokeText(text, xCoordinate, yCoordinate);
     ctx.fillStyle = color
     ctx.stroke();

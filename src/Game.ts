@@ -48,7 +48,7 @@ class Game {
         //array of screens
         this.screenArray = [
             new StartScreen(this.canvas),
-            //new Level1(this.canvas, this.player),
+            new Level1(this.canvas, this.player),
             new QLevel1(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level2(this.canvas, this.player),
