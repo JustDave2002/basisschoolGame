@@ -14,7 +14,7 @@ abstract class Screens{
 
     abstract gameLogic(): void;
 
-    abstract draw(ctx:CanvasRenderingContext2D): void; 
+    abstract draw(ctx:CanvasRenderingContext2D, fps:number): void; 
 
         
     

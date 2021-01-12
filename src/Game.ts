@@ -75,7 +75,7 @@ class Game {
 
         // Start the animation
         console.log('start animation');
-        this.startAnimating(70);
+        this.startAnimating(120);
     }
 
     /**
@@ -119,12 +119,13 @@ class Game {
             }
 
 
-            this.draw();
+            
 
 
-            //let sinceStart = this.now - this.startTime;
-            //let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
+            let sinceStart = this.now - this.startTime;
+            let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
             //console.log("Elapsed time= " + Math.round(sinceStart / 1000 * 100) / 100 + " secs @ " + currentFps + " fps.");
+            this.draw(currentFps);
         }
     }
 
@@ -168,7 +169,7 @@ class Game {
     /**
      * Render the items on the canvas
      */
-    private draw() {
+    private draw(fps:number) {
         // Get the canvas rendering context
         const ctx = this.canvas.getContext('2d');
         // Clear the entire canvas 
@@ -177,7 +178,7 @@ class Game {
         
 
 
-        this.currentScreen.draw(ctx);
+        this.currentScreen.draw(ctx, fps);
 
 
         this.player.draw(ctx);

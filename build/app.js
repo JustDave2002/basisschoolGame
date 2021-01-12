@@ -27,7 +27,9 @@ class Game {
                     this.screenIndex = this.screenArray.length - 1;
                     this.advanceToNextLevel();
                 }
-                this.draw();
+                let sinceStart = this.now - this.startTime;
+                let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
+                this.draw(currentFps);
             }
         };
         this.canvas = canvas;
@@ -61,7 +63,7 @@ class Game {
         ];
         this.advanceToNextLevel();
         console.log('start animation');
-        this.startAnimating(70);
+        this.startAnimating(120);
     }
     advanceToNextLevel() {
         this.currentScreen = this.screenArray[this.screenIndex];
@@ -79,10 +81,10 @@ class Game {
         img.src = source;
         return img;
     }
-    draw() {
+    draw(fps) {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.currentScreen.draw(ctx);
+        this.currentScreen.draw(ctx, fps);
         this.player.draw(ctx);
     }
 }
@@ -211,7 +213,7 @@ class Player {
     animatePlayer() {
         if (this.goLeft == true) {
             if (this.positionX >= this.toGoLane) {
-                this.positionX = this.positionX - 22;
+                this.positionX = this.positionX - 12;
                 if (this.positionX < this.toGoLane) {
                     this.positionX = this.toGoLane;
                 }
@@ -219,7 +221,7 @@ class Player {
         }
         else if (this.goLeft == false) {
             if (this.positionX <= this.toGoLane) {
-                this.positionX = this.positionX + 22;
+                this.positionX = this.positionX + 12;
                 if (this.positionX > this.toGoLane) {
                     this.positionX = this.toGoLane;
                 }
@@ -556,10 +558,11 @@ class Level extends Screens {
             }
         });
     }
-    draw(ctx) {
+    draw(ctx, fps) {
         this.backgroundArray.forEach(background => {
             ctx.drawImage(background.background, background.getPositionX(), background.getPositionY(), this.canvas.width, this.canvas.height);
         });
+        this.writeTextToCanvas(ctx, ` fps: ${fps}`, 50, 20, 18);
         this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
         this.writeTextToCanvas(ctx, `Druk op ESC om te pauzeren`, this.canvas.width / 2 - 250, 20, 16);
         this.writeTextToCanvas(ctx, `Levens: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
@@ -583,13 +586,11 @@ class Level extends Screens {
     backgroundLogic() {
         this.backgroundArray.forEach((background, index) => {
             if (background.backgroundCollision()) {
-                console.log("new BG spawned");
                 this.backgroundArray.push(new Background(this.canvas, this.levelIndex));
             }
             if (background !== null) {
                 background.move();
                 if (background.collidesWithCanvasBottom()) {
-                    console.log("BG collission detected", index);
                     this.backgroundArray.splice(index, 1);
                 }
             }
@@ -709,7 +710,7 @@ class Background extends ScoringObject {
     constructor(canvas, currentLevel, yPos = canvas.height * -1) {
         super(canvas);
         this.collidedSwitch = false;
-        this.speed = 7;
+        this.speed = 3, 5;
         this.points = 0;
         this._lives = 0;
         this.positionX = 0;
@@ -733,7 +734,6 @@ class Background extends ScoringObject {
     backgroundCollision() {
         if (this.positionY + this.background.height - 20 > this.canvas.height && this.collidedSwitch == false) {
             this.collidedSwitch = true;
-            console.log("yes");
             return true;
         }
         return false;
