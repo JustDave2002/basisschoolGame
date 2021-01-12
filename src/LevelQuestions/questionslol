@@ -77,7 +77,7 @@
     question: " Welk e-mailadres lijkt echt?"
     choices: ["HenkBakplaat@gmal.com", "KarelVisser@gmail.com"],
     answer: 2, 
-    explanation: ["gmal is fout want het is gmail  "]
+    explanation: ["gmal is fout want het is gmail"]
 
 },{
    question: " Je krijgt een e-mail van je neef in de bijlage staat een bestand in de e-mail staat “je zal nooit geloven wat er is gebeurt” wat doe je?"
