@@ -58,13 +58,7 @@
     answer: 2, 
     explanation: ["Kan een virus bevatten doe het niet"]
 
-},{
-   question: " Je krijgt een vriendschapsverzoek van iemand die je niet kent wat doe je?"
-    choices: ["je accepteert het vriendschapsverzoek", " je weigert het vriendschapsverzoek "],
-    answer: 2, 
-    explanation: ["Als je iemand niet kent doe het niet"]
-
-},
+}
 
 //level 2
 {
@@ -86,93 +80,71 @@
     explanation: ["Nooit rare emails vetrouwen"]
 
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: " Een site vraagt voor je bankgegevens wat moet je doen?"
+    choices: ["vul het in ", " negeer het en ga weg van de site"],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["nooit zomaar het geven"]
+
 },{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    question: " Je wil een product kopen op een site waar kijk je naar?"
+    choices: ["de reviews bekijken", "Alleen naar het product zelf"],
+    answer: 1, 
+    explanation: ["altijd kijken naar reviews zodat je niet word opgelicht"]
+
 },{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    question: " Je wilt een computerprogramma downloaden waar kijk je naar?"
+    choices: ["lijkt het officieel", "Alleen naar het product zelf"],
+    answer: 1, 
+    explanation: ["Altijd kijken of het de goede site is."]
+
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: "Iemand gebruikt foute worden op het internet wat doe je?"
+    choices: ["Doe niks ", "Rapporteer en blokkeer"],
     answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    explanation: ["Altijd rapporteren en blokkeren",
+            Dan kan er iets tegen worden gedaan."]
+
 }
 
 //level 3
 {
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+   question: ["Je zit al 5 uur achter de computer", "Wat doe je?"]
+    choices: ["Stoppen", "Doorgaan"],
+    answer: 1, 
+    explanation: ["Normale lengte achter de computer","Want dat is goed"]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: " Je krijgt een vriendschapsverzoek van iemand die je niet kent wat doe je?"
+    choices: ["je accepteert het vriendschapsverzoek", " je weigert het vriendschapsverzoek "],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Als je iemand niet kent doe het niet"]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: " Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"
+    choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Kan een virus bevatten doe het niet"]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: ["je word gecyberpest wat doe je"]
+    choices: ["je negeert het ", "Rappoteren en Blokkeren"],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Altijd rapporteren en blokkeren",
+            Dan kan er iets tegen worden gedaan."]
 },{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+   question: ["Een site zegt dat je iets hebt gewonnen", "Je bent de duizendste klant wat doe je."]
+    choices: ["vetrouw het niet", "Doe wat er word gevraagd"],
+    answer: 1, 
+    explanation: ["Dit is altijd nep trap er niet in."]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: " Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"
+    choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Kan een virus bevatten doe het niet"]
 },{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+     question: "Wat is een goed wachtwoord?",
+     choices: ["1234", " W0nderwa11$"],
+     answer: 2, 
+    explanation: ["1234 is heel makkelijk om voor hackers achter te komen.","
+    W0nderwa11$ is dat niet door de tekens"]
+
 }
 
 //level 4
@@ -202,20 +174,10 @@
     answer: 2, 
     explanation: ["",""]
 },{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
-},{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    question: ["Wat is een betere game", ""]
+    choices: ["Minecraft", "Fortnite"],
+    answer: 1, 
+    explanation: ["Minecraft is een veel beter spel"]
 },{
     question: ["", ""]
     choices: ["", ""],
