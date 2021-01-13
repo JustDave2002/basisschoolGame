@@ -39,13 +39,14 @@ abstract class Questions extends Screens {
         }
         this.questionConfirmed = false;
         this.pickedQuestion = false;
+        this.player.goUp(false, true)
     }
 
 
     public gameLogic() {
         //console.log("qlogic work");
-
-        this.player.move();
+        this.player.goUp(this.questionConfirmed,false);
+        this.player.questionMove();
         if (this.pickedQuestion == false) {
             this.questionI = this.randomInteger(0, this.questionArray.length)
 

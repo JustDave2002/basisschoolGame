@@ -28,7 +28,7 @@ class Background extends ScoringObject {
                 this.background = this.loadNewImage("assets/img/street2.jpg");
                 break;
             case 1:
-                this.background = this.loadNewImage("assets/img/street.jpg");
+                this.background = this.loadNewImage("assets/img/street3.jpg");
                 break;
             default:
                 break;

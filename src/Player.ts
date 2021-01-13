@@ -10,6 +10,8 @@ class Player {
 
     private image: HTMLImageElement;
     private positionX: number;
+    private positionY: number;
+    private velocityY: number = 2
 
 
     private Left: number = 0;
@@ -31,12 +33,13 @@ class Player {
 
         this.image = this.loadNewImage("./assets/img/players/carplayer.png");
         this.positionX = this.middleLane;
+        this.positionY = this.canvas.height - 175;
     }
 
     public move() {
 
 
-        this.animatePlayer();
+
 
         if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT)) {
             this.Left += 1;
@@ -73,6 +76,38 @@ class Player {
         } else {
             this.Right = 0;
         }
+        this.animatePlayer();
+    }
+
+    public questionMove() {
+
+        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX != this.leftLane) {
+            console.log("going left");
+            this.goLeft = true;
+            this.toGoLane = this.leftLane;
+        } else if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX != this.rightLane) {
+            console.log("going right");
+            this.goLeft = false;
+            this.toGoLane = this.rightLane;
+        }
+        this.animatePlayer();
+    }
+
+    public goUp(activate: boolean, reset:boolean) {
+        if (reset == true){
+            this.positionX = this.middleLane;
+        }
+        if (activate == true) {;
+            this.velocityY +=  1,5
+            if(this.positionY <= this.canvas.height){
+                this.positionY -= this.velocityY;
+            } 
+
+           
+        } else {
+            this.positionY = this.canvas.height - 175;
+            this.velocityY = 2;
+        }
     }
 
 
@@ -104,7 +139,7 @@ class Player {
             this.image,
             // Center the image in the lane with the x coordinates
             this.positionX - this.image.width / 2,
-            this.canvas.height - 175
+            this.positionY
         );
     }
 

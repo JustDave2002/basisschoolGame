@@ -29,8 +29,6 @@ class Game {
                 }
                 let sinceStart = this.now - this.startTime;
                 let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
-                console.log("Elapsed time= " + Math.round(sinceStart / 1000 * 100) / 100 + " secs @ " + currentFps + " fps.");
-                console.log(currentFps);
                 this.draw(currentFps);
             }
         };
@@ -168,6 +166,7 @@ KeyListener.KEY_Y = 89;
 KeyListener.KEY_Z = 90;
 class Player {
     constructor(canvas) {
+        this.velocityY = 2;
         this.Left = 0;
         this.Right = 0;
         this.canvas = canvas;
@@ -177,9 +176,9 @@ class Player {
         this.keyListener = new KeyListener();
         this.image = this.loadNewImage("./assets/img/players/carplayer.png");
         this.positionX = this.middleLane;
+        this.positionY = this.canvas.height - 175;
     }
     move() {
-        this.animatePlayer();
         if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT)) {
             this.Left += 1;
         }
@@ -212,6 +211,36 @@ class Player {
         else {
             this.Right = 0;
         }
+        this.animatePlayer();
+    }
+    questionMove() {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX != this.leftLane) {
+            console.log("going left");
+            this.goLeft = true;
+            this.toGoLane = this.leftLane;
+        }
+        else if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX != this.rightLane) {
+            console.log("going right");
+            this.goLeft = false;
+            this.toGoLane = this.rightLane;
+        }
+        this.animatePlayer();
+    }
+    goUp(activate, reset) {
+        if (reset == true) {
+            this.positionX = this.middleLane;
+        }
+        if (activate == true) {
+            ;
+            this.velocityY += 1, 5;
+            if (this.positionY <= this.canvas.height) {
+                this.positionY -= this.velocityY;
+            }
+        }
+        else {
+            this.positionY = this.canvas.height - 175;
+            this.velocityY = 2;
+        }
     }
     animatePlayer() {
         if (this.goLeft == true) {
@@ -232,7 +261,7 @@ class Player {
         }
     }
     draw(ctx) {
-        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.canvas.height - 175);
+        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.positionY);
     }
     collidesWith(scoringObject) {
         if (this.positionX < scoringObject.getPositionX() + scoringObject.getImageWidth()
@@ -362,9 +391,11 @@ class Questions extends Screens {
         }
         this.questionConfirmed = false;
         this.pickedQuestion = false;
+        this.player.goUp(false, true);
     }
     gameLogic() {
-        this.player.move();
+        this.player.goUp(this.questionConfirmed, false);
+        this.player.questionMove();
         if (this.pickedQuestion == false) {
             this.questionI = this.randomInteger(0, this.questionArray.length);
             this.currentQuestion = this.questionArray[this.questionI].question;
@@ -649,7 +680,7 @@ class Level1 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 1);
         this.baseSpawnRate = 100;
-        this.maxPoints = 100;
+        this.maxPoints = 1;
         this.speedMultiplier = 0.5;
     }
 }
@@ -728,7 +759,7 @@ class Background extends ScoringObject {
                 this.background = this.loadNewImage("assets/img/street2.jpg");
                 break;
             case 1:
-                this.background = this.loadNewImage("assets/img/street.jpg");
+                this.background = this.loadNewImage("assets/img/street3.jpg");
                 break;
             default:
                 break;
