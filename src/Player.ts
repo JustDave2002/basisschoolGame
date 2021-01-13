@@ -96,6 +96,8 @@ class Player {
     public goUp(activate: boolean, reset:boolean) {
         if (reset == true){
             this.positionX = this.middleLane;
+            this.goLeft = undefined;
+            
         }
         if (activate == true) {;
             this.velocityY +=  1,5

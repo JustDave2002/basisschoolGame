@@ -24,11 +24,11 @@ class Background extends ScoringObject {
     private imageChanger() {
 
         switch (this.currentLevel) {
-            case 2:
-                this.background = this.loadNewImage("assets/img/street2.jpg");
-                break;
             case 1:
                 this.background = this.loadNewImage("assets/img/street3.jpg");
+                break;
+            case 2:
+                this.background = this.loadNewImage("assets/img/street4.jpg");
                 break;
             case 3:
                 this.background = this.loadNewImage("assets/img/street4.jpg");

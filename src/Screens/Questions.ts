@@ -20,6 +20,8 @@ abstract class Questions extends Screens {
     private questionI: number;
     private pickedQuestion: boolean;
 
+    private firstStart: boolean = true;
+
     // keeps score of the amount of questions that have been completed
     private questionCounter:number = 0
 
@@ -44,7 +46,10 @@ abstract class Questions extends Screens {
 
 
     public gameLogic() {
-        //console.log("qlogic work");
+        if (this.firstStart == true){
+            this.reset(0);
+            this.firstStart = false;
+        }
         this.player.goUp(this.questionConfirmed,false);
         this.player.questionMove();
         if (this.pickedQuestion == false) {

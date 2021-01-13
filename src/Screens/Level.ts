@@ -65,7 +65,7 @@ abstract class Level extends Screens {
         if (this.getState() === ScreenState.PLAYING) {
             this.frameIndex++
 
-
+            this.player.goUp(false, false)
             this.player.move();
             this.backgroundLogic();
             //console.log(this.frameIndex);

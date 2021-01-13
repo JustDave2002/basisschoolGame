@@ -229,6 +229,7 @@ class Player {
     goUp(activate, reset) {
         if (reset == true) {
             this.positionX = this.middleLane;
+            this.goLeft = undefined;
         }
         if (activate == true) {
             ;
@@ -378,6 +379,7 @@ window.addEventListener('load', () => {
 class Questions extends Screens {
     constructor(canvas, player) {
         super();
+        this.firstStart = true;
         this.questionCounter = 0;
         this.player = player;
         this.canvas = canvas;
@@ -394,6 +396,10 @@ class Questions extends Screens {
         this.player.goUp(false, true);
     }
     gameLogic() {
+        if (this.firstStart == true) {
+            this.reset(0);
+            this.firstStart = false;
+        }
         this.player.goUp(this.questionConfirmed, false);
         this.player.questionMove();
         if (this.pickedQuestion == false) {
@@ -539,6 +545,7 @@ class Level extends Screens {
         this.pause();
         if (this.getState() === ScreenState.PLAYING) {
             this.frameIndex++;
+            this.player.goUp(false, false);
             this.player.move();
             this.backgroundLogic();
             this.collision();
@@ -755,11 +762,11 @@ class Background extends ScoringObject {
     }
     imageChanger() {
         switch (this.currentLevel) {
-            case 2:
-                this.background = this.loadNewImage("assets/img/street2.jpg");
-                break;
             case 1:
                 this.background = this.loadNewImage("assets/img/street3.jpg");
+                break;
+            case 2:
+                this.background = this.loadNewImage("assets/img/street4.jpg");
                 break;
             case 3:
                 this.background = this.loadNewImage("assets/img/street4.jpg");
