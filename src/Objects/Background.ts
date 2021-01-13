@@ -8,7 +8,7 @@ class Background extends ScoringObject {
 
     public constructor(canvas: HTMLCanvasElement, currentLevel: number, yPos: number = canvas.height * -1) {
         super(canvas);
-        this.speed = 3,5;
+        this.speed = 7;
         this.points = 0;
         this._lives = 0;
         this.positionX = 0;

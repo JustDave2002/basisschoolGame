@@ -77,7 +77,7 @@ class Game {
 
         // Start the animation
         console.log('start animation');
-        this.startAnimating(120);
+        this.startAnimating(60);
     }
 
     /**

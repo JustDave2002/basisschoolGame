@@ -66,7 +66,7 @@ class Game {
         ];
         this.advanceToNextLevel();
         console.log('start animation');
-        this.startAnimating(120);
+        this.startAnimating(60);
     }
     advanceToNextLevel() {
         this.currentScreen = this.screenArray[this.screenIndex];
@@ -216,7 +216,7 @@ class Player {
     animatePlayer() {
         if (this.goLeft == true) {
             if (this.positionX >= this.toGoLane) {
-                this.positionX = this.positionX - 12;
+                this.positionX = this.positionX - 22;
                 if (this.positionX < this.toGoLane) {
                     this.positionX = this.toGoLane;
                 }
@@ -224,7 +224,7 @@ class Player {
         }
         else if (this.goLeft == false) {
             if (this.positionX <= this.toGoLane) {
-                this.positionX = this.positionX + 12;
+                this.positionX = this.positionX + 22;
                 if (this.positionX > this.toGoLane) {
                     this.positionX = this.toGoLane;
                 }
@@ -713,7 +713,7 @@ class Background extends ScoringObject {
     constructor(canvas, currentLevel, yPos = canvas.height * -1) {
         super(canvas);
         this.collidedSwitch = false;
-        this.speed = 3, 5;
+        this.speed = 7;
         this.points = 0;
         this._lives = 0;
         this.positionX = 0;
