@@ -15,7 +15,8 @@ class QLevel4 extends Questions {
                answer: 2, 
                explanation: ["Kan een virus bevatten doe het niet"]
            },{
-                question: [" Je krijgt een berichtje van een familie lid die vraagt of je even de betalingsgegevens kan sturen omdat ze die vergeten zijn wat doe je?"],
+                question: [" Je krijgt een berichtje van een familie lid die vraagt of",
+                "je even de betalingsgegevens kan sturen omdat ze die vergeten zijn wat doe je?"],
                choices: [" je vraagt het aan je ouders persoonlijk en blokkeer de persoon", " je geeft hem de betalingsinformatie"],
                answer: 1, 
                explanation: ["Nooit delen kan nep zijn"]

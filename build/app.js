@@ -29,6 +29,9 @@ class Game {
                 }
                 let sinceStart = this.now - this.startTime;
                 let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
+                if (currentFps == 60) {
+                    currentFps = 60.1;
+                }
                 this.draw(currentFps);
             }
         };
@@ -418,7 +421,7 @@ class Questions extends Screens {
             }
         }
         this.questionCheck();
-        if (this.questionConfirmed == true && this.keyListener.isKeyDown(KeyListener.KEY_ENTER)) {
+        if (this.questionConfirmed == true && this.keyListener.isKeyDown(KeyListener.KEY_SHIFT)) {
             this.questionCounter++;
             if (this.questionCounter == 2) {
                 this.state = ScreenState.NEXT_SCREEN;
@@ -451,7 +454,7 @@ class Questions extends Screens {
             this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 350, 170, 40);
         }
         else {
-            this.writeTextToCanvas(ctx, "Druk op ENTER om door te gaan!", this.canvas.width / 2, 150, 45);
+            this.writeTextToCanvas(ctx, "Druk op SHIFT om door te gaan!", this.canvas.width / 2, 150, 45);
         }
         if (this.questionIsRight != undefined) {
             for (let i = 0; i < this.currentExplanation.length; i++) {
@@ -519,7 +522,17 @@ class QLevel1 extends Questions {
                 answer: 1,
                 explanation: ["Nooit betaalinformatie aan mensen uitgeven.",
                     "Ze kunnen gehacked zijn of het kan een nep nummer zijn."]
-            },
+            }, {
+                question: ["Welke gegevens deel je niet op je sociale media?"],
+                choices: ["je adres en je persoonlijke telefoonnummer ", " je naam"],
+                answer: 1,
+                explanation: ["Deze info is voor vrienden niet iedereen."]
+            }, {
+                question: ["Is het oké om je je ouders betalings informatie op het internet te delen?"],
+                choices: ["ja", "nee"],
+                answer: 2,
+                explanation: ["Nooit Betalingsgegevens delen."]
+            }
         ];
     }
 }
@@ -538,7 +551,8 @@ class QLevel2 extends Questions {
                 answer: 2,
                 explanation: ["gmal is fout want het is gmail"]
             }, {
-                question: [" Je krijgt een e-mail van je neef in de bijlage staat een bestand in de e-mail staat “je zal nooit geloven wat er is gebeurt” wat doe je?"],
+                question: [" Je krijgt een e-mail van je neef in de bijlage staat een bestand in",
+                    "de e-mail staat “je zal nooit geloven wat er is gebeurt” wat doe je?"],
                 choices: ["Verwijder de E-mail en vertel je ouders dat je neef gehackt is ", " Open hem hij is toch familie"],
                 answer: 1,
                 explanation: ["Nooit rare emails vetrouwen"]
@@ -576,7 +590,8 @@ class QLevel3 extends Questions {
                 answer: 2,
                 explanation: ["Als je iemand niet kent doe het niet"]
             }, {
-                question: [" Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"],
+                question: [" Je krijgt een link naar je toegestuurd",
+                    "waarvan je niet van weet wat het doet wat doe je?"],
                 choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
                 answer: 2,
                 explanation: ["Kan een virus bevatten doe het niet"]
@@ -586,12 +601,14 @@ class QLevel3 extends Questions {
                 answer: 2,
                 explanation: ["Altijd rapporteren en blokkeren. Dan kan er iets tegen worden gedaan."]
             }, {
-                question: ["Een site zegt dat je iets hebt gewonnen", "Je bent de duizendste klant wat doe je."],
+                question: ["Een site zegt dat je iets hebt gewonnen",
+                    "Je bent de duizendste klant wat doe je."],
                 choices: ["vetrouw het niet", "Doe wat er word gevraagd"],
                 answer: 1,
                 explanation: ["Dit is altijd nep trap er niet in."]
             }, {
-                question: [" Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"],
+                question: [" Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet",
+                    "wat doe je?"],
                 choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
                 answer: 2,
                 explanation: ["Kan een virus bevatten doe het niet"]
@@ -614,7 +631,8 @@ class QLevel4 extends Questions {
                 answer: 2,
                 explanation: ["Kan een virus bevatten doe het niet"]
             }, {
-                question: [" Je krijgt een berichtje van een familie lid die vraagt of je even de betalingsgegevens kan sturen omdat ze die vergeten zijn wat doe je?"],
+                question: [" Je krijgt een berichtje van een familie lid die vraagt of",
+                    "je even de betalingsgegevens kan sturen omdat ze die vergeten zijn wat doe je?"],
                 choices: [" je vraagt het aan je ouders persoonlijk en blokkeer de persoon", " je geeft hem de betalingsinformatie"],
                 answer: 1,
                 explanation: ["Nooit delen kan nep zijn"]
@@ -801,7 +819,7 @@ class Level1 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 1);
         this.baseSpawnRate = 100;
-        this.maxPoints = 1;
+        this.maxPoints = 100;
         this.speedMultiplier = 0.5;
     }
 }
@@ -809,7 +827,7 @@ class Level2 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 2);
         this.baseSpawnRate = 90;
-        this.maxPoints = 20;
+        this.maxPoints = 200;
         this.speedMultiplier = 1;
     }
 }
@@ -817,7 +835,7 @@ class Level3 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 3);
         this.baseSpawnRate = 75;
-        this.maxPoints = 30;
+        this.maxPoints = 300;
         this.speedMultiplier = 1;
     }
 }
@@ -877,13 +895,16 @@ class Background extends ScoringObject {
     imageChanger() {
         switch (this.currentLevel) {
             case 1:
-                this.background = this.loadNewImage("assets/img/street3.jpg");
-                break;
-            case 2:
-                this.background = this.loadNewImage("assets/img/street4.jpg");
+                this.background = this.loadNewImage("assets/img/street.jpg");
                 break;
             case 3:
-                this.background = this.loadNewImage("assets/img/street4.jpg");
+                this.background = this.loadNewImage("assets/img/street2.jpg");
+                break;
+            case 5:
+                this.background = this.loadNewImage("assets/img/street3.jpg");
+                break;
+            case 7:
+                this.background = this.loadNewImage("assets/img/street7.jpg");
                 break;
             default:
                 break;
@@ -957,14 +978,14 @@ class DeathScreen extends Screens {
         this.canvas = canvas;
     }
     gameLogic() {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
             this.state = ScreenState.RESTART;
         }
     }
     draw() {
         const ctx = this.canvas.getContext('2d');
         this.writeTextToCanvas(ctx, `Helaas, je hebt verloren`, this.canvas.width / 2, 200, 40);
-        this.writeTextToCanvas(ctx, `Druk op P om opnieuw te proberen`, this.canvas.width / 2, 250, 40);
+        this.writeTextToCanvas(ctx, `Druk op CTRL om opnieuw te proberen`, this.canvas.width / 2, 250, 40);
     }
 }
 class GameWon extends Screens {

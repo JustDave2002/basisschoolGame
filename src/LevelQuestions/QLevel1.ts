@@ -63,7 +63,19 @@ class QLevel1 extends Questions {
                 explanation: ["Nooit betaalinformatie aan mensen uitgeven.", 
                 "Ze kunnen gehacked zijn of het kan een nep nummer zijn."]
             
-            },
+            },{
+                question: ["Welke gegevens deel je niet op je sociale media?"],
+                choices: ["je adres en je persoonlijke telefoonnummer ", " je naam"],
+                answer: 1, 
+                explanation:[ "Deze info is voor vrienden niet iedereen."]
+            
+            },{
+                question: ["Is het oké om je je ouders betalings informatie op het internet te delen?"],
+                choices: ["ja", "nee"],
+                answer: 2, 
+                explanation:[ "Nooit Betalingsgegevens delen."]
+            
+            }
             
         ]
     }

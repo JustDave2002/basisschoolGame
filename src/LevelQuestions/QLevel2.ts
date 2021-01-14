@@ -19,7 +19,8 @@ class QLevel2 extends Questions {
                  explanation: ["gmal is fout want het is gmail"]
              
              },{
-                question: [" Je krijgt een e-mail van je neef in de bijlage staat een bestand in de e-mail staat “je zal nooit geloven wat er is gebeurt” wat doe je?"],
+                question: [" Je krijgt een e-mail van je neef in de bijlage staat een bestand in",
+                "de e-mail staat “je zal nooit geloven wat er is gebeurt” wat doe je?"],
                 choices: ["Verwijder de E-mail en vertel je ouders dat je neef gehackt is ", " Open hem hij is toch familie"],
                  answer: 1, 
                  explanation: ["Nooit rare emails vetrouwen"]
