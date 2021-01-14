@@ -74,7 +74,7 @@ abstract class Questions extends Screens {
             }
         }
         this.questionCheck();
-        if(this.questionConfirmed == true && this.keyListener.isKeyDown(KeyListener.KEY_ENTER)){
+        if(this.questionConfirmed == true && this.keyListener.isKeyDown(KeyListener.KEY_SHIFT)){
             this.questionCounter ++
             if (this.questionCounter ==2){
                 this.state = ScreenState.NEXT_SCREEN;
@@ -112,7 +112,7 @@ abstract class Questions extends Screens {
         this.writeTextToCanvas(ctx, this.currentOptions[0], this.canvas.width / 2 - 350, 170, 40);
         this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 350, 170, 40);    
         } else {
-            this.writeTextToCanvas(ctx, "Druk op ENTER om door te gaan!", this.canvas.width / 2, 150, 45);
+            this.writeTextToCanvas(ctx, "Druk op SHIFT om door te gaan!", this.canvas.width / 2, 150, 45);
         }
         
         
