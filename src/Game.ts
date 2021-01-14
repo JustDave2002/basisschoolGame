@@ -56,10 +56,13 @@ class Game {
             new QLevel1(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level2(this.canvas, this.player),
+            new QLevel2(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level3(this.canvas, this.player),
+            new QLevel3(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level4(this.canvas, this.player),
+            new QLevel4(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level5(this.canvas, this.player),
             new LevelWon(this.canvas),
@@ -153,23 +156,7 @@ class Game {
         this.animate();
     }
 
-    /**
-    * Loads an image in such a way that the screen doesn't constantly flicker
-    * @param {HTMLImageElement} source
-    * @return HTMLImageElement - returns an image
-    */
-   private loadNewImage(source: string): HTMLImageElement {
-    const img = new Image();
-    img.src = source;
-    return img;
-}
-
     
-
-
-
-
-
     /**
      * Render the items on the canvas
      */

@@ -47,10 +47,13 @@ class Game {
             new QLevel1(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level2(this.canvas, this.player),
+            new QLevel2(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level3(this.canvas, this.player),
+            new QLevel3(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level4(this.canvas, this.player),
+            new QLevel4(this.canvas, this.player),
             new LevelWon(this.canvas),
             new Level5(this.canvas, this.player),
             new LevelWon(this.canvas),
@@ -76,11 +79,6 @@ class Game {
         this.startTime = this.then;
         console.log(this.startTime);
         this.animate();
-    }
-    loadNewImage(source) {
-        const img = new Image();
-        img.src = source;
-        return img;
     }
     draw(fps) {
         const ctx = this.canvas.getContext('2d');
@@ -525,6 +523,122 @@ class QLevel1 extends Questions {
         ];
     }
 }
+class QLevel2 extends Questions {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.questionArray = [
+            {
+                question: [" Je krijgt een e-mail met een hilarisch onderwerp dat duidelijk een scam is wat doe je?"],
+                choices: ["Vermijd te klikken op de links en markeer ze als spam", " Stuur de e-mail door naar je vrienden maar zeg er niet op te klikken "],
+                answer: 1,
+                explanation: ["links zijn gevaarlijk "]
+            }, {
+                question: [" Welk e-mailadres lijkt echt?"],
+                choices: ["HenkBakplaat@gmal.com", "KarelVisser@gmail.com"],
+                answer: 2,
+                explanation: ["gmal is fout want het is gmail"]
+            }, {
+                question: [" Je krijgt een e-mail van je neef in de bijlage staat een bestand in de e-mail staat “je zal nooit geloven wat er is gebeurt” wat doe je?"],
+                choices: ["Verwijder de E-mail en vertel je ouders dat je neef gehackt is ", " Open hem hij is toch familie"],
+                answer: 1,
+                explanation: ["Nooit rare emails vetrouwen"]
+            }, {
+                question: [" Een site vraagt voor je bankgegevens wat moet je doen?"],
+                choices: ["vul het in ", " negeer het en ga weg van de site"],
+                answer: 2,
+                explanation: ["nooit zomaar het geven"]
+            }, {
+                question: [" Je wil een product kopen op een site waar kijk je naar?"],
+                choices: ["de reviews bekijken", "Alleen naar het product zelf"],
+                answer: 1,
+                explanation: ["altijd kijken naar reviews zodat je niet word opgelicht"]
+            }, {
+                question: [" Je wilt een computerprogramma downloaden waar kijk je naar?"],
+                choices: ["lijkt het officieel", "Alleen naar het product zelf"],
+                answer: 1,
+                explanation: ["Altijd kijken of het de goede site is."]
+            },
+        ];
+    }
+}
+class QLevel3 extends Questions {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.questionArray = [
+            {
+                question: ["Je zit al 5 uur achter de computer", "Wat doe je?"],
+                choices: ["Stoppen", "Doorgaan"],
+                answer: 1,
+                explanation: ["Normale lengte achter de computer", "Want dat is goed"],
+            }, {
+                question: [" Je krijgt een vriendschapsverzoek van iemand die je niet kent wat doe je?"],
+                choices: ["je accepteert het vriendschapsverzoek", " je weigert het vriendschapsverzoek "],
+                answer: 2,
+                explanation: ["Als je iemand niet kent doe het niet"]
+            }, {
+                question: [" Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"],
+                choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
+                answer: 2,
+                explanation: ["Kan een virus bevatten doe het niet"]
+            }, {
+                question: ["je word gecyberpest wat doe je"],
+                choices: ["je negeert het ", "Rappoteren en Blokkeren"],
+                answer: 2,
+                explanation: ["Altijd rapporteren en blokkeren. Dan kan er iets tegen worden gedaan."]
+            }, {
+                question: ["Een site zegt dat je iets hebt gewonnen", "Je bent de duizendste klant wat doe je."],
+                choices: ["vetrouw het niet", "Doe wat er word gevraagd"],
+                answer: 1,
+                explanation: ["Dit is altijd nep trap er niet in."]
+            }, {
+                question: [" Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"],
+                choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
+                answer: 2,
+                explanation: ["Kan een virus bevatten doe het niet"]
+            }
+        ];
+    }
+}
+class QLevel4 extends Questions {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.questionArray = [
+            {
+                question: ["Iemand gebruikt foute worden op het internet wat doe je?"],
+                choices: ["Doe niks ", "Rapporteer en blokkeer"],
+                answer: 2,
+                explanation: ["Altijd rapporteren en blokkeren. Dan kan er iets tegen worden gedaan."]
+            }, {
+                question: [" Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"],
+                choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
+                answer: 2,
+                explanation: ["Kan een virus bevatten doe het niet"]
+            }, {
+                question: [" Je krijgt een berichtje van een familie lid die vraagt of je even de betalingsgegevens kan sturen omdat ze die vergeten zijn wat doe je?"],
+                choices: [" je vraagt het aan je ouders persoonlijk en blokkeer de persoon", " je geeft hem de betalingsinformatie"],
+                answer: 1,
+                explanation: ["Nooit delen kan nep zijn"]
+            }, {
+                question: [" Je zit op een chatbox website iemand stelt wat rare persoonlijk vragen wat doe je?"],
+                choices: ["rapporteer en blokkeer en vertel je ouders", " je beantwoordt de vragen"],
+                answer: 1,
+                explanation: ["Je moet nooit beantwoorden.",
+                    "Hierdoor weten ze niks"]
+            }, {
+                question: "Wat is een goed wachtwoord?",
+                choices: ["1234", " W0nderwa11$"],
+                answer: 2,
+                explanation: ["1234 is heel makkelijk om voor hackers achter te komen.",
+                    "W0nderwa11$ is dat niet door de tekens"]
+            }, {
+                question: ["Wat is een betere game"],
+                choices: ["Minecraft", "Fortnite"],
+                answer: 1,
+                explanation: ["Minecraft is een veel beter spel"]
+            }
+        ];
+    }
+}
 class Level extends Screens {
     constructor(canvas, player, levelIndex) {
         super();
@@ -695,7 +809,7 @@ class Level2 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 2);
         this.baseSpawnRate = 90;
-        this.maxPoints = 200;
+        this.maxPoints = 20;
         this.speedMultiplier = 1;
     }
 }
@@ -703,7 +817,7 @@ class Level3 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 3);
         this.baseSpawnRate = 75;
-        this.maxPoints = 300;
+        this.maxPoints = 30;
         this.speedMultiplier = 1;
     }
 }
