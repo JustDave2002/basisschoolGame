@@ -27,7 +27,7 @@ class QLevel4 extends Questions {
                explanation: ["Je moet nooit beantwoorden.",
                "Hierdoor weten ze niks"]   
            },{
-               question: "Wat is een goed wachtwoord?",
+               question: ["Wat is een goed wachtwoord?"],
                 choices: ["1234", " W0nderwa11$"],
                 answer: 2, 
                explanation: ["1234 is heel makkelijk om voor hackers achter te komen.",
