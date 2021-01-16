@@ -34,7 +34,7 @@ class Game {
                 let sinceStart = this.now - this.startTime;
                 let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
                 if (currentFps == 60) {
-                    currentFps = 60.1;
+                    currentFps = 60.10;
                 }
                 this.draw(currentFps);
             }
@@ -320,7 +320,7 @@ class ScoringObject {
         if (random === 3) {
             this.positionX = this.rightLane;
         }
-        this.positionY = window.innerHeight - (window.innerHeight + 50);
+        this.positionY = -100;
     }
     move() {
         this.positionY += this.speed;
@@ -749,7 +749,7 @@ class Level extends Screens {
     }
     draw(ctx, fps) {
         this.backgroundArray.forEach(background => {
-            ctx.drawImage(background.background, background.getPositionX(), background.getPositionY(), this.canvas.width, this.canvas.height);
+            ctx.drawImage(background.background, background.getPositionX(), background.getPositionY(), this.canvas.width, this.canvas.height * 2);
         });
         this.writeTextToCanvas(ctx, ` fps: ${fps}`, 50, 20, 18);
         this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
@@ -821,7 +821,6 @@ class Level extends Screens {
         else if (random === 5) {
             this.scoringObject.push(new Box(this.canvas));
         }
-        const last_element = this.scoringObject.length - 1;
     }
     changeTheme(img) {
         document.body.style.backgroundImage = img;
@@ -895,7 +894,7 @@ class Level8 extends Level {
     }
 }
 class Background extends ScoringObject {
-    constructor(canvas, currentLevel, yPos = canvas.height * -1) {
+    constructor(canvas, currentLevel, yPos = canvas.height * -2) {
         super(canvas);
         this.collidedSwitch = false;
         this.speed = 7;
@@ -911,7 +910,7 @@ class Background extends ScoringObject {
         switch (this.currentLevel) {
             case 1:
             case 2:
-                this.background = this.loadNewImage("assets/img/street.jpg");
+                this.background = this.loadNewImage("assets/img/street1.jpg");
                 break;
             case 3:
             case 4:
@@ -923,14 +922,14 @@ class Background extends ScoringObject {
                 break;
             case 7:
             case 8:
-                this.background = this.loadNewImage("assets/img/street5.jpg");
+                this.background = this.loadNewImage("assets/img/street4.jpg");
                 break;
             default:
                 break;
         }
     }
     backgroundCollision() {
-        if (this.positionY + this.background.height - 20 > this.canvas.height && this.collidedSwitch == false) {
+        if (this.positionY + this.background.height - 1100 > this.canvas.height && this.collidedSwitch == false) {
             this.collidedSwitch = true;
             return true;
         }

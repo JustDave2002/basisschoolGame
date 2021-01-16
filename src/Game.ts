@@ -134,7 +134,7 @@ class Game {
             let sinceStart = this.now - this.startTime;
             let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
             if (currentFps == 60) {
-                currentFps = 60.1
+                currentFps = 60.10
             }
             //console.log("Elapsed time= " + Math.round(sinceStart / 1000 * 100) / 100 + " secs @ " + currentFps + " fps.");
             //console.log(currentFps);

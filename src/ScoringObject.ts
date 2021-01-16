@@ -34,7 +34,7 @@ abstract class ScoringObject {
         }
 
 
-        this.positionY = window.innerHeight - (window.innerHeight + 50);
+        this.positionY = -100;
 
 
 

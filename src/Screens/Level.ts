@@ -123,45 +123,6 @@ abstract class Level extends Screens {
             });
 
             console.log(this.spawnInterval,this.gameSpeed);
-
-
-            /*
-                        //makes items spawn faster depending on the totalscore
-                        const number = this.totalScore / 20;
-                        let difficultyVariable: number = this.baseSpawnRate - number;
-                        if (difficultyVariable < 15) {
-                            difficultyVariable = 15;
-                        }
-                        if (this.speedBoost < 5 && this.speedSwitch === true) {
-                            this.speedBoost = this.totalScore * 0.015
-                        } else {
-                            this.speedSwitch = false;
-                            this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
-                        }
-                        //spawns an item every x frames & decides the speed boost and frequency of items
-                        if (this.frameIndex >= difficultyVariable) {
-                            //console.log(difficultyVariable);
-            
-            
-                            const number = this.totalScore / 20;
-                            let difficultyVariable: number = this.baseSpawnRate - number;
-                            if (difficultyVariable < 15) {
-                                difficultyVariable = 15;
-                            }
-                            if (this.speedBoost < 5 && this.speedSwitch === true) {
-                                this.speedBoost = this.totalScore * 0.015
-                            } else {
-                                this.speedSwitch = false;
-                                this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
-                            }
-                            //spawns an item every x frames & decides the speed boost and frequency of items
-                            if (this.frameIndex >= difficultyVariable) {
-                                console.log(difficultyVariable);
-            
-                                this.createRandomScoringObject();
-                                this.frameIndex = 0;
-                            }
-                        }*/
         }
     }
 
@@ -192,7 +153,7 @@ abstract class Level extends Screens {
                 background.getPositionX(),
                 background.getPositionY(),
                 this.canvas.width,
-                this.canvas.height
+                this.canvas.height * 2
             );
         });
 
@@ -304,8 +265,6 @@ abstract class Level extends Screens {
         else if (random === 5) {
             this.scoringObject.push(new Box(this.canvas));
         }
-
-        const last_element: number = this.scoringObject.length - 1;
     }
 
 
