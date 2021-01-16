@@ -3,15 +3,19 @@
 class LevelWon extends Screens {
 
 
+    private keyWasPressed: boolean = true;
     private canvas: HTMLCanvasElement
-    public constructor(canvas: HTMLCanvasElement) {
-        super()
+    public constructor(canvas: HTMLCanvasElement, player: Player) {
+        super(player)
         this.canvas = canvas
     }
 
     public gameLogic() {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
-            this.state = ScreenState.NEXT_SCREEN
+        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL) != true) {
+            this.keyWasPressed = false;
+        }
+        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL) && this.keyWasPressed == false) {
+            this.state = ScreenState.NEXT_SCREEN;
         }
     }
 
