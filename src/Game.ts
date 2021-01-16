@@ -24,8 +24,8 @@ class Game {
     private then: number
     private elapsed: number
 
-    //Background Image related
     
+    private advanceToNextLevelSwitch: boolean;
 
 
     public constructor(canvas: HTMLElement) {
@@ -35,7 +35,7 @@ class Game {
         this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
 
-        this.load(0); 
+        this.load(0);
     }
 
     /**
@@ -51,31 +51,33 @@ class Game {
 
         //array of screens
         this.screenArray = [
-            new StartScreen(this.canvas),
+            new StartScreen(this.canvas, this.player),
             new Level1(this.canvas, this.player),
             new QLevel1(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level2(this.canvas, this.player),
             new QLevel2(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level3(this.canvas, this.player),
             new QLevel3(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level4(this.canvas, this.player),
             new QLevel4(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level5(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level6(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level7(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level8(this.canvas, this.player),
-            new GameWon(this.canvas),
-            new DeathScreen(this.canvas)]
+            new GameWon(this.canvas, this.player),
+            new DeathScreen(this.canvas, this.player)]
+
+            this.advanceToNextLevelSwitch = false;
+        this.currentScreen = this.screenArray[this.screenIndex];
 
 
-        this.advanceToNextLevel();
 
 
         // Start the animation
@@ -90,7 +92,7 @@ class Game {
      */
     private animate = () => {
 
-        
+
 
         // request another frame
 
@@ -110,31 +112,33 @@ class Game {
             this.then = this.now - (this.elapsed % this.fpsInterval);
 
             // draw stuff here
+            this.advanceToNextLevel();
+
             this.currentScreen.gameLogic();
 
             if (this.currentScreen.getState() == ScreenState.NEXT_SCREEN) {
-                this.advanceToNextLevel();
-            }
-            else if (this.currentScreen.getState() == ScreenState.RESTART) {
+                this.advanceToNextLevelSwitch = true;
+            } else if (this.currentScreen.getState() == ScreenState.RESTART) {
                 this.load(1);
             } else if (this.currentScreen.getState() == ScreenState.DIED) {
-                this.screenIndex = this.screenArray.length - 1;
-                this.advanceToNextLevel();
-
+                this.screenIndex = this.screenArray.length - 2;
+                this.advanceToNextLevelSwitch = true;
+            } else {
+                this.advanceToNextLevelSwitch = false;
             }
 
 
-            
+
 
 
             let sinceStart = this.now - this.startTime;
             let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
-            if (currentFps == 60){
+            if (currentFps == 60) {
                 currentFps = 60.1
             }
             //console.log("Elapsed time= " + Math.round(sinceStart / 1000 * 100) / 100 + " secs @ " + currentFps + " fps.");
             //console.log(currentFps);
-            
+
             this.draw(currentFps);
         }
     }
@@ -142,8 +146,26 @@ class Game {
 
 
     private advanceToNextLevel() {
-        this.currentScreen = this.screenArray[this.screenIndex];
-        this.screenIndex++;
+        if (this.advanceToNextLevelSwitch == true) {
+            if (this.currentScreen.getState() == ScreenState.DIED) {
+                console.log("no");
+                
+                this.screenIndex++;
+                this.currentScreen = this.screenArray[this.screenIndex];
+                this.advanceToNextLevelSwitch = false;
+                this.player.goUp(false, true); 
+            }
+            if (this.player.goUp(true, false)) {
+                console.log("yes");
+                
+                this.screenIndex++;
+                this.currentScreen = this.screenArray[this.screenIndex];
+                this.advanceToNextLevelSwitch = false;
+                this.player.goUp(false, true);
+            } 
+        }
+
+
     }
 
 
@@ -159,17 +181,17 @@ class Game {
         this.animate();
     }
 
-    
+
     /**
      * Render the items on the canvas
      */
-    private draw(fps:number) {
+    private draw(fps: number) {
         // Get the canvas rendering context
         const ctx = this.canvas.getContext('2d');
         // Clear the entire canvas 
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        
+
 
 
         this.currentScreen.draw(ctx, fps);
