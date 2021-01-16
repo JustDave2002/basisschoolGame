@@ -4,8 +4,8 @@ class DeathScreen extends Screens {
 
 
     private canvas: HTMLCanvasElement
-    public constructor(canvas: HTMLCanvasElement) {
-        super()
+    public constructor(canvas: HTMLCanvasElement, player:Player) {
+        super(player)
         this.canvas = canvas
     }
 

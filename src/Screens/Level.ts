@@ -12,11 +12,10 @@ abstract class Level extends Screens {
 
 
     protected totalLives: number;
-    protected player: Player;
 
     //has a formula of speeding up the game the more points you have
     protected speedBoost: number;
-    protected speedMultiplier: number;
+    protected baseSpeed: number;
     protected speedSwitch: boolean = true;
 
     protected baseSpawnRate: number;
@@ -36,7 +35,7 @@ abstract class Level extends Screens {
 
     constructor(canvas: HTMLCanvasElement, player: Player, levelIndex: number) {
 
-        super();
+        super(player);
         this.frameIndex = 0
         this.canvas = canvas;
         this.player = player;
@@ -86,41 +85,63 @@ abstract class Level extends Screens {
             }
 
 
-            const number = this.totalScore / 20;
-            let difficultyVariable: number = this.baseSpawnRate - number;
-            if (difficultyVariable < 15) {
-                difficultyVariable = 15;
-            }
-            if (this.speedBoost < 5 && this.speedSwitch === true) {
-                this.speedBoost = this.totalScore * 0.015
-            } else {
-                this.speedSwitch = false;
-                this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
-            }
+            //we willen dat de snelheid van item spawns sneller word *tot een bepaald punt
+            //we moeten dat punt gaan vinden
+
+            //speed willen we ook steeds omhoog *tot een bepaald punt
+            //het moet een duidelijk nummer zijn die je zo vaak kan applien
+
+            //lineair steeds moeilijker worden
+            //je pakt de punten in een level en daaraan pas je de spawnrate en speed aan
+
+
+
+/*
+
             //spawns an item every x frames & decides the speed boost and frequency of items
             if (this.frameIndex >= difficultyVariable) {
-                //console.log(difficultyVariable);
+                console.log(difficultyVariable);
 
-
-                const number = this.totalScore / 20;
-                let difficultyVariable: number = this.baseSpawnRate - number;
-                if (difficultyVariable < 15) {
-                    difficultyVariable = 15;
-                }
-                if (this.speedBoost < 5 && this.speedSwitch === true) {
-                    this.speedBoost = this.totalScore * 0.015
-                } else {
-                    this.speedSwitch = false;
-                    this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
-                }
-                //spawns an item every x frames & decides the speed boost and frequency of items
-                if (this.frameIndex >= difficultyVariable) {
-                    console.log(difficultyVariable);
-
-                    this.createRandomScoringObject();
-                    this.frameIndex = 0;
-                }
-            }
+                this.createRandomScoringObject();
+                this.frameIndex = 0;
+            }*/
+            
+                        //makes items spawn faster depending on the totalscore
+                        const number = this.totalScore / 20;
+                        let difficultyVariable: number = this.baseSpawnRate - number;
+                        if (difficultyVariable < 15) {
+                            difficultyVariable = 15;
+                        }
+                        if (this.speedBoost < 5 && this.speedSwitch === true) {
+                            this.speedBoost = this.totalScore * 0.015
+                        } else {
+                            this.speedSwitch = false;
+                            this.speedBoost = 5 - this.baseSpeed + this.totalScore * 0.005;
+                        }
+                        //spawns an item every x frames & decides the speed boost and frequency of items
+                        if (this.frameIndex >= difficultyVariable) {
+                            //console.log(difficultyVariable);
+            
+            
+                            const number = this.totalScore / 20;
+                            let difficultyVariable: number = this.baseSpawnRate - number;
+                            if (difficultyVariable < 15) {
+                                difficultyVariable = 15;
+                            }
+                            if (this.speedBoost < 5 && this.speedSwitch === true) {
+                                this.speedBoost = this.totalScore * 0.015
+                            } else {
+                                this.speedSwitch = false;
+                                this.speedBoost = 5 - this.baseSpeed + this.totalScore * 0.005;
+                            }
+                            //spawns an item every x frames & decides the speed boost and frequency of items
+                            if (this.frameIndex >= difficultyVariable) {
+                                console.log(difficultyVariable);
+            
+                                this.createRandomScoringObject();
+                                this.frameIndex = 0;
+                            }
+                        }
         }
     }
 
@@ -130,7 +151,7 @@ abstract class Level extends Screens {
      * pauses the game on button press and start back up 1000 ms after pressing start
      */
     private async pause() {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_ESC)) {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_SHIFT)) {
             this.state = ScreenState.PAUSED;
         } else if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
             await this.delay(1000);
@@ -142,7 +163,7 @@ abstract class Level extends Screens {
      * @param ctx 
      * @param levelIndex shows which level the player is currently at
      */
-    public draw(ctx: CanvasRenderingContext2D, fps:number) {
+    public draw(ctx: CanvasRenderingContext2D, fps: number) {
         this.backgroundArray.forEach(background => {
             ctx.drawImage(
                 background.background,
@@ -158,7 +179,7 @@ abstract class Level extends Screens {
 
         this.writeTextToCanvas(ctx, ` fps: ${fps}`, 50, 20, 18);
         this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
-        this.writeTextToCanvas(ctx, `Druk op ESC om te pauzeren`, this.canvas.width / 2 - 250, 20, 16);
+        this.writeTextToCanvas(ctx, `Druk op SHIFT om te pauzeren`, this.canvas.width / 2 - 250, 20, 16);
         this.writeTextToCanvas(ctx, `Levens: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
 
         //writes the pause message when game is paused
@@ -199,7 +220,7 @@ abstract class Level extends Screens {
 
         this.backgroundArray.forEach(
             (background, index) => {
-                //background.setSpeed(this.speedBoost + this.speedMultiplier);
+                //background.setSpeed(this.speedBoost + this.baseSpeed);
                 if (background.backgroundCollision()) {
                     //console.log("new BG spawned");
 
@@ -265,11 +286,11 @@ abstract class Level extends Screens {
         }
 
         const last_element: number = this.scoringObject.length - 1;
-        //console.log(this.speedBoost + this.speedMultiplier);
+        //console.log(this.speedBoost + this.baseSpeed);
 
-        this.scoringObject[last_element].setSpeed(this.speedBoost + this.speedMultiplier);
+        this.scoringObject[last_element].setSpeed(this.speedBoost + this.baseSpeed);
 
-        //this.backgroundArray[last_element].setSpeed(this.speedBoost + this.speedMultiplier);
+        //this.backgroundArray[last_element].setSpeed(this.speedBoost + this.baseSpeed);
     }
 
 

@@ -1,11 +1,13 @@
 abstract class Screens{
 
-    protected state: ScreenState = ScreenState.PLAYING
+    protected state: ScreenState = ScreenState.PLAYING;
 
-    protected keyListener: KeyListener = new KeyListener
+    protected keyListener: KeyListener = new KeyListener;
+
+protected player: Player
     
-    protected constructor(){
-
+    protected constructor(player:Player){
+        this.player = player;
         this.state = ScreenState.PLAYING
     }
     getState(): ScreenState {
