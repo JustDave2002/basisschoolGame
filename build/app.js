@@ -75,7 +75,7 @@ class Game {
         this.advanceToNextLevelSwitch = false;
         this.currentScreen = this.screenArray[this.screenIndex];
         console.log('start animation');
-        this.startAnimating(60);
+        this.startAnimating(70);
     }
     advanceToNextLevel() {
         if (this.advanceToNextLevelSwitch == true) {
@@ -929,7 +929,7 @@ class Background extends ScoringObject {
         }
     }
     backgroundCollision() {
-        if (this.positionY + this.background.height - 1100 > this.canvas.height && this.collidedSwitch == false) {
+        if (this.positionY + this.background.height - 1060 > this.canvas.height && this.collidedSwitch == false) {
             this.collidedSwitch = true;
             return true;
         }

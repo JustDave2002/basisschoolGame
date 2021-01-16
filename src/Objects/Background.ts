@@ -51,7 +51,7 @@ class Background extends ScoringObject {
     public backgroundCollision(): boolean {
 
 
-        if (this.positionY + this.background.height - 1100 > this.canvas.height && this.collidedSwitch == false) {
+        if (this.positionY + this.background.height - 1060 > this.canvas.height && this.collidedSwitch == false) {
             this.collidedSwitch = true
             return true;
 
