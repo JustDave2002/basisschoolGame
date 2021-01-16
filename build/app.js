@@ -305,6 +305,7 @@ class Player {
 }
 class ScoringObject {
     constructor(canvas) {
+        this.setSpeedSwitch = true;
         this.canvas = canvas;
         this.leftLane = this.canvas.width / 24 * 9;
         this.middleLane = this.canvas.width / 2;
@@ -352,7 +353,10 @@ class ScoringObject {
         return this._lives;
     }
     setSpeed(v) {
-        this.speed += v;
+        if (this.setSpeedSwitch == true) {
+            this.setSpeedSwitch = false;
+            this.speed += v;
+        }
     }
     loadNewImage(source) {
         const img = new Image();
@@ -688,14 +692,12 @@ class Level extends Screens {
         super(player);
         this.totalScore = 0;
         this.scoringObject = new Array();
-        this.speedSwitch = true;
         this.backgroundArray = new Array();
         this.frameIndex = 0;
         this.canvas = canvas;
         this.player = player;
         this.levelIndex = levelIndex;
         this.totalLives = 5;
-        this.speedBoost = 0;
         this.totalScore = 0;
         this.backgroundArray.push(new Background(this.canvas, levelIndex, -20));
     }
@@ -703,6 +705,8 @@ class Level extends Screens {
         this.pause();
         if (this.getState() === ScreenState.PLAYING) {
             this.frameIndex++;
+            this.spawnInterval = this.baseSpawnRate;
+            this.gameSpeed = this.baseSpeed;
             this.player.goUp(false, false);
             this.player.move();
             this.backgroundLogic();
@@ -713,37 +717,23 @@ class Level extends Screens {
             if (this.totalScore < 0 || this.totalLives <= 0) {
                 this.state = ScreenState.DIED;
             }
-            const number = this.totalScore / 20;
-            let difficultyVariable = this.baseSpawnRate - number;
-            if (difficultyVariable < 15) {
-                difficultyVariable = 15;
+            const pointStep = this.totalScore / 20;
+            if (this.spawnInterval > 30) {
+                this.spawnInterval = this.baseSpawnRate - pointStep;
             }
-            if (this.speedBoost < 5 && this.speedSwitch === true) {
-                this.speedBoost = this.totalScore * 0.015;
+            if (this.frameIndex >= this.spawnInterval) {
+                this.createRandomScoringObject();
+                this.frameIndex = 0;
             }
-            else {
-                this.speedSwitch = false;
-                this.speedBoost = 5 - this.baseSpeed + this.totalScore * 0.005;
-            }
-            if (this.frameIndex >= difficultyVariable) {
-                const number = this.totalScore / 20;
-                let difficultyVariable = this.baseSpawnRate - number;
-                if (difficultyVariable < 15) {
-                    difficultyVariable = 15;
-                }
-                if (this.speedBoost < 5 && this.speedSwitch === true) {
-                    this.speedBoost = this.totalScore * 0.015;
-                }
-                else {
-                    this.speedSwitch = false;
-                    this.speedBoost = 5 - this.baseSpeed + this.totalScore * 0.005;
-                }
-                if (this.frameIndex >= difficultyVariable) {
-                    console.log(difficultyVariable);
-                    this.createRandomScoringObject();
-                    this.frameIndex = 0;
-                }
-            }
+            let speedBooster = this.totalScore / 50;
+            this.gameSpeed = speedBooster + this.baseSpeed;
+            this.scoringObject.forEach(object => {
+                object.setSpeed(this.gameSpeed);
+            });
+            this.backgroundArray.forEach(BG => {
+                BG.setSpeed(this.gameSpeed);
+            });
+            console.log(this.spawnInterval, this.gameSpeed);
         }
     }
     pause() {
@@ -832,7 +822,6 @@ class Level extends Screens {
             this.scoringObject.push(new Box(this.canvas));
         }
         const last_element = this.scoringObject.length - 1;
-        this.scoringObject[last_element].setSpeed(this.speedBoost + this.baseSpeed);
     }
     changeTheme(img) {
         document.body.style.backgroundImage = img;
@@ -844,7 +833,7 @@ class Level extends Screens {
 class Level1 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 1);
-        this.baseSpawnRate = 100;
+        this.baseSpawnRate = 80;
         this.maxPoints = 100;
         this.baseSpeed = 0.5;
     }

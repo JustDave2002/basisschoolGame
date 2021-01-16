@@ -13,6 +13,7 @@ abstract class ScoringObject {
     protected points: number
     protected _lives: number
 
+    private setSpeedSwitch: boolean = true;
 
     protected constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -92,7 +93,10 @@ abstract class ScoringObject {
     }
 
     public setSpeed(v: number) {
+        if(this.setSpeedSwitch == true){
+            this.setSpeedSwitch = false;
         this.speed += v;
+    }
     }
 
 
