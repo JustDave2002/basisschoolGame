@@ -2,7 +2,6 @@
 
 class Box extends ScoringObject {
 
- 
     public constructor(canvas: HTMLCanvasElement) {
         super(canvas);
         this.image = this.loadNewImage("assets/img/objects/box1.png");

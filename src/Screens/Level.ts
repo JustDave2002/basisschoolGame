@@ -68,7 +68,7 @@ abstract class Level extends Screens {
             this.spawnRateSetter();
             this.speedSetter();
 
-            console.log(this.spawnInterval, this.gameSpeed);
+            console.log(`${this.spawnInterval} spawnFrems, ${this.gameSpeed} speed`);
         }
     }
 
@@ -81,10 +81,11 @@ abstract class Level extends Screens {
         const pointStep: number = this.totalScore / 20;
 
         //calculates the amount of frames needed to spawn an item 
-        if (this.spawnInterval > 30) {
-
             this.spawnInterval = this.baseSpawnRate - pointStep;
-        }
+        if (this.spawnInterval < 30) {
+            this.spawnInterval = 30;
+
+        } 
         //spawns an item every x frames & decides the speed boost and frequency of items
         if (this.frameIndex >= this.spawnInterval) {
             this.createRandomScoringObject();
@@ -96,7 +97,7 @@ abstract class Level extends Screens {
      * sets the speed of all items on screen based on the current points
      */
     private speedSetter() {
-        let speedBooster = this.totalScore / 50;
+        let speedBooster = this.totalScore / 85;
         this.gameSpeed = speedBooster + this.baseSpeed;
         this.scoringObject.forEach(object => {
             object.setSpeed(this.gameSpeed);
