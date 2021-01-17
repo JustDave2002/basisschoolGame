@@ -5,39 +5,36 @@ class QLevel4 extends Questions {
         super(canvas, player)
         this.questionArray = [
             {
-                question: ["Iemand gebruikt foute worden op het internet wat doe je?"],
-               choices: ["Doe niks ", "Rapporteer en blokkeer"],
-               answer: 2, 
-               explanation: ["Altijd rapporteren en blokkeren. Dan kan er iets tegen worden gedaan."]
-           },{
-                question: [" Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"],
-               choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
-               answer: 2, 
-               explanation: ["Kan een virus bevatten doe het niet"]
-           },{
-                question: [" Je krijgt een berichtje van een familie lid die vraagt of",
-                "je even de betalingsgegevens kan sturen omdat ze die vergeten zijn wat doe je?"],
-               choices: [" je vraagt het aan je ouders persoonlijk en blokkeer de persoon", " je geeft hem de betalingsinformatie"],
-               answer: 1, 
-               explanation: ["Nooit delen kan nep zijn"]
-           },{
-               question: [" Je zit op een chatbox website iemand stelt wat rare persoonlijk vragen wat doe je?"],
-               choices: ["rapporteer en blokkeer en vertel je ouders", " je beantwoordt de vragen"],
-               answer: 1, 
-               explanation: ["Je moet nooit beantwoorden.",
-               "Hierdoor weten ze niks"]   
-           },{
-               question: ["Wat is een goed wachtwoord?"],
-                choices: ["1234", " W0nderwa11$"],
+                question: "Je komt met iemand op het internet in discussie. Wat doe je?",
+                choices: ["Ga verder met deze persoon in gesprek.", "Ga de discussie niet aan."],
                 answer: 2, 
-               explanation: ["1234 is heel makkelijk om voor hackers achter te komen.",
-               "W0nderwa11$ is dat niet door de tekens"]
+                explanation: ["Dit soort gesprekken kunnen uit de hand lopen ga ze niet aan."]
+           },{
+               question: "Lees je de voorwaarden van computer programma's?",
+               choices: ["Nee.", "Ja. "],
+               answer: 2, 
+               explanation: ["Altijd lezen dan weet je wat je accepteert."]
+           },{
+               question: "Je krijgt een mail van de bank die vraagt voor je bank gegevens wat doe je?",
+               choices: ["Je belt de bank en checkt het na.", " Je geeft de informatie."],
+               answer: 1, 
+               explanation: ["Altijd na checken."]
+           },{
+               question: " Je zit op een chatbox website iemand stelt wat rare persoonlijk vragen wat doe je?",
+               choices: ["Vertel je ouders.", "Je beantwoordt de vragen."],
+               answer: 1, 
+               explanation: ["Je moet nooit persoonlijke vragen beantwoorden."]  
+           },{
+               question: "Je laptop begint langzamer te werken. Wat doe je?",
+               choices: ["Je doet er niks tegen.", "Je gebruikt een anti virus."],
+                answer: 2, 
+                explanation: ["Door een anti virus te gebruiken, kan je checken of je computer door een virus langzamer is gaan werken."]
            
            },{
-               question: ["Wat is een betere game"],
-               choices: ["Minecraft", "Fortnite"],
+               question: ["Een site vraagt om toegang tot je locatie. Wat doe je?"],
+              choices: ["Niet doen.", "Geef toegang."],
                answer: 1, 
-               explanation: ["Minecraft is een veel beter spel"]
+               explanation: ["Nooit zomaar een site je locatie geven."]
            }
             
         ]
