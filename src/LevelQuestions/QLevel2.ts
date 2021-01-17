@@ -20,7 +20,7 @@ class QLevel2 extends Questions {
              
              },{
                 question: [" Je krijgt een e-mail van je neef in de bijlage staat een link met de titel:"," “je zal nooit geloven wat er is gebeurt” wat doe je?",""],
-                choices: ["Verwijder de E-mail en vertel hou je ouders hievan op de hoogte.", " Open hem. Hij is toch familie"],
+                choices: ["Verwijder de E-mail en vertel het je ouders.", " Open hem. Hij is toch familie"],
                 answer: 1, 
                 explanation: ["Vetrouw nooit van deze rare e-mails.",""]
              
