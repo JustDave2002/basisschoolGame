@@ -2,7 +2,6 @@
 
 class GoldCoin extends ScoringObject {
 
- 
     public constructor(canvas: HTMLCanvasElement) {
         super(canvas);
         this.image = this.loadNewImage("assets/img/objects/goldcoin.png");

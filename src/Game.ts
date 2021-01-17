@@ -30,7 +30,7 @@ class Game {
         this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
 
-        this.load(0);
+        this.load(19);
     }
 
     /**
@@ -60,12 +60,16 @@ class Game {
             new QLevel4(this.canvas, this.player),
             new LevelWon(this.canvas, this.player),
             new Level5(this.canvas, this.player),
+            new QLevel5(this.canvas, this.player),
             new LevelWon(this.canvas, this.player),
             new Level6(this.canvas, this.player),
+            new QLevel6(this.canvas, this.player),
             new LevelWon(this.canvas, this.player),
             new Level7(this.canvas, this.player),
+            new QLevel7(this.canvas, this.player),
             new LevelWon(this.canvas, this.player),
             new Level8(this.canvas, this.player),
+            new QLevel8(this.canvas, this.player),
             new GameWon(this.canvas, this.player),
             new DeathScreen(this.canvas, this.player)]
 
@@ -115,7 +119,7 @@ class Game {
             }
 
 
-            
+
             let sinceStart = this.now - this.startTime;
             let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
             if (currentFps == 60) {

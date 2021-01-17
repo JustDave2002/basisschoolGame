@@ -42,7 +42,7 @@ class Game {
         this.canvas = canvas;
         this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
-        this.load(0);
+        this.load(19);
     }
     load(screenIndex) {
         this.screenIndex = screenIndex;
@@ -716,13 +716,14 @@ class Level extends Screens {
             }
             this.spawnRateSetter();
             this.speedSetter();
-            console.log(this.spawnInterval, this.gameSpeed);
+            console.log(`${this.spawnInterval} spawnFrems, ${this.gameSpeed} speed`);
         }
     }
     spawnRateSetter() {
         const pointStep = this.totalScore / 20;
-        if (this.spawnInterval > 30) {
-            this.spawnInterval = this.baseSpawnRate - pointStep;
+        this.spawnInterval = this.baseSpawnRate - pointStep;
+        if (this.spawnInterval < 30) {
+            this.spawnInterval = 30;
         }
         if (this.frameIndex >= this.spawnInterval) {
             this.createRandomScoringObject();
@@ -730,7 +731,7 @@ class Level extends Screens {
         }
     }
     speedSetter() {
-        let speedBooster = this.totalScore / 50;
+        let speedBooster = this.totalScore / 85;
         this.gameSpeed = speedBooster + this.baseSpeed;
         this.scoringObject.forEach(object => {
             object.setSpeed(this.gameSpeed);
@@ -834,7 +835,7 @@ class Level1 extends Level {
         super(canvas, player, 1);
         this.baseSpawnRate = 80;
         this.maxPoints = 100;
-        this.baseSpeed = 0.5;
+        this.baseSpeed = 1.5;
     }
 }
 class Level2 extends Level {
@@ -842,7 +843,7 @@ class Level2 extends Level {
         super(canvas, player, 2);
         this.baseSpawnRate = 90;
         this.maxPoints = 200;
-        this.baseSpeed = 1;
+        this.baseSpeed = 1.75;
     }
 }
 class Level3 extends Level {
@@ -850,7 +851,7 @@ class Level3 extends Level {
         super(canvas, player, 3);
         this.baseSpawnRate = 75;
         this.maxPoints = 300;
-        this.baseSpeed = 1;
+        this.baseSpeed = 2.2;
     }
 }
 class Level4 extends Level {
@@ -858,7 +859,7 @@ class Level4 extends Level {
         super(canvas, player, 4);
         this.baseSpawnRate = 70;
         this.maxPoints = 400;
-        this.baseSpeed = 1.5;
+        this.baseSpeed = 2.5;
     }
 }
 class Level5 extends Level {
@@ -866,7 +867,7 @@ class Level5 extends Level {
         super(canvas, player, 5);
         this.baseSpawnRate = 65;
         this.maxPoints = 600;
-        this.baseSpeed = 2;
+        this.baseSpeed = 2.7;
     }
 }
 class Level6 extends Level {
@@ -874,7 +875,7 @@ class Level6 extends Level {
         super(canvas, player, 6);
         this.baseSpawnRate = 60;
         this.maxPoints = 800;
-        this.baseSpeed = 2.5;
+        this.baseSpeed = 3;
     }
 }
 class Level7 extends Level {
@@ -882,7 +883,7 @@ class Level7 extends Level {
         super(canvas, player, 7);
         this.baseSpawnRate = 55;
         this.maxPoints = 1000;
-        this.baseSpeed = 3;
+        this.baseSpeed = 4;
     }
 }
 class Level8 extends Level {
@@ -890,7 +891,7 @@ class Level8 extends Level {
         super(canvas, player, 8);
         this.baseSpawnRate = 50;
         this.maxPoints = 1200;
-        this.baseSpeed = 3.5;
+        this.baseSpeed = 5;
     }
 }
 class Background extends ScoringObject {
@@ -928,7 +929,7 @@ class Background extends ScoringObject {
         }
     }
     backgroundCollision() {
-        if (this.positionY + this.backgroundImage.height - 1060 > this.canvas.height && this.collidedSwitch == false) {
+        if (this.positionY + this.backgroundImage.height > this.canvas.height && this.collidedSwitch == false) {
             this.collidedSwitch = true;
             return true;
         }
