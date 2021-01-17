@@ -30,7 +30,7 @@ class Game {
         this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
 
-        this.load(0);
+        this.load(19);
     }
 
     /**
@@ -115,7 +115,7 @@ class Game {
             }
 
 
-            
+
             let sinceStart = this.now - this.startTime;
             let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
             if (currentFps == 60) {

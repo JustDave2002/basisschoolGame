@@ -33,15 +33,8 @@ abstract class ScoringObject {
             this.positionX = this.rightLane;
         }
 
-
         this.positionY = -100;
-
-
-
     }
-
-
-
 
     public move() {
         this.positionY += this.speed;
@@ -64,10 +57,10 @@ abstract class ScoringObject {
         if (this.positionY > this.canvas.height) {
             return true;
         }
-
         return false;
     }
 
+    //getters and setters
     public getPositionX(): number {
         return this.positionX;
     }
@@ -98,7 +91,6 @@ abstract class ScoringObject {
             this.speed += v;
         }
     }
-
 
     /**
     * Loads an image in such a way that the screen doesn't constantly flicker
