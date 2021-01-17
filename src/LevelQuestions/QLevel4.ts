@@ -28,7 +28,8 @@ class QLevel4 extends Questions {
                question: ["Je laptop begint langzamer te werken. Wat doe je?",""],
                choices: ["Je doet er niks tegen.", "Je gebruikt een anti virus."],
                 answer: 2, 
-                explanation: ["Door een anti virus te gebruiken.","Kan je checken of je computer door een virus langzamer is gaan werken.",""]
+                explanation: ["Door een anti virus te gebruiken.",
+                "Kan je checken of je computer door een virus langzamer is geworden.",""]
            
            },{
                question: ["Een site vraagt om toegang tot je locatie. Wat doe je?",""],
