@@ -93,10 +93,10 @@ abstract class ScoringObject {
     }
 
     public setSpeed(v: number) {
-        if(this.setSpeedSwitch == true){
+        if (this.setSpeedSwitch == true) {
             this.setSpeedSwitch = false;
-        this.speed += v;
-    }
+            this.speed += v;
+        }
     }
 
 

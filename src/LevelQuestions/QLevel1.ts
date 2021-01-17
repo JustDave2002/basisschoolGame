@@ -24,7 +24,7 @@ class QLevel1 extends Questions {
                 question: ["Tegen welke mensen vertel je inloggegevens"],
                 choices: ["Niemand of je ouders", "Je vrienden"],
                 answer: 1, 
-                explanation: [" Je kan  je ouders vertrouwen",
+                explanation: [" Je kan je ouders vertrouwen",
                 "En je vrienden niet perse."]
             
             },{
