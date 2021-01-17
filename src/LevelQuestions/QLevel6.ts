@@ -27,7 +27,7 @@ class QLevel6 extends Questions {
                 answer: 2, 
                 explanation: ["Hoewel 1 makkelijker te onthouden is, is het ook makkelijker te raden voor dieven.","Dat is dus niet zo handig."],
             },{
-                question: ["Een klasgenoot vraagt je of hij met jouw inloggegevens in mag loggen, omdat hij zijn gegevens vergeten is.", "Sta je dat toe?"],
+                question: ["Een klasgenoot vraagt je of hij met jouw inloggegevens in mag loggen,", "omdat hij zijn gegevens vergeten is. Sta je dat toe?"],
                 choices: ["Nee, eigen schuld dikke bult", "Ja, 1 keertje maar"],
                 answer: 1, 
                 explanation: ["Wie het ook is, deel NOOIT je inloggegevens! Ze zijn alleen van jou.",""],
