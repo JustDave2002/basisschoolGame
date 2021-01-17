@@ -136,7 +136,7 @@ class Player {
         if (this.goLeft == true) {
 
             if (this.positionX >= this.toGoLane) {
-                this.positionX = this.positionX - 22;
+                this.positionX = this.positionX - 25;
                 // An extra if statement to compensate for the possibility of an overshoot.
                 if (this.positionX < this.toGoLane) {
                     this.positionX = this.toGoLane;
@@ -144,7 +144,7 @@ class Player {
             }
         } else if (this.goLeft == false) {
             if (this.positionX <= this.toGoLane) {
-                this.positionX = this.positionX + 22;
+                this.positionX = this.positionX + 25;
                 if (this.positionX > this.toGoLane) {
                     this.positionX = this.toGoLane;
                 }

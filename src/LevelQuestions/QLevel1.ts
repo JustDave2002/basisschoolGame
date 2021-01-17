@@ -7,75 +7,49 @@ class QLevel1 extends Questions {
         super(canvas, player)
         this.questionArray = [
             {
-                question: ["Wat moet je doen wanneer je een vreemde email krijgt van een onbekende?"],
+                question: " Wat moet je doen wanneer je een email krijgt van een onbekenden?",
                 choices: ["verwijder de email ", " rapporteer en blokkeer "],
                 answer: 2, 
-                explanation:[ ["Je kan zo zorgen dat google  er iets tegen kan doen."], 
+                explanation:[ "  Je kan zo zorgen dat google  er iets tegen kan doen.", 
                 "Ook krijg je dan geen emails meer."]
             
             },{
-                 question: ["Wat is een goed wachtwoord?"],
+                question: "Wat is een goed wachtwoord?",
                  choices: ["1234", " W0nderwa11$"],
                  answer: 2, 
-                explanation: ["1234 is heel makkelijk om voor hackers achter te komen.",
-                "W0nderwa11$ is dat niet door de tekens"]
+                 explanation: ["1234 is makkelijk om achter te komen voor hackers.",
+                                "W0nderwa11$ is dat niet door de symbolen"]
+
             
             },{
-                question: ["Tegen welke mensen vertel je inloggegevens"],
-                choices: ["Niemand of je ouders", "Je vrienden"],
+                question: "Tegen welke mensen vertel je inloggegevens?",
+                choices: ["Je ouders", "Je vrienden"],
                 answer: 1, 
-                explanation: [" Je kan je ouders vertrouwen",
-                "En je vrienden niet perse."]
+                explanation: [" Je ouders houden het geheim ",
+                              "Bij je vrienden weet je dat niet zeker."]
             
             },{
-                question: ["Je krijgt van iemand die je niet kent een sms",
-                "en hij stelt persoonlijke vragen wat doe je?"],
-                choices: ["Blokkeer diegene en vertel het aan je ouders ", " ga met de persoon in gesprek"],
+                question: " Iemand stuurt je een sms en hij stelt persoonlijke vragen.",
+                choices: ["Blokkeer diegene","Ga met de persoon in gesprek"],
                 answer: 1, 
-                explanation: ["Je moet nooit beantwoorden.",
-                "Hierdoor weten ze niks"]  
+                explanation: ["Reageer nooit op deze berichten en deel zeker nooit informatie.",
+                            "Hierdoor weten ze niks"]  
             
             },{
-                question: ["Welke gegevens deel je niet op je sociale media?"],
-                choices: ["je adres en je persoonlijke telefoonnummer ", "je naam"],
-                answer: 1, 
-                explanation:[ "Deze info is voor vrienden niet iedereen."]
-            
-            },{
-                question: ["Is het oké om je ouders hun betalings informatie op het internet te delen?"],
-                choices: ["ja", "nee"],
-                answer: 2, 
-                explanation:[ "Nooit Betalingsgegevens delen."]
-            
-            },{
-               question:[ "Je zit op een chatbox website iemand stelt wat rare persoonlijk vragen.",
-                "wat doe je?"],
-                choices: ["rapporteer en blokkeer en vertel je ouders", " je beantwoordt de vragen"],
-                answer: 1, 
-                explanation: ["Je moet nooit beantwoorden.",
-                "Hierdoor weten ze niks"]   
-            
-            },{
-                question: ["Je krijgt een berichtje van een familie lid die vraagt of je",
-                 "even de betalingsgegevens kan sturen omdat ze die vergeten zijn. Wat doe je?"],
-                choices: ["je belt of vraagt je ouders persoonlijk", " je geeft hem de betalingsinformatie"],
-                answer: 1, 
-                explanation: ["Nooit betaalinformatie aan mensen uitgeven.", 
-                "Ze kunnen gehacked zijn of het kan een nep nummer zijn."]
-            
-            },{
-                question: ["Welke gegevens deel je niet op je sociale media?"],
-                choices: ["je adres en je persoonlijke telefoonnummer ", " je naam"],
+                question: " Welke dingen deel je niet op social media? ",
+                choices: ["je adres "," je naam"],
                 answer: 1, 
                 explanation:[ "Deze info is voor vrienden niet iedereen."]
             
             },{
-                question: ["Is het oké om je je ouders betalings informatie op het internet te delen?"],
-                choices: ["ja", "nee"],
+                question: "Is het oké om je je ouders betalings informatie op het internet te delen?",
+                choices: ["Ja", "Nee"],
                 answer: 2, 
-                explanation:[ "Nooit Betalingsgegevens delen."]
+                explanation:[ "Deel nooit prive informatie."]
             
             }
+            
+            
             
         ]
     }
