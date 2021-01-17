@@ -12,12 +12,12 @@ class QLevel3 extends Questions {
                 answer: 1, 
                 explanation: ["Het is beter voor je om niet te lang achter de computer te zitten."]
              },{
-                question: " Je krijgt een vriendschapsverzoek van iemand die je niet kent. Wat doe je?",
+                question: [" Je krijgt een vriendschapsverzoek van iemand die je niet kent. Wat doe je?"],
                 choices: ["Je accepteert het vriendschapsverzoek.", " Je weigert het vriendschapsverzoek."],
                 answer: 2, 
                 explanation: ["Voeg alleen mensen die je kent als vriend toe."]
              },{
-                question: " Je krijgt een link doorgestuurd  waarvan je niet van weet wat het doet. Wat doe je?",
+                question: [" Je krijgt een link doorgestuurd  waarvan je niet van weet wat het doet. Wat doe je?"],
                 choices: ["Je klikt erop om te kijken waar het naartoe gaat.", "Je klikt er niet op."],
                 answer: 2, 
                 explanation: ["Klil nooit op vreemde internet links."]
