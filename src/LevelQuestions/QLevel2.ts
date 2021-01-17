@@ -7,7 +7,7 @@ class QLevel2 extends Questions {
         super(canvas, player)
         this.questionArray = [
             {
-                question: [" Je krijgt een grappige e-mail naar je toegestuurd die vreemd lijkt wat doe je?",""],
+                question: [" Je krijgt een grappige e-mail naar je toegestuurd."," Hij lijkt vreemd  wat doe je?",""],
                 choices: ["Let niet op deze mail en verwijder hem", " Stuur de e-mail door naar je vrienden."],
                 answer: 1, 
                 explanation: ["links zijn gevaarlijk ",""]
@@ -19,8 +19,7 @@ class QLevel2 extends Questions {
                 explanation: ["Mensen gebruiken vaak hun naam, let daar op!",""]
              
              },{
-                question: [" Je krijgt een e-mail van je neef.",
-                "In de bijlage staat een link met de titel: “je zal nooit geloven wat er is gebeurt” wat doe je?",""],
+                question: [" Je krijgt een e-mail van je neef in de bijlage staat een link met de titel:"," “je zal nooit geloven wat er is gebeurt” wat doe je?",""],
                 choices: ["Verwijder de E-mail en vertel hou je ouders hievan op de hoogte.", " Open hem. Hij is toch familie"],
                 answer: 1, 
                 explanation: ["Vetrouw nooit van deze rare e-mails.",""]
