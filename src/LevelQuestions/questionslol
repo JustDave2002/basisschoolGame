@@ -111,7 +111,7 @@
 //level 4
 {
      question: "Je komt met iemand op het internet in discussie. Wat doe je?"
-    choices: ["Ga veder met deze persoon in gesprek.", "Ga de discussie niet aan."],
+    choices: ["Ga verder met deze persoon in gesprek.", "Ga de discussie niet aan."],
     answer: 2, 
     explanation: ["Dit soort gesprekken kunnen uit de hand lopen ga ze niet aan."]
 },{
