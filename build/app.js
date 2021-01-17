@@ -268,7 +268,7 @@ class Player {
     animatePlayer() {
         if (this.goLeft == true) {
             if (this.positionX >= this.toGoLane) {
-                this.positionX = this.positionX - 22;
+                this.positionX = this.positionX - 25;
                 if (this.positionX < this.toGoLane) {
                     this.positionX = this.toGoLane;
                 }
@@ -276,7 +276,7 @@ class Player {
         }
         else if (this.goLeft == false) {
             if (this.positionX <= this.toGoLane) {
-                this.positionX = this.positionX + 22;
+                this.positionX = this.positionX + 25;
                 if (this.positionX > this.toGoLane) {
                     this.positionX = this.toGoLane;
                 }
@@ -843,7 +843,7 @@ class Level2 extends Level {
         super(canvas, player, 2);
         this.baseSpawnRate = 90;
         this.maxPoints = 200;
-        this.baseSpeed = 1.75;
+        this.baseSpeed = 2.5;
     }
 }
 class Level3 extends Level {
@@ -851,7 +851,7 @@ class Level3 extends Level {
         super(canvas, player, 3);
         this.baseSpawnRate = 75;
         this.maxPoints = 300;
-        this.baseSpeed = 2.2;
+        this.baseSpeed = 3.5;
     }
 }
 class Level4 extends Level {
@@ -859,7 +859,7 @@ class Level4 extends Level {
         super(canvas, player, 4);
         this.baseSpawnRate = 70;
         this.maxPoints = 400;
-        this.baseSpeed = 2.5;
+        this.baseSpeed = 4;
     }
 }
 class Level5 extends Level {
@@ -867,7 +867,7 @@ class Level5 extends Level {
         super(canvas, player, 5);
         this.baseSpawnRate = 65;
         this.maxPoints = 600;
-        this.baseSpeed = 2.7;
+        this.baseSpeed = 4.5;
     }
 }
 class Level6 extends Level {
@@ -875,7 +875,7 @@ class Level6 extends Level {
         super(canvas, player, 6);
         this.baseSpawnRate = 60;
         this.maxPoints = 800;
-        this.baseSpeed = 3;
+        this.baseSpeed = 5;
     }
 }
 class Level7 extends Level {
@@ -883,7 +883,7 @@ class Level7 extends Level {
         super(canvas, player, 7);
         this.baseSpawnRate = 55;
         this.maxPoints = 1000;
-        this.baseSpeed = 4;
+        this.baseSpeed = 5.5;
     }
 }
 class Level8 extends Level {
@@ -891,7 +891,7 @@ class Level8 extends Level {
         super(canvas, player, 8);
         this.baseSpawnRate = 50;
         this.maxPoints = 1200;
-        this.baseSpeed = 5;
+        this.baseSpeed = 6;
     }
 }
 class Background extends ScoringObject {
