@@ -18,7 +18,7 @@ class QLevel3 extends Questions {
                 answer: 2, 
                 explanation: ["Voeg alleen mensen die je kent als vriend toe.",""]
              },{
-                question: [" Je krijgt een link doorgestuurd  waarvan je niet van weet wat het doet. Wat doe je?",""],
+                question: [" Je krijgt een link doorgestuurd.","  Waarvan je niet van weet wat het doet. Wat doe je?",""],
                 choices: ["Je klikt erop om te kijken waar het naartoe gaat.", "Je klikt er niet op."],
                 answer: 2, 
                 explanation: ["Klik nooit op vreemde internet links.",""]
