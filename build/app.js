@@ -752,7 +752,7 @@ class QLevel6 extends Questions {
                 answer: 2,
                 explanation: ["Hoewel 1 makkelijker te onthouden is, is het ook makkelijker te raden voor dieven.", "Dat is dus niet zo handig."],
             }, {
-                question: ["Een klasgenoot vraagt je of hij met jouw inloggegevens in mag loggen, omdat hij zijn gegevens vergeten is.", "Sta je dat toe?"],
+                question: ["Een klasgenoot vraagt je of hij met jouw inloggegevens in mag loggen,", "omdat hij zijn gegevens vergeten is. Sta je dat toe?"],
                 choices: ["Nee, eigen schuld dikke bult", "Ja, 1 keertje maar"],
                 answer: 1,
                 explanation: ["Wie het ook is, deel NOOIT je inloggegevens! Ze zijn alleen van jou.", ""],
@@ -785,12 +785,12 @@ class QLevel7 extends Questions {
                 answer: 1,
                 explanation: ["Je hoeft nooit te reageren op een bericht dat je verdrietig of ongemakkelijk laat voelen", "Ga naar je ouders zodat zij je kunnen helpen."],
             }, {
-                question: ["Met je ouder(s) heb je afgesproken wat je wel en niet mag doen op je computer. Maar nu ben je aan het spelen bij een vriend van je!", "Hou je je nog steeds aan de afspraken?"],
+                question: ["Met je ouder(s) heb je afgesproken wat je wel en niet mag doen op je computer.", "Maar nu ben je bij een vriend van je! Hou je je nog steeds aan de afspraken?"],
                 choices: ["Ja", "Tuurlijk niet!"],
                 answer: 1,
                 explanation: ["Die afspraken zijn er voor een reden.", "Het is dus het beste om je eraan te houden."],
             }, {
-                question: ["Een vriendin heeft een foto van je online gezet die jij niet leuk vindt. Je vraagt of zij het wilt verwijderen maar ze zegt nee", "Wat doe je?"],
+                question: ["Een vriendin heeft een foto van je online gezet die jij niet leuk vindt.", "Je vraagt of zij het wilt verwijderen maar ze zegt nee. Wat doe je?"],
                 choices: ["Zet een stomme foto van HAAR online", "Laat je ouders helpen"],
                 answer: 2,
                 explanation: ["Je ouders kunnen je helpen met de foto verwijderen of je vriendin aan te spreken.", ""],
@@ -813,7 +813,7 @@ class QLevel8 extends Questions {
         super(canvas, player);
         this.questionArray = [
             {
-                question: ["Iemand stuurt je een vriendverzoek. Je kent hem niet maar je vriend zegt dat hij hem misschien kent. Accepteer je het vriendverzoek?", ""],
+                question: ["Iemand stuurt je een vriendverzoek. Je kent hem niet maar je vriend zegt dat hij hem misschien kent. ", "Accepteer je het vriendverzoek?"],
                 choices: ["Ja", "Nee"],
                 answer: 2,
                 explanation: ["Het veiligst is om dat niet te doen. Het is altijd veiliger om iemand toe te voegen in je vriendenlijst "],

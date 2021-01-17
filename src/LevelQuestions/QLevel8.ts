@@ -7,7 +7,7 @@ class QLevel8 extends Questions {
         super(canvas, player)
         this.questionArray = [
             {
-                question: ["Iemand stuurt je een vriendverzoek. Je kent hem niet maar je vriend zegt dat hij hem misschien kent. Accepteer je het vriendverzoek?",""],
+                question: ["Iemand stuurt je een vriendverzoek. Je kent hem niet maar je vriend zegt dat hij hem misschien kent. ","Accepteer je het vriendverzoek?"],
                 choices: ["Ja", "Nee"],
                 answer: 2, 
                 explanation: ["Het veiligst is om dat niet te doen. Het is altijd veiliger om iemand toe te voegen in je vriendenlijst "],
