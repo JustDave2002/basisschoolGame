@@ -505,36 +505,36 @@ class QLevel1 extends Questions {
         super(canvas, player);
         this.questionArray = [
             {
-                question: " Wat moet je doen wanneer je een email krijgt van een onbekenden?",
+                question: [" Wat moet je doen wanneer je een email krijgt van een onbekenden?"],
                 choices: ["verwijder de email ", " rapporteer en blokkeer "],
                 answer: 2,
                 explanation: ["  Je kan zo zorgen dat google  er iets tegen kan doen.",
                     "Ook krijg je dan geen emails meer."]
             }, {
-                question: "Wat is een goed wachtwoord?",
+                question: ["Wat is een goed wachtwoord?"],
                 choices: ["1234", " W0nderwa11$"],
                 answer: 2,
                 explanation: ["1234 is makkelijk om achter te komen voor hackers.",
                     "W0nderwa11$ is dat niet door de symbolen"]
             }, {
-                question: "Tegen welke mensen vertel je inloggegevens?",
+                question: ["Tegen welke mensen vertel je inloggegevens?"],
                 choices: ["Je ouders", "Je vrienden"],
                 answer: 1,
                 explanation: [" Je ouders houden het geheim ",
                     "Bij je vrienden weet je dat niet zeker."]
             }, {
-                question: " Iemand stuurt je een sms en hij stelt persoonlijke vragen.",
+                question: [" Iemand stuurt je een sms en hij stelt persoonlijke vragen."],
                 choices: ["Blokkeer diegene", "Ga met de persoon in gesprek"],
                 answer: 1,
                 explanation: ["Reageer nooit op deze berichten en deel zeker nooit informatie.",
                     "Hierdoor weten ze niks"]
             }, {
-                question: " Welke dingen deel je niet op social media? ",
+                question: [" Welke dingen deel je niet op social media? "],
                 choices: ["je adres ", " je naam"],
                 answer: 1,
                 explanation: ["Deze info is voor vrienden niet iedereen."]
             }, {
-                question: "Is het oké om je je ouders betalings informatie op het internet te delen?",
+                question: ["Is het oké om je je ouders betalings informatie op het internet te delen?"],
                 choices: ["Ja", "Nee"],
                 answer: 2,
                 explanation: ["Deel nooit prive informatie."]
@@ -547,32 +547,32 @@ class QLevel2 extends Questions {
         super(canvas, player);
         this.questionArray = [
             {
-                question: " Je krijgt een grappige e-mail naar je toegestuurd die vreemd lijkt wat doe je?",
+                question: [" Je krijgt een grappige e-mail naar je toegestuurd die vreemd lijkt wat doe je?"],
                 choices: ["Let niet op deze mail en verwijder hem", " Stuur de e-mail door naar je vrienden."],
                 answer: 1,
                 explanation: ["links zijn gevaarlijk "]
             }, {
-                question: " Welk e-mailadres lijkt echt?",
+                question: [" Welk e-mailadres lijkt echt?"],
                 choices: ["12345@hotmail.com", "KarelVisser@gmail.com"],
                 answer: 2,
                 explanation: ["Mensen gebruiken vaak hun naam, let daar op!"]
             }, {
-                question: " Je krijgt een e-mail van je neef. In de bijlage staat een link met de titel: “je zal nooit geloven wat er is gebeurt” wat doe je?",
+                question: [" Je krijgt een e-mail van je neef. In de bijlage staat een link met de titel: “je zal nooit geloven wat er is gebeurt” wat doe je?"],
                 choices: ["Verwijder de E-mail en vertel hou je ouders hievan op de hoogte.", " Open hem. Hij is toch familie"],
                 answer: 1,
                 explanation: ["Vetrouw nooit van deze rare e-mails."]
             }, {
-                question: " Een site vraagt voor je adres wat moet je doen?",
+                question: [" Een site vraagt voor je adres wat moet je doen?"],
                 choices: ["Vul het in.", " Negeer het en ga weg van de site."],
                 answer: 2,
                 explanation: ["Geef nooit prive informatie uit op het internet."]
             }, {
-                question: " Je wilt een product kopen op een site. Waar kijk je naar?",
+                question: [" Je wilt een product kopen op een site. Waar kijk je naar?"],
                 choices: ["Bekijk de recensies.", "Alleen naar het product zelf."],
                 answer: 1,
                 explanation: ["Kijk altijd naar de  recensies zodat je niet wordt opgelicht."]
             }, {
-                question: " Je wilt een computerprogramma downloaden. Waar kijk je naar?",
+                question: [" Je wilt een computerprogramma downloaden. Waar kijk je naar?"],
                 choices: ["Controleer of je op een goede cite zit.", "Alleen naar het product zelf."],
                 answer: 1,
                 explanation: ["Zo wat je zeker dat je het goede download. "]
@@ -590,12 +590,12 @@ class QLevel3 extends Questions {
                 answer: 1,
                 explanation: ["Het is beter voor je om niet te lang achter de computer te zitten."]
             }, {
-                question: " Je krijgt een vriendschapsverzoek van iemand die je niet kent. Wat doe je?",
+                question: [" Je krijgt een vriendschapsverzoek van iemand die je niet kent. Wat doe je?"],
                 choices: ["Je accepteert het vriendschapsverzoek.", " Je weigert het vriendschapsverzoek."],
                 answer: 2,
                 explanation: ["Voeg alleen mensen die je kent als vriend toe."]
             }, {
-                question: " Je krijgt een link doorgestuurd  waarvan je niet van weet wat het doet. Wat doe je?",
+                question: [" Je krijgt een link doorgestuurd  waarvan je niet van weet wat het doet. Wat doe je?"],
                 choices: ["Je klikt erop om te kijken waar het naartoe gaat.", "Je klikt er niet op."],
                 answer: 2,
                 explanation: ["Klil nooit op vreemde internet links."]
@@ -623,27 +623,27 @@ class QLevel4 extends Questions {
         super(canvas, player);
         this.questionArray = [
             {
-                question: "Je komt met iemand op het internet in discussie. Wat doe je?",
+                question: ["Je komt met iemand op het internet in discussie. Wat doe je?"],
                 choices: ["Ga verder met deze persoon in gesprek.", "Ga de discussie niet aan."],
                 answer: 2,
                 explanation: ["Dit soort gesprekken kunnen uit de hand lopen ga ze niet aan."]
             }, {
-                question: "Lees je de voorwaarden van computer programma's?",
+                question: ["Lees je de voorwaarden van computer programma's?"],
                 choices: ["Nee.", "Ja. "],
                 answer: 2,
                 explanation: ["Altijd lezen dan weet je wat je accepteert."]
             }, {
-                question: "Je krijgt een mail van de bank die vraagt voor je bank gegevens wat doe je?",
+                question: ["Je krijgt een mail van de bank die vraagt voor je bank gegevens wat doe je?"],
                 choices: ["Je belt de bank en checkt het na.", " Je geeft de informatie."],
                 answer: 1,
                 explanation: ["Altijd na checken."]
             }, {
-                question: " Je zit op een chatbox website iemand stelt wat rare persoonlijk vragen wat doe je?",
+                question: [" Je zit op een chatbox website iemand stelt wat rare persoonlijk vragen wat doe je?"],
                 choices: ["Vertel je ouders.", "Je beantwoordt de vragen."],
                 answer: 1,
                 explanation: ["Je moet nooit persoonlijke vragen beantwoorden."]
             }, {
-                question: "Je laptop begint langzamer te werken. Wat doe je?",
+                question: ["Je laptop begint langzamer te werken. Wat doe je?"],
                 choices: ["Je doet er niks tegen.", "Je gebruikt een anti virus."],
                 answer: 2,
                 explanation: ["Door een anti virus te gebruiken, kan je checken of je computer door een virus langzamer is gaan werken."]
