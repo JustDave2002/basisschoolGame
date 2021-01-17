@@ -9,7 +9,7 @@ class QLevel3 extends Questions {
             {
                 question: ["Je zit al een tijdje achter de computer", "Wat ga je nu doen?",""],
                 choices: ["Nog een youtube filmpje kijken", "Buiten spelen"],
-                answer: 1, 
+                answer: 2, 
                 explanation: ["Het is beter voor je om niet te lang achter de computer te zitten.",""]
              },{
                 question: [" Je krijgt een vriendschapsverzoek van iemand die je niet kent. Wat doe je?",""],
