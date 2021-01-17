@@ -18,7 +18,7 @@ class GameWon extends Screens {
     * checks if CTRL key is pressed and puts game on restart
     */
     public gameLogic() {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_P)) {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
             this.state = ScreenState.RESTART;
         }
     }
@@ -31,6 +31,6 @@ class GameWon extends Screens {
         const ctx = this.canvas.getContext('2d');
 
         this.writeTextToCanvas(ctx, `Gefeliciteerd! Je hebt alle levels gehaald!`, this.canvas.width / 2, 200, 40);
-        this.writeTextToCanvas(ctx, `Druk op P om opnieuw te spelen`, this.canvas.width / 2, 250, 40);
+        this.writeTextToCanvas(ctx, `Druk op CTRL om opnieuw te spelen`, this.canvas.width / 2, 250, 40);
     }
 }

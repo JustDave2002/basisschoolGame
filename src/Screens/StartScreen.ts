@@ -29,7 +29,7 @@ class StartScreen extends Screens {
         // Get the canvas rendering context
         const ctx = this.canvas.getContext('2d');
 
-        this.writeTextToCanvas(ctx, `Welkom bij ~naam hier~`, this.canvas.width / 2, 200, 40);
+        this.writeTextToCanvas(ctx, `Welkom bij ~Car Dash&Crash~`, this.canvas.width / 2, 200, 40);
         this.writeTextToCanvas(ctx, `Druk op CTRL om de game te starten!`, this.canvas.width / 2, 250, 40);
     }
 }
