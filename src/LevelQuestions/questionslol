@@ -120,21 +120,20 @@
     answer: 2, 
     explanation: ["Kan een virus bevatten doe het niet"]
 },{
-     question: " Je krijgt een berichtje van een familie lid die vraagt of je even de betalingsgegevens kan sturen omdat ze die vergeten zijn wat doe je?"
-    choices: [" je vraagt het aan je ouders persoonlijk en blokkeer de persoon", " je geeft hem de betalingsinformatie"],
+     question: "Je krijgt een mail van de bank die vraagt voor je bank gegevens wat doe je?"
+    choices: ["Je belt de bank en checkt het na.", " Je geeft de informatie."],
     answer: 1, 
-    explanation: ["Nooit delen kan nep zijn"]
+    explanation: ["Altijd na checken."]
 },{
     question: " Je zit op een chatbox website iemand stelt wat rare persoonlijk vragen wat doe je?"
     choices: ["Vertel je ouders.", "Je beantwoordt de vragen."],
     answer: 1, 
     explanation: ["Je moet nooit persoonlijke vragen beantwoorden."]  
 },{
-    question: "Wat is een goed wachtwoord?",
-     choices: ["1234", " W0nderwa11$"],
+    question: "Je laptop begint langzamer te werken.Wat doe je?",
+     choices: ["Je doet er niks tegen.", "Je gebruikt een anti virus."],
      answer: 2, 
-    explanation: ["1234 is heel makkelijk om voor hackers achter te komen.","
-    W0nderwa11$ is dat niet door de tekens"]
+    explanation: ["Door een anti virus te gebruiken, kan je checken of je computer door een virus langzamer is gaan werken."]
 
 },{
     question: ["Wat is een betere game", ""]
