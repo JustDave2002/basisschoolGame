@@ -80,14 +80,12 @@ class Game {
     advanceToNextLevel() {
         if (this.advanceToNextLevelSwitch == true) {
             if (this.currentScreen.getState() == ScreenState.DIED) {
-                console.log("no");
                 this.screenIndex++;
                 this.currentScreen = this.screenArray[this.screenIndex];
                 this.advanceToNextLevelSwitch = false;
                 this.player.goUp(false, true);
             }
             if (this.player.goUp(true, false)) {
-                console.log("yes");
                 this.screenIndex++;
                 this.currentScreen = this.screenArray[this.screenIndex];
                 this.advanceToNextLevelSwitch = false;
@@ -518,7 +516,7 @@ class QLevel1 extends Questions {
                 question: ["Tegen welke mensen vertel je inloggegevens"],
                 choices: ["Niemand of je ouders", "Je vrienden"],
                 answer: 1,
-                explanation: [" Je kan  je ouders vertrouwen",
+                explanation: [" Je kan je ouders vertrouwen",
                     "En je vrienden niet perse."]
             }, {
                 question: ["Je krijgt van iemand die je niet kent een sms",
@@ -690,15 +688,14 @@ class QLevel4 extends Questions {
 class Level extends Screens {
     constructor(canvas, player, levelIndex) {
         super(player);
-        this.totalScore = 0;
         this.scoringObject = new Array();
         this.backgroundArray = new Array();
+        this.totalLives = 5;
+        this.totalScore = 0;
         this.frameIndex = 0;
         this.canvas = canvas;
         this.player = player;
         this.levelIndex = levelIndex;
-        this.totalLives = 5;
-        this.totalScore = 0;
         this.backgroundArray.push(new Background(this.canvas, levelIndex, -20));
     }
     gameLogic() {
@@ -709,32 +706,38 @@ class Level extends Screens {
             this.gameSpeed = this.baseSpeed;
             this.player.goUp(false, false);
             this.player.move();
-            this.backgroundLogic();
             this.collision();
+            this.backgroundLogic();
             if (this.totalScore >= this.maxPoints) {
                 this.state = ScreenState.NEXT_SCREEN;
             }
             if (this.totalScore < 0 || this.totalLives <= 0) {
                 this.state = ScreenState.DIED;
             }
-            const pointStep = this.totalScore / 20;
-            if (this.spawnInterval > 30) {
-                this.spawnInterval = this.baseSpawnRate - pointStep;
-            }
-            if (this.frameIndex >= this.spawnInterval) {
-                this.createRandomScoringObject();
-                this.frameIndex = 0;
-            }
-            let speedBooster = this.totalScore / 50;
-            this.gameSpeed = speedBooster + this.baseSpeed;
-            this.scoringObject.forEach(object => {
-                object.setSpeed(this.gameSpeed);
-            });
-            this.backgroundArray.forEach(BG => {
-                BG.setSpeed(this.gameSpeed);
-            });
+            this.spawnRateSetter();
+            this.speedSetter();
             console.log(this.spawnInterval, this.gameSpeed);
         }
+    }
+    spawnRateSetter() {
+        const pointStep = this.totalScore / 20;
+        if (this.spawnInterval > 30) {
+            this.spawnInterval = this.baseSpawnRate - pointStep;
+        }
+        if (this.frameIndex >= this.spawnInterval) {
+            this.createRandomScoringObject();
+            this.frameIndex = 0;
+        }
+    }
+    speedSetter() {
+        let speedBooster = this.totalScore / 50;
+        this.gameSpeed = speedBooster + this.baseSpeed;
+        this.scoringObject.forEach(object => {
+            object.setSpeed(this.gameSpeed);
+        });
+        this.backgroundArray.forEach(BG => {
+            BG.setSpeed(this.gameSpeed);
+        });
     }
     pause() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -749,7 +752,7 @@ class Level extends Screens {
     }
     draw(ctx, fps) {
         this.backgroundArray.forEach(background => {
-            ctx.drawImage(background.background, background.getPositionX(), background.getPositionY(), this.canvas.width, this.canvas.height * 2);
+            ctx.drawImage(background.backgroundImage, background.getPositionX(), background.getPositionY(), this.canvas.width, this.canvas.height * 2);
         });
         this.writeTextToCanvas(ctx, ` fps: ${fps}`, 50, 20, 18);
         this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
@@ -821,9 +824,6 @@ class Level extends Screens {
         else if (random === 5) {
             this.scoringObject.push(new Box(this.canvas));
         }
-    }
-    changeTheme(img) {
-        document.body.style.backgroundImage = img;
     }
     delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -903,33 +903,32 @@ class Background extends ScoringObject {
         this.positionX = 0;
         this.positionY = yPos;
         this.currentLevel = currentLevel;
-        this.background = this.loadNewImage("assets/img/street.jpg");
         this.imageChanger();
     }
     imageChanger() {
         switch (this.currentLevel) {
             case 1:
             case 2:
-                this.background = this.loadNewImage("assets/img/street1.jpg");
+                this.backgroundImage = this.loadNewImage("assets/img/street1.jpg");
                 break;
             case 3:
             case 4:
-                this.background = this.loadNewImage("assets/img/street2.jpg");
+                this.backgroundImage = this.loadNewImage("assets/img/street2.jpg");
                 break;
             case 5:
             case 6:
-                this.background = this.loadNewImage("assets/img/street3.jpg");
+                this.backgroundImage = this.loadNewImage("assets/img/street3.jpg");
                 break;
             case 7:
             case 8:
-                this.background = this.loadNewImage("assets/img/street4.jpg");
+                this.backgroundImage = this.loadNewImage("assets/img/street4.jpg");
                 break;
             default:
                 break;
         }
     }
     backgroundCollision() {
-        if (this.positionY + this.background.height - 1060 > this.canvas.height && this.collidedSwitch == false) {
+        if (this.positionY + this.backgroundImage.height - 1060 > this.canvas.height && this.collidedSwitch == false) {
             this.collidedSwitch = true;
             return true;
         }

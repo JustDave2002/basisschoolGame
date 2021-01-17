@@ -1,60 +1,42 @@
 /// <reference path="../Screens.ts"/>
 /**
- * this class is responsible for the state of the level
+ * this class is responsible for all the logic within a level
  */
 abstract class Level extends Screens {
 
-    protected totalScore: number = 0;
-
-
     // The objects on the canvas
-    protected scoringObject: Array<ScoringObject> = new Array()
+    protected scoringObject: Array<ScoringObject> = new Array();
+    protected backgroundArray: Array<Background> = new Array();
 
-
-    protected totalLives: number;
-
-
-    
+    protected totalLives: number = 5;
+    protected totalScore: number = 0;
+    protected frameIndex: number = 0;
     protected maxPoints: number;
-
-    protected frameIndex: number;
+    protected levelIndex: number;
 
     protected canvas: HTMLCanvasElement;
 
-    protected backgroundArray: Array<Background> = new Array();
-
-    protected levelIndex: number;
-
-
     //speedvariables for level
     protected baseSpawnRate: number;
-    protected baseSpeed:number;
+    protected baseSpeed: number;
     private spawnInterval: number;
     private gameSpeed: number;
-
 
     constructor(canvas: HTMLCanvasElement, player: Player, levelIndex: number) {
 
         super(player);
-        this.frameIndex = 0
         this.canvas = canvas;
         this.player = player;
         this.levelIndex = levelIndex;
 
-        
-
-        // Score is zero at start
-        this.totalLives = 5;
-        this.totalScore = 0;
-
+        //initialises the first BG
         this.backgroundArray.push(new Background(this.canvas, levelIndex, -20));
-
     }
 
-
-
+    /**
+     * logic of the level
+     */
     public gameLogic() {
-
         //makes sure the pause logic is not frozen when the game is paused
         this.pause();
 
@@ -63,70 +45,66 @@ abstract class Level extends Screens {
             this.frameIndex++
 
             //sets the base speed for the level
-        this.spawnInterval = this.baseSpawnRate;
-        this.gameSpeed = this.baseSpeed;
+            this.spawnInterval = this.baseSpawnRate;
+            this.gameSpeed = this.baseSpeed;
 
+            //executes the needed code for the player and player collision
             this.player.goUp(false, false)
             this.player.move();
-            this.backgroundLogic();
-            //console.log(this.frameIndex);
-
-
-
-            // checks if player collides
             this.collision();
 
+            this.backgroundLogic();
 
-
+            //executes the next screen when the win conditions are met
             if (this.totalScore >= this.maxPoints) {
                 this.state = ScreenState.NEXT_SCREEN;
             }
-            //makes you lose if you have minus points
+
+            //executes the lost screen when you lost all lives or points
             if (this.totalScore < 0 || this.totalLives <= 0) {
                 this.state = ScreenState.DIED
             }
 
+            this.spawnRateSetter();
+            this.speedSetter();
 
-            //we willen dat de snelheid van item spawns sneller word *tot een bepaald punt
-            //we moeten dat punt gaan vinden
-
-            //speed willen we ook steeds omhoog *tot een bepaald punt
-            //het moet een duidelijk nummer zijn die je zo vaak kan applien
-
-            //lineair steeds moeilijker worden
-            //je pakt de punten in een level en daaraan pas je de spawnrate en speed aan
-
-
-            //counter that changes all variables based on the points
-            const pointStep:number = this.totalScore / 20;
-
-           //calculates the amount of frames needed to spawn an item 
-            if (this.spawnInterval > 30){
-                
-            this.spawnInterval = this.baseSpawnRate - pointStep;
-            }
-            //spawns an item every x frames & decides the speed boost and frequency of items
-            if (this.frameIndex >= this.spawnInterval) {
-                
-
-                this.createRandomScoringObject();
-                this.frameIndex = 0;
-            }
-
-            let speedBooster = this.totalScore /50
-            this.gameSpeed = speedBooster + this.baseSpeed
-            this.scoringObject.forEach(object => {
-                object.setSpeed(this.gameSpeed);
-            });
-            this.backgroundArray.forEach(BG => {
-                BG.setSpeed(this.gameSpeed);
-            });
-
-            console.log(this.spawnInterval,this.gameSpeed);
+            console.log(this.spawnInterval, this.gameSpeed);
         }
     }
 
 
+    /**
+     * sets the speed at which items spawn based on the current points 
+     */
+    private spawnRateSetter() {
+        //counter that changes all variables based on the points
+        const pointStep: number = this.totalScore / 20;
+
+        //calculates the amount of frames needed to spawn an item 
+        if (this.spawnInterval > 30) {
+
+            this.spawnInterval = this.baseSpawnRate - pointStep;
+        }
+        //spawns an item every x frames & decides the speed boost and frequency of items
+        if (this.frameIndex >= this.spawnInterval) {
+            this.createRandomScoringObject();
+            this.frameIndex = 0;
+        }
+    }
+
+    /**
+     * sets the speed of all items on screen based on the current points
+     */
+    private speedSetter() {
+        let speedBooster = this.totalScore / 50;
+        this.gameSpeed = speedBooster + this.baseSpeed;
+        this.scoringObject.forEach(object => {
+            object.setSpeed(this.gameSpeed);
+        });
+        this.backgroundArray.forEach(BG => {
+            BG.setSpeed(this.gameSpeed);
+        });
+    }
 
     /**
      * pauses the game on button press and start back up 1000 ms after pressing start
@@ -139,17 +117,18 @@ abstract class Level extends Screens {
             this.state = ScreenState.PLAYING;
         }
     }
+
     /**
      * draws everything on screen for a level
-     * @param ctx 
+     * @param ctx canvasRenderingContext2D
      * @param levelIndex shows which level the player is currently at
      */
     public draw(ctx: CanvasRenderingContext2D, fps: number) {
+        //loops through all backgrounds and draws them
         this.backgroundArray.forEach(background => {
             ctx.drawImage(
-                background.background,
+                background.backgroundImage,
                 // Center the image in the lane with the x coordinates
-
                 background.getPositionX(),
                 background.getPositionY(),
                 this.canvas.width,
@@ -158,6 +137,7 @@ abstract class Level extends Screens {
         });
 
 
+        //draws all the level info on screen
         this.writeTextToCanvas(ctx, ` fps: ${fps}`, 50, 20, 18);
         this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
         this.writeTextToCanvas(ctx, `Druk op SHIFT om te pauzeren`, this.canvas.width / 2 - 250, 20, 16);
@@ -165,15 +145,13 @@ abstract class Level extends Screens {
 
         //writes the pause message when game is paused
         if (this.getState() == ScreenState.PAUSED) {
-
             this.writeTextToCanvas(ctx, `Gepauzeerd`, this.canvas.width / 2, 200, 40);
             this.writeTextToCanvas(ctx, `Druk op CTRL om door te gaan`, this.canvas.width / 2, 250, 35);
         }
         this.drawScore(ctx);
         this.drawObjects(ctx);
-
-
     }
+
     /**
      * draws all objects within the level
      * @param ctx 
@@ -184,9 +162,9 @@ abstract class Level extends Screens {
                 if (object !== null) {
                     object.draw(ctx);
                 }
-            });
+            }
+        );
     }
-
 
     /**
      * Draw the score on a canvas
@@ -196,24 +174,23 @@ abstract class Level extends Screens {
         this.writeTextToCanvas(ctx, `Score: ${this.totalScore}`, this.canvas.width / 2, 45, 18);
     }
 
+    /**
+     * all the logic concidering the BG
+     */
     private backgroundLogic() {
-
-
         this.backgroundArray.forEach(
             (background, index) => {
-                //background.setSpeed(this.speedBoost + this.speedMultiplier);
+                //spawns new BG if a previous BG touches the bottom of the canvas
                 if (background.backgroundCollision()) {
-                    //console.log("new BG spawned");
-
                     this.backgroundArray.push(new Background(this.canvas, this.levelIndex));
                 }
+
+                //general moving and removing BG logic
                 if (background !== null) {
-                    //console.log("moving BG");
-
                     background.move();
-                    if (background.collidesWithCanvasBottom()) {
-                        //console.log("BG collission detected", index);
 
+                    //removes a BG if the top of it collides with the bottom of the canvas
+                    if (background.collidesWithCanvasBottom()) {
                         this.backgroundArray.splice(index, 1);
 
                     }
@@ -222,6 +199,10 @@ abstract class Level extends Screens {
         );
 
     }
+
+    /**
+     * detects collision of scoringobjects with the player or canvas bottom
+     */
     public collision() {
         this.scoringObject.forEach(
             (object, index) => {
@@ -239,8 +220,13 @@ abstract class Level extends Screens {
             }
         );
     }
+
+    /**
+     * creates a random scoring object to fall down the canvas
+     */
     protected createRandomScoringObject(): void {
 
+        //randomisers for rarer items
         const random = this.randomInteger(1, 5);
         const plusLife = this.randomInteger(1, 40)
 
@@ -265,13 +251,6 @@ abstract class Level extends Screens {
         else if (random === 5) {
             this.scoringObject.push(new Box(this.canvas));
         }
-    }
-
-
-
-
-    protected changeTheme(img: string) {
-        document.body.style.backgroundImage = img;
     }
 
     /**
