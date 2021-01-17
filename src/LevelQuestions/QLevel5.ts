@@ -27,12 +27,12 @@ class QLevel5 extends Questions {
                 answer: 2, 
                 explanation: ["Sommige mensen slaan op hun apparaat in de hoop dat het weer gaat werken.","Niet doen! Het is niet slim en je kan je laptop meer schade aanrichten."],
             },{
-                question: ["Iemand online stuurt je een bericht, zij wil graag je telefoonnummer zodat ze je een kaar kan bellen", "Wat doe je?"],
+                question: ["Iemand online stuurt je een bericht, zij wil graag je", "telefoonnummer zodat ze je een keer kan bellen. Wat doe je?"],
                 choices: ["Geef haar niet je nummer", "Geef het nummer"],
                 answer: 1, 
                 explanation: ["Als je de persoon niet kent, kan je beter niet persoonlijke dingen weggeven.",""],
             },{
-                question: ["Je krijgt een melding die zegt dat je telefoon gehackt is en dat je geld moet betalen om het weer te kunnen gebruiken", "Ga je naar je ouders of los je het zelf op?"],
+                question: ["Je krijgt een melding die zegt dat je telefoon gehackt is en dat", "je geld moet betalen om het weer te kunnen gebruiken. Ga je naar je ouders of los je het zelf op?"],
                 choices: ["Zelf: Ik betaal", "Ouders: ik vraag mijn ouders om hulp"],
                 answer: 2, 
                 explanation: ["Het is dapper dat je het zelf wilt oplossen, maar hulp van je ouders is altijd handiger!",""],
