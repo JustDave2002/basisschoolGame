@@ -24,7 +24,7 @@ class QLevel1 extends Questions {
                 question: ["Tegen welke mensen vertel je inloggegevens"],
                 choices: ["Niemand of je ouders", "Je vrienden"],
                 answer: 1, 
-                explanation: [" Je kan  je ouders vertrouwen",
+                explanation: [" Je kan je ouders vertrouwen",
                 "En je vrienden niet perse."]
             
             },{
@@ -42,7 +42,7 @@ class QLevel1 extends Questions {
                 explanation:[ "Deze info is voor vrienden niet iedereen."]
             
             },{
-                question: ["Is het oké om je je ouders betalings informatie op het internet te delen?"],
+                question: ["Is het oké om je ouders hun betalings informatie op het internet te delen?"],
                 choices: ["ja", "nee"],
                 answer: 2, 
                 explanation:[ "Nooit Betalingsgegevens delen."]

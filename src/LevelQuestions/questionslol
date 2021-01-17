@@ -10,145 +10,136 @@
      question: "Wat is een goed wachtwoord?",
      choices: ["1234", " W0nderwa11$"],
      answer: 2, 
-    explanation: ["1234 is heel makkelijk om voor hackers achter te komen.","
-    W0nderwa11$ is dat niet door de tekens"]
+    explanation: ["1234 is makkelijk om achter te komen voor hackers.","
+    W0nderwa11$ is dat niet door de symbolen"]
 
 },{
-    question: "Tegen welke mensen vertel je inloggegevens",
-    choices: ["Niemand of je ouders", "Je vrienden"],
+    question: "Tegen welke mensen vertel je inloggegevens?",
+    choices: ["Je ouders", "Je vrienden"],
     answer: 1, 
-    explanation: [" Je kan  je ouders vertrouwen",
-    "En je vrienden niet perse."]
+    explanation: [" Je ouders houden het geheim ",
+    "Bij je vrienden weet je dat niet zeker."]
 
 },{
-    question: " Je krijgt van iemand die je niet kent een sms en hij stelt persoonlijke vragen wat doe je?",
-    choices: ["Blokkeer diegene en vertel het aan je ouders ", " ga met de persoon in gesprek"],
+    question: " Iemand stuurt je een sms en hij stelt persoonlijke vragen.",
+    choices: ["Blokkeer diegene","Ga met de persoon in gesprek"],
     answer: 1, 
-    explanation: ["Je moet nooit beantwoorden.",
+    explanation: ["Reageer nooit op deze berichten en deel zeker nooit informatie.",
     "Hierdoor weten ze niks"]  
 
 },{
-    question: " Welke gegevens deel je niet op je sociale media? "
-    choices: ["je adres en je persoonlijke telefoonnummer ", " je naam"],
+    question: " Welke dingen deel je niet op social media? "
+    choices: ["je adres ", " je naam"],
     answer: 1, 
     explanation:[ "Deze info is voor vrienden niet iedereen."]
 
 },{
     question: "Is het oké om je je ouders betalings informatie op het internet te delen?"
-    choices: ["ja", "nee"],
+    choices: ["Ja", "Nee"],
     answer: 2, 
-    explanation:[ "Nooit Betalingsgegevens delen."]
+    explanation:[ "Deel nooit prive informatie."]
 
 }
 
 //level 2
 {
-   question: " Je krijgt een e-mail met een hilarisch onderwerp dat duidelijk een scam is wat doe je?"
-    choices: ["Vermijd te klikken op de links en markeer ze als spam", " Stuur de e-mail door naar je vrienden maar zeg er niet op te klikken "],
+   question: " Je krijgt een grappige e-mail naar je toegestuurd die vreemd lijkt wat doe je?"
+    choices: ["Let niet op deze mail en verwijder hem", " Stuur de e-mail door naar je vrienden."],
     answer: 1, 
     explanation: ["links zijn gevaarlijk "]
 
 },{
     question: " Welk e-mailadres lijkt echt?"
-    choices: ["HenkBakplaat@gmal.com", "KarelVisser@gmail.com"],
+    choices: ["12345@hotmail.com", "KarelVisser@gmail.com"],
     answer: 2, 
-    explanation: ["gmal is fout want het is gmail"]
+    explanation: ["Mensen gebruiken vaak hun naam, let daar op!"]
 
 },{
-   question: " Je krijgt een e-mail van je neef in de bijlage staat een bestand in de e-mail staat “je zal nooit geloven wat er is gebeurt” wat doe je?"
-   choices: ["Verwijder de E-mail en vertel je ouders dat je neef gehackt is ", " Open hem hij is toch familie"],
+   question: " Je krijgt een e-mail van je neef. In de bijlage staat een link met de titel: “je zal nooit geloven wat er is gebeurt” wat doe je?"
+   choices: ["Verwijder de E-mail en vertel hou je ouders hievan op de hoogte.", " Open hem. Hij is toch familie"],
     answer: 1, 
-    explanation: ["Nooit rare emails vetrouwen"]
+    explanation: ["Vetrouw nooit van deze rare e-mails."]
 
 },{
-    question: " Een site vraagt voor je bankgegevens wat moet je doen?"
-    choices: ["vul het in ", " negeer het en ga weg van de site"],
+    question: " Een site vraagt voor je adres wat moet je doen?"
+    choices: ["Vul het in.", " Negeer het en ga weg van de site."],
     answer: 2, 
-    explanation: ["nooit zomaar het geven"]
+    explanation: ["Geef nooit prive informatie uit op het internet."]
 
 },{
-    question: " Je wil een product kopen op een site waar kijk je naar?"
-    choices: ["de reviews bekijken", "Alleen naar het product zelf"],
+    question: " Je wilt een product kopen op een site. Waar kijk je naar?"
+    choices: ["Bekijk de recensies.", "Alleen naar het product zelf."],
     answer: 1, 
-    explanation: ["altijd kijken naar reviews zodat je niet word opgelicht"]
+    explanation: ["Kijk altijd naar de  recensies zodat je niet wordt opgelicht."]
 
 },{
-    question: " Je wilt een computerprogramma downloaden waar kijk je naar?"
-    choices: ["lijkt het officieel", "Alleen naar het product zelf"],
+    question: " Je wilt een computerprogramma downloaden. Waar kijk je naar?"
+    choices: ["Controleer of je op een goede cite zit.", "Alleen naar het product zelf."],
     answer: 1, 
-    explanation: ["Altijd kijken of het de goede site is."]
+    explanation: ["Zo wat je zeker dat je het goede download. "]
 
 }
 
 //level 3
 {
-   question: ["Je zit al 5 uur achter de computer", "Wat doe je?"]
-    choices: ["Stoppen", "Doorgaan"],
+   question: ["Je zit al een tijdje achter de computer", "Wat ga je nu doen?"]
+    choices: ["Nog een youtube filmpje kijken", "Buiten spelen"],
     answer: 1, 
-    explanation: ["Normale lengte achter de computer","Want dat is goed"]
+    explanation: ["Het is beter voor je om niet te lang achter de computer te zitten."]
 },{
-    question: " Je krijgt een vriendschapsverzoek van iemand die je niet kent wat doe je?"
-    choices: ["je accepteert het vriendschapsverzoek", " je weigert het vriendschapsverzoek "],
+    question: " Je krijgt een vriendschapsverzoek van iemand die je niet kent. Wat doe je?"
+    choices: ["Je accepteert het vriendschapsverzoek.", " Je weigert het vriendschapsverzoek."],
     answer: 2, 
-    explanation: ["Als je iemand niet kent doe het niet"]
+    explanation: ["Voeg alleen mensen die je kent als vriend toe."]
 },{
-    question: " Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"
-    choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
+    question: " Je krijgt een link doorgestuurd  waarvan je niet van weet wat het doet. Wat doe je?"
+    choices: ["Je klikt erop om te kijken waar het naartoe gaat.", "Je klikt er niet op."],
     answer: 2, 
-    explanation: ["Kan een virus bevatten doe het niet"]
+    explanation: ["Klil nooit op vreemde internet links."]
 },{
-    question: ["je word gecyberpest wat doe je"]
-    choices: ["je negeert het ", "Rappoteren en Blokkeren"],
+    question: ["Je word gepest op het internet. Wat doe je?"]
+    choices: ["Je negeert het. ", "Breng je ouders hievan op tehoogte ."],
     answer: 2, 
-    explanation: ["Altijd rapporteren en blokkeren",
-            Dan kan er iets tegen worden gedaan."]
+    explanation: ["Pesten is nooit fijn vertel het tegen iemand."]
 },{
-   question: ["Een site zegt dat je iets hebt gewonnen", "Je bent de duizendste klant wat doe je."]
-    choices: ["vetrouw het niet", "Doe wat er word gevraagd"],
+   question: ["Een site zegt dat je iets duurs hebt gewonnen. Wat doe je?"]
+    choices: ["Vetrouw het niet.", "Doe wat er word gevraagd."],
     answer: 1, 
-    explanation: ["Dit is altijd nep trap er niet in."]
-},{
-    question: " Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"
-    choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
-    answer: 2, 
-    explanation: ["Kan een virus bevatten doe het niet"]
+    explanation: ["Dit is altijd nep dus trap er niet in."]
 }
 
 //level 4
 {
-     question: "Iemand gebruikt foute worden op het internet wat doe je?"
-    choices: ["Doe niks ", "Rapporteer en blokkeer"],
+     question: "Je komt met iemand op het internet in discussie. Wat doe je?"
+    choices: ["Ga verder met deze persoon in gesprek.", "Ga de discussie niet aan."],
     answer: 2, 
-    explanation: ["Altijd rapporteren en blokkeren",
-            Dan kan er iets tegen worden gedaan."]
+    explanation: ["Dit soort gesprekken kunnen uit de hand lopen ga ze niet aan."]
 },{
-     question: " Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"
-    choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
+     question: "Lees je de voorwaarden van computer programma's?"
+    choices: ["Nee.", "Ja. "],
     answer: 2, 
-    explanation: ["Kan een virus bevatten doe het niet"]
+    explanation: ["Altijd lezen dan weet je wat je accepteert."]
 },{
-     question: " Je krijgt een berichtje van een familie lid die vraagt of je even de betalingsgegevens kan sturen omdat ze die vergeten zijn wat doe je?"
-    choices: [" je vraagt het aan je ouders persoonlijk en blokkeer de persoon", " je geeft hem de betalingsinformatie"],
+     question: "Je krijgt een mail van de bank die vraagt voor je bank gegevens wat doe je?"
+    choices: ["Je belt de bank en checkt het na.", " Je geeft de informatie."],
     answer: 1, 
-    explanation: ["Nooit delen kan nep zijn"]
+    explanation: ["Altijd na checken."]
 },{
     question: " Je zit op een chatbox website iemand stelt wat rare persoonlijk vragen wat doe je?"
-    choices: ["rapporteer en blokkeer en vertel je ouders", " je beantwoordt de vragen"],
+    choices: ["Vertel je ouders.", "Je beantwoordt de vragen."],
     answer: 1, 
-    explanation: ["Je moet nooit beantwoorden.",
-    "Hierdoor weten ze niks"]   
+    explanation: ["Je moet nooit persoonlijke vragen beantwoorden."]  
 },{
-    question: "Wat is een goed wachtwoord?",
-     choices: ["1234", " W0nderwa11$"],
+    question: "Je laptop begint langzamer te werken. Wat doe je?",
+     choices: ["Je doet er niks tegen.", "Je gebruikt een anti virus."],
      answer: 2, 
-    explanation: ["1234 is heel makkelijk om voor hackers achter te komen.","
-    W0nderwa11$ is dat niet door de tekens"]
+    explanation: ["Door een anti virus te gebruiken, kan je checken of je computer door een virus langzamer is gaan werken."]
 
 },{
-    question: ["Wat is een betere game", ""]
-    choices: ["Minecraft", "Fortnite"],
+    question: ["Een site vraagt om toegang tot je locatie. Wat doe je?"]
+    choices: ["Niet doen.", "Geef toegang."],
     answer: 1, 
-    explanation: ["Minecraft is een veel beter spel"]
+    explanation: ["Nooit zomaar een site je locatie geven."]
 }
 
 //level 5

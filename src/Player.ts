@@ -80,7 +80,6 @@ class Player {
     }
 
     public questionMove() {
-
         if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX != this.leftLane) {
             console.log("going left");
             this.goLeft = true;
@@ -93,22 +92,27 @@ class Player {
         this.animatePlayer();
     }
 
-    public goUp(activate: boolean, reset:boolean) {
-        if (reset == true){
+    public goUp(activate: boolean, reset: boolean): boolean {
+        if (reset == true) {
             this.positionX = this.middleLane;
             this.goLeft = undefined;
-            
-        }
-        if (activate == true) {;
-            this.velocityY +=  1,5
-            if(this.positionY <= this.canvas.height){
-                this.positionY -= this.velocityY;
-            } 
 
-           
+        }
+
+        if (activate == true) {
+            this.velocityY += 1, 5
+            if (this.positionY >= -200) {
+                this.positionY -= this.velocityY;
+                return false;
+            } else {
+                return true;
+            }
+
+
         } else {
             this.positionY = this.canvas.height - 175;
             this.velocityY = 2;
+            return false;
         }
     }
 
