@@ -115,10 +115,10 @@
     answer: 2, 
     explanation: ["Dit soort gesprekken kunnen uit de hand lopen ga ze niet aan."]
 },{
-     question: " Je krijgt een link naar je toegestuurd waarvan je niet van weet wat het doet wat doe je?"
-    choices: ["Je klikt erop om te kijken waar het naartoe gaat", " je klikt er niet op "],
+     question: "Lees je de voorwaarden van computer programma's?"
+    choices: ["Nee.", "Ja. "],
     answer: 2, 
-    explanation: ["Kan een virus bevatten doe het niet"]
+    explanation: ["Altijd lezen dan weet je wat je accepteert"]
 },{
      question: "Je krijgt een mail van de bank die vraagt voor je bank gegevens wat doe je?"
     choices: ["Je belt de bank en checkt het na.", " Je geeft de informatie."],
@@ -136,10 +136,10 @@
     explanation: ["Door een anti virus te gebruiken, kan je checken of je computer door een virus langzamer is gaan werken."]
 
 },{
-    question: ["Wat is een betere game", ""]
-    choices: ["Minecraft", "Fortnite"],
+    question: ["Een site vraagt om toegang tot je locatie. Wat doe je?"]
+    choices: ["Niet doen.", "Geef toegang."],
     answer: 1, 
-    explanation: ["Minecraft is een veel beter spel"]
+    explanation: ["Nooit zomaar een site je locatie geven."]
 }
 
 //level 5
