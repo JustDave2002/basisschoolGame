@@ -30,7 +30,7 @@ abstract class Level extends Screens {
         this.levelIndex = levelIndex;
 
         //initialises the first BG
-        this.backgroundArray.push(new Background(this.canvas, levelIndex, -20));
+        this.backgroundArray.push(new Background(this.canvas, levelIndex, -this.canvas.height ));
     }
 
     /**
@@ -134,6 +134,7 @@ abstract class Level extends Screens {
                 background.getPositionY(),
                 this.canvas.width,
                 this.canvas.height * 2
+                
             );
         });
 
@@ -181,6 +182,7 @@ abstract class Level extends Screens {
     private backgroundLogic() {
         this.backgroundArray.forEach(
             (background, index) => {
+                console.log(background.getPositionY());
                 //spawns new BG if a previous BG touches the bottom of the canvas
                 if (background.backgroundCollision()) {
                     this.backgroundArray.push(new Background(this.canvas, this.levelIndex));

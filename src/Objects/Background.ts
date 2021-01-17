@@ -9,7 +9,7 @@ class Background extends ScoringObject {
     public backgroundImage: HTMLImageElement;
     private collidedSwitch: boolean = false;
 
-    public constructor(canvas: HTMLCanvasElement, currentLevel: number, yPos: number = canvas.height * -2) {
+    public constructor(canvas: HTMLCanvasElement, currentLevel: number, yPos: number = canvas.height * -2.4) {
         super(canvas);
         this.speed = 7;
         this.points = 0;
@@ -56,7 +56,7 @@ class Background extends ScoringObject {
     public backgroundCollision(): boolean {
 
 
-        if (this.positionY + this.backgroundImage.height > this.canvas.height && this.collidedSwitch == false) {
+        if (this.positionY + this.backgroundImage.height - this.canvas.height > this.canvas.height && this.collidedSwitch == false) {
             this.collidedSwitch = true
             return true;
 
