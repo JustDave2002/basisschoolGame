@@ -20,7 +20,7 @@ class QLevel3 extends Questions {
                 question: [" Je krijgt een link doorgestuurd  waarvan je niet van weet wat het doet. Wat doe je?"],
                 choices: ["Je klikt erop om te kijken waar het naartoe gaat.", "Je klikt er niet op."],
                 answer: 2, 
-                explanation: ["Klil nooit op vreemde internet links."]
+                explanation: ["Klik nooit op vreemde internet links."]
              },{
                 question: ["Een site zegt dat je iets duurs hebt gewonnen. Wat doe je?"],
                 choices: ["Vetrouw het niet.", "Doe wat er word gevraagd."],
