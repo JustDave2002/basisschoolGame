@@ -4,6 +4,7 @@
   "main": "index.js",
   "repository": "https://github.com/JustDave2002/basisschoolGame",
   "author": "HZ University of Applied Sciences, Dave Elshout, Joost Bol, Luca Geene, Mats Bouwense",
+  "music": "www.bensound.com",
   "license": "MIT",
   "private": true,
   "scripts": {
