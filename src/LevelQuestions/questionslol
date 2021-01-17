@@ -183,15 +183,15 @@
     answer: 2, 
     explanation: ["Sommige mensen slaan op hun apparaat in de hoop dat het weer gaat werken.","Niet doen! Het is niet slim en je kan je laptop meer schade aanrichten."]
 },{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    question: ["Iemand online stuurt je een bericht, zij wil graag je telefoonnummer zodat ze je een kaar kan bellen", "Wat doe je?"]
+    choices: ["Geef haar niet je nummer", "Geef het nummer"],
+    answer: 1, 
+    explanation: ["Als je de persoon niet kent, kan je beter niet persoonlijke dingen weggeven.",""]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: ["Je krijgt een melding die zegt dat je telefoon gehackt is en dat je geld moet betalen om het weer te kunnen gebruiken", "Ga je naar je ouders of los je het zelf op?"]
+    choices: ["Zelf: Ik betaal", "Ouders: ik vraag mijn ouders om hulp"],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Het is dapper dat je het zelf wilt oplossen, maar hulp van je ouders is altijd handiger!",""]
 }
 
 //level 6
@@ -201,25 +201,25 @@
     answer: 1, 
     explanation: ["Meer verschillende tekens als wachtwoord is altijd beter.",""]
 },{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    question: ["Als je klaar bent met op je computer zitten, wat is dan het beste om te doen?", ""]
+    choices: ["Weglopen", "De computer uitzetten"],
+    answer: 1, 
+    explanation: ["Het uitzetten bespaart energie, en niemand kan iets met je computer doen!",""]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: ["Je krijgt een berichtje van iemand die zegt dat hij graag een foto van je zou willen zien.", "Wat doe je?"]
+    choices: ["Je stuurt een foto", "Je stuurt geen foto"],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Het is beter om anoniem te blijven!",""]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: ["Je moet een wachtwoord aanmaken. Wat voor wachtwoord doe je?", ""]
+    choices: ["Deel van je naam en wat cijfers", "Willekeurige letters en cijfers"],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Hoewel 1 makkelijker te onthouden is, is het ook makkelijker te raden voor dieven.","Dat is dus niet zo handig."]
 },{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    question: ["Een klasgenoot vraagt je of hij met jouw inloggegevens in mag loggen, omdat hij zijn gegevens vergeten is.", "Sta je dat toe?"]
+    choices: ["Nee, eigen schuld dikke bult", "Ja, 1 keertje maar"],
+    answer: 1, 
+    explanation: ["Wie het ook is, deel NOOIT je inloggegevens! Ze zijn alleen van jou.",""]
 },{
     question: ["", ""]
     choices: ["", ""],
@@ -244,25 +244,25 @@
     answer: 2, 
     explanation: ["Misschien geen van beide, maar als je moet kiezen is de 2de betrouwbaarder.",""]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: ["Je gaat naar een site die wilt dat je een vragenlijst invult, zodat je een prijs kan winnen.", "Je moet je volledige naam en adres invullen. Ga je het invullen?"]
+    choices: ["Ja", "Nee"],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["De kans is groot dat hier dieven achter zitten die je persoonlijke gegevens willen weten.","Niet doen dus!"]
 },{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    question: ["Je zit in een groepschat en iemand zegt iets gemeens over jou.", "Jij:"]
+    choices: ["Negeer het bericht en laat het je ouders weten", "Zegt iets gemeens terug"],
+    answer: 1, 
+    explanation: ["Je hoeft nooit te reageren op een bericht dat je verdrietig of ongemakkelijk laat voelen","Ga naar je ouders zodat zij je kunnen helpen."]
 },{
-    question: ["", ""]
-    choices: ["", ""],
-    answer: 2, 
-    explanation: ["",""]
+    question: ["Met je ouder(s) heb je afgesproken wat je wel en niet mag doen op je computer. Maar nu ben je aan het spelen bij een vriend van je!", "Hou je je nog steeds aan de afspraken?"]
+    choices: ["Ja", "Tuurlijk niet!"],
+    answer: 1, 
+    explanation: ["Die afspraken zijn er voor een reden.","Het is dus het beste om je eraan te houden."]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: ["Een vriendin heeft een foto van je online gezet die jij niet leuk vindt. Je vraagt of zij het wilt verwijderen maar ze zegt nee", "Wat doe je?"]
+    choices: ["Zet een stomme foto van HAAR online", "Laat je ouders helpen"],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Je ouders kunnen je helpen met de foto verwijderen of je vriendin aan te spreken.",""]
 },{
     question: ["", ""]
     choices: ["", ""],
@@ -287,10 +287,10 @@
     answer: 2, 
     explanation: ["Het veiligst is om dat niet te doen. Het is altijd veiliger om iemand toe te voegen in je vriendenlijst "]
 },{
-    question: ["", ""]
-    choices: ["", ""],
+    question: ["Wat is de veiligste manier om je telefoon mee te beschermen?", ""]
+    choices: ["PIN-code", "vingerafdruk"],
     answer: 2, 
-    explanation: ["",""]
+    explanation: ["Tegenwoordig kan je je telefoon vergrendelen met je vingerafdruk of zelfs je gezicht!","Het is makkelijker EN veiliger om dat te gebruiken."]
 },{
     question: ["", ""]
     choices: ["", ""],
