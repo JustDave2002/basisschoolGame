@@ -16,21 +16,25 @@ class Game {
             this.elapsed = this.now - this.then;
             if (this.elapsed > this.fpsInterval) {
                 this.then = this.now - (this.elapsed % this.fpsInterval);
+                this.advanceToNextLevel();
                 this.currentScreen.gameLogic();
                 if (this.currentScreen.getState() == ScreenState.NEXT_SCREEN) {
-                    this.advanceToNextLevel();
+                    this.advanceToNextLevelSwitch = true;
                 }
                 else if (this.currentScreen.getState() == ScreenState.RESTART) {
                     this.load(1);
                 }
                 else if (this.currentScreen.getState() == ScreenState.DIED) {
-                    this.screenIndex = this.screenArray.length - 1;
-                    this.advanceToNextLevel();
+                    this.screenIndex = this.screenArray.length - 2;
+                    this.advanceToNextLevelSwitch = true;
+                }
+                else {
+                    this.advanceToNextLevelSwitch = false;
                 }
                 let sinceStart = this.now - this.startTime;
                 let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
                 if (currentFps == 60) {
-                    currentFps = 60.1;
+                    currentFps = 60.10;
                 }
                 this.draw(currentFps);
             }
@@ -45,36 +49,51 @@ class Game {
         this.player = new Player(this.canvas);
         this.frameCount = 0;
         this.screenArray = [
-            new StartScreen(this.canvas),
+            new StartScreen(this.canvas, this.player),
             new Level1(this.canvas, this.player),
             new QLevel1(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level2(this.canvas, this.player),
             new QLevel2(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level3(this.canvas, this.player),
             new QLevel3(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level4(this.canvas, this.player),
             new QLevel4(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level5(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level6(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level7(this.canvas, this.player),
-            new LevelWon(this.canvas),
+            new LevelWon(this.canvas, this.player),
             new Level8(this.canvas, this.player),
-            new GameWon(this.canvas),
-            new DeathScreen(this.canvas)
+            new GameWon(this.canvas, this.player),
+            new DeathScreen(this.canvas, this.player)
         ];
-        this.advanceToNextLevel();
+        this.advanceToNextLevelSwitch = false;
+        this.currentScreen = this.screenArray[this.screenIndex];
         console.log('start animation');
-        this.startAnimating(60);
+        this.startAnimating(70);
     }
     advanceToNextLevel() {
-        this.currentScreen = this.screenArray[this.screenIndex];
-        this.screenIndex++;
+        if (this.advanceToNextLevelSwitch == true) {
+            if (this.currentScreen.getState() == ScreenState.DIED) {
+                console.log("no");
+                this.screenIndex++;
+                this.currentScreen = this.screenArray[this.screenIndex];
+                this.advanceToNextLevelSwitch = false;
+                this.player.goUp(false, true);
+            }
+            if (this.player.goUp(true, false)) {
+                console.log("yes");
+                this.screenIndex++;
+                this.currentScreen = this.screenArray[this.screenIndex];
+                this.advanceToNextLevelSwitch = false;
+                this.player.goUp(false, true);
+            }
+        }
     }
     startAnimating(fps) {
         this.fpsInterval = 1000 / fps;
@@ -233,15 +252,19 @@ class Player {
             this.goLeft = undefined;
         }
         if (activate == true) {
-            ;
             this.velocityY += 1, 5;
-            if (this.positionY <= this.canvas.height) {
+            if (this.positionY >= -200) {
                 this.positionY -= this.velocityY;
+                return false;
+            }
+            else {
+                return true;
             }
         }
         else {
             this.positionY = this.canvas.height - 175;
             this.velocityY = 2;
+            return false;
         }
     }
     animatePlayer() {
@@ -282,6 +305,7 @@ class Player {
 }
 class ScoringObject {
     constructor(canvas) {
+        this.setSpeedSwitch = true;
         this.canvas = canvas;
         this.leftLane = this.canvas.width / 24 * 9;
         this.middleLane = this.canvas.width / 2;
@@ -296,7 +320,7 @@ class ScoringObject {
         if (random === 3) {
             this.positionX = this.rightLane;
         }
-        this.positionY = window.innerHeight - (window.innerHeight + 50);
+        this.positionY = -100;
     }
     move() {
         this.positionY += this.speed;
@@ -329,7 +353,10 @@ class ScoringObject {
         return this._lives;
     }
     setSpeed(v) {
-        this.speed += v;
+        if (this.setSpeedSwitch == true) {
+            this.setSpeedSwitch = false;
+            this.speed += v;
+        }
     }
     loadNewImage(source) {
         const img = new Image();
@@ -350,9 +377,10 @@ var ScreenState;
     ScreenState[ScreenState["RESTART"] = 5] = "RESTART";
 })(ScreenState || (ScreenState = {}));
 class Screens {
-    constructor() {
+    constructor(player) {
         this.state = ScreenState.PLAYING;
         this.keyListener = new KeyListener;
+        this.player = player;
         this.state = ScreenState.PLAYING;
     }
     getState() {
@@ -379,7 +407,7 @@ window.addEventListener('load', () => {
 });
 class Questions extends Screens {
     constructor(canvas, player) {
-        super();
+        super(player);
         this.firstStart = true;
         this.questionCounter = 0;
         this.player = player;
@@ -411,7 +439,6 @@ class Questions extends Screens {
             this.currentExplanation = this.questionArray[this.questionI].explanation;
             this.pickedQuestion = true;
         }
-        console.log(this.leftOrRight, this.questionConfirmed);
         if (this.questionConfirmed == false) {
             if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) || this.leftOrRight == 1) {
                 this.leftOrRight = 1;
@@ -421,11 +448,13 @@ class Questions extends Screens {
             }
         }
         this.questionCheck();
-        if (this.questionConfirmed == true && this.keyListener.isKeyDown(KeyListener.KEY_SHIFT)) {
+        if (this.questionConfirmed == true && this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
             this.questionCounter++;
-            if (this.questionCounter == 2) {
-                this.state = ScreenState.NEXT_SCREEN;
-                this.questionCounter = 0;
+            if (this.questionCounter >= 2) {
+                if (this.player.goUp(true, true)) {
+                    this.state = ScreenState.NEXT_SCREEN;
+                    this.questionCounter = 0;
+                }
             }
             else {
                 this.reset(1);
@@ -454,7 +483,7 @@ class Questions extends Screens {
             this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 350, 170, 40);
         }
         else {
-            this.writeTextToCanvas(ctx, "Druk op SHIFT om door te gaan!", this.canvas.width / 2, 150, 45);
+            this.writeTextToCanvas(ctx, "Druk op CTRL om door te gaan!", this.canvas.width / 2, 150, 45);
         }
         if (this.questionIsRight != undefined) {
             for (let i = 0; i < this.currentExplanation.length; i++) {
@@ -504,7 +533,7 @@ class QLevel1 extends Questions {
                 answer: 1,
                 explanation: ["Deze info is voor vrienden niet iedereen."]
             }, {
-                question: ["Is het oké om je je ouders betalings informatie op het internet te delen?"],
+                question: ["Is het oké om je ouders hun betalings informatie op het internet te delen?"],
                 choices: ["ja", "nee"],
                 answer: 2,
                 explanation: ["Nooit Betalingsgegevens delen."]
@@ -555,12 +584,13 @@ class QLevel2 extends Questions {
                     "de e-mail staat “je zal nooit geloven wat er is gebeurt” wat doe je?"],
                 choices: ["Verwijder de E-mail en vertel je ouders dat je neef gehackt is ", " Open hem hij is toch familie"],
                 answer: 1,
-                explanation: ["Nooit rare emails vetrouwen"]
+                explanation: ["Nooit rare emails vertouwen"]
             }, {
                 question: [" Een site vraagt voor je bankgegevens wat moet je doen?"],
                 choices: ["vul het in ", " negeer het en ga weg van de site"],
                 answer: 2,
-                explanation: ["nooit zomaar het geven"]
+                explanation: ["Het is nooit slim om zomaar je bankgegevens te geven, hiermee kunnen slechte mensen",
+                    "deze gebruiken om je geld te stelen."]
             }, {
                 question: [" Je wil een product kopen op een site waar kijk je naar?"],
                 choices: ["de reviews bekijken", "Alleen naar het product zelf"],
@@ -643,7 +673,7 @@ class QLevel4 extends Questions {
                 explanation: ["Je moet nooit beantwoorden.",
                     "Hierdoor weten ze niks"]
             }, {
-                question: "Wat is een goed wachtwoord?",
+                question: ["Wat is een goed wachtwoord?"],
                 choices: ["1234", " W0nderwa11$"],
                 answer: 2,
                 explanation: ["1234 is heel makkelijk om voor hackers achter te komen.",
@@ -659,17 +689,15 @@ class QLevel4 extends Questions {
 }
 class Level extends Screens {
     constructor(canvas, player, levelIndex) {
-        super();
+        super(player);
         this.totalScore = 0;
         this.scoringObject = new Array();
-        this.speedSwitch = true;
         this.backgroundArray = new Array();
         this.frameIndex = 0;
         this.canvas = canvas;
         this.player = player;
         this.levelIndex = levelIndex;
         this.totalLives = 5;
-        this.speedBoost = 0;
         this.totalScore = 0;
         this.backgroundArray.push(new Background(this.canvas, levelIndex, -20));
     }
@@ -677,6 +705,8 @@ class Level extends Screens {
         this.pause();
         if (this.getState() === ScreenState.PLAYING) {
             this.frameIndex++;
+            this.spawnInterval = this.baseSpawnRate;
+            this.gameSpeed = this.baseSpeed;
             this.player.goUp(false, false);
             this.player.move();
             this.backgroundLogic();
@@ -687,42 +717,28 @@ class Level extends Screens {
             if (this.totalScore < 0 || this.totalLives <= 0) {
                 this.state = ScreenState.DIED;
             }
-            const number = this.totalScore / 20;
-            let difficultyVariable = this.baseSpawnRate - number;
-            if (difficultyVariable < 15) {
-                difficultyVariable = 15;
+            const pointStep = this.totalScore / 20;
+            if (this.spawnInterval > 30) {
+                this.spawnInterval = this.baseSpawnRate - pointStep;
             }
-            if (this.speedBoost < 5 && this.speedSwitch === true) {
-                this.speedBoost = this.totalScore * 0.015;
+            if (this.frameIndex >= this.spawnInterval) {
+                this.createRandomScoringObject();
+                this.frameIndex = 0;
             }
-            else {
-                this.speedSwitch = false;
-                this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
-            }
-            if (this.frameIndex >= difficultyVariable) {
-                const number = this.totalScore / 20;
-                let difficultyVariable = this.baseSpawnRate - number;
-                if (difficultyVariable < 15) {
-                    difficultyVariable = 15;
-                }
-                if (this.speedBoost < 5 && this.speedSwitch === true) {
-                    this.speedBoost = this.totalScore * 0.015;
-                }
-                else {
-                    this.speedSwitch = false;
-                    this.speedBoost = 5 - this.speedMultiplier + this.totalScore * 0.005;
-                }
-                if (this.frameIndex >= difficultyVariable) {
-                    console.log(difficultyVariable);
-                    this.createRandomScoringObject();
-                    this.frameIndex = 0;
-                }
-            }
+            let speedBooster = this.totalScore / 50;
+            this.gameSpeed = speedBooster + this.baseSpeed;
+            this.scoringObject.forEach(object => {
+                object.setSpeed(this.gameSpeed);
+            });
+            this.backgroundArray.forEach(BG => {
+                BG.setSpeed(this.gameSpeed);
+            });
+            console.log(this.spawnInterval, this.gameSpeed);
         }
     }
     pause() {
         return __awaiter(this, void 0, void 0, function* () {
-            if (this.keyListener.isKeyDown(KeyListener.KEY_ESC)) {
+            if (this.keyListener.isKeyDown(KeyListener.KEY_SHIFT)) {
                 this.state = ScreenState.PAUSED;
             }
             else if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
@@ -733,11 +749,11 @@ class Level extends Screens {
     }
     draw(ctx, fps) {
         this.backgroundArray.forEach(background => {
-            ctx.drawImage(background.background, background.getPositionX(), background.getPositionY(), this.canvas.width, this.canvas.height);
+            ctx.drawImage(background.background, background.getPositionX(), background.getPositionY(), this.canvas.width, this.canvas.height * 2);
         });
         this.writeTextToCanvas(ctx, ` fps: ${fps}`, 50, 20, 18);
         this.writeTextToCanvas(ctx, ` Level: ${this.levelIndex}`, this.canvas.width / 2, 20, 18);
-        this.writeTextToCanvas(ctx, `Druk op ESC om te pauzeren`, this.canvas.width / 2 - 250, 20, 16);
+        this.writeTextToCanvas(ctx, `Druk op SHIFT om te pauzeren`, this.canvas.width / 2 - 250, 20, 16);
         this.writeTextToCanvas(ctx, `Levens: ${this.totalLives}`, this.canvas.width / 2 + 250, 20, 16);
         if (this.getState() == ScreenState.PAUSED) {
             this.writeTextToCanvas(ctx, `Gepauzeerd`, this.canvas.width / 2, 200, 40);
@@ -805,8 +821,6 @@ class Level extends Screens {
         else if (random === 5) {
             this.scoringObject.push(new Box(this.canvas));
         }
-        const last_element = this.scoringObject.length - 1;
-        this.scoringObject[last_element].setSpeed(this.speedBoost + this.speedMultiplier);
     }
     changeTheme(img) {
         document.body.style.backgroundImage = img;
@@ -818,9 +832,9 @@ class Level extends Screens {
 class Level1 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 1);
-        this.baseSpawnRate = 100;
+        this.baseSpawnRate = 80;
         this.maxPoints = 100;
-        this.speedMultiplier = 0.5;
+        this.baseSpeed = 0.5;
     }
 }
 class Level2 extends Level {
@@ -828,7 +842,7 @@ class Level2 extends Level {
         super(canvas, player, 2);
         this.baseSpawnRate = 90;
         this.maxPoints = 200;
-        this.speedMultiplier = 1;
+        this.baseSpeed = 1;
     }
 }
 class Level3 extends Level {
@@ -836,7 +850,7 @@ class Level3 extends Level {
         super(canvas, player, 3);
         this.baseSpawnRate = 75;
         this.maxPoints = 300;
-        this.speedMultiplier = 1;
+        this.baseSpeed = 1;
     }
 }
 class Level4 extends Level {
@@ -844,7 +858,7 @@ class Level4 extends Level {
         super(canvas, player, 4);
         this.baseSpawnRate = 70;
         this.maxPoints = 400;
-        this.speedMultiplier = 1.5;
+        this.baseSpeed = 1.5;
     }
 }
 class Level5 extends Level {
@@ -852,7 +866,7 @@ class Level5 extends Level {
         super(canvas, player, 5);
         this.baseSpawnRate = 65;
         this.maxPoints = 600;
-        this.speedMultiplier = 2;
+        this.baseSpeed = 2;
     }
 }
 class Level6 extends Level {
@@ -860,7 +874,7 @@ class Level6 extends Level {
         super(canvas, player, 6);
         this.baseSpawnRate = 60;
         this.maxPoints = 800;
-        this.speedMultiplier = 2.5;
+        this.baseSpeed = 2.5;
     }
 }
 class Level7 extends Level {
@@ -868,7 +882,7 @@ class Level7 extends Level {
         super(canvas, player, 7);
         this.baseSpawnRate = 55;
         this.maxPoints = 1000;
-        this.speedMultiplier = 3;
+        this.baseSpeed = 3;
     }
 }
 class Level8 extends Level {
@@ -876,11 +890,11 @@ class Level8 extends Level {
         super(canvas, player, 8);
         this.baseSpawnRate = 50;
         this.maxPoints = 1200;
-        this.speedMultiplier = 3.5;
+        this.baseSpeed = 3.5;
     }
 }
 class Background extends ScoringObject {
-    constructor(canvas, currentLevel, yPos = canvas.height * -1) {
+    constructor(canvas, currentLevel, yPos = canvas.height * -2) {
         super(canvas);
         this.collidedSwitch = false;
         this.speed = 7;
@@ -895,23 +909,27 @@ class Background extends ScoringObject {
     imageChanger() {
         switch (this.currentLevel) {
             case 1:
-                this.background = this.loadNewImage("assets/img/street.jpg");
+            case 2:
+                this.background = this.loadNewImage("assets/img/street1.jpg");
                 break;
             case 3:
+            case 4:
                 this.background = this.loadNewImage("assets/img/street2.jpg");
                 break;
             case 5:
+            case 6:
                 this.background = this.loadNewImage("assets/img/street3.jpg");
                 break;
             case 7:
-                this.background = this.loadNewImage("assets/img/street7.jpg");
+            case 8:
+                this.background = this.loadNewImage("assets/img/street4.jpg");
                 break;
             default:
                 break;
         }
     }
     backgroundCollision() {
-        if (this.positionY + this.background.height - 20 > this.canvas.height && this.collidedSwitch == false) {
+        if (this.positionY + this.background.height - 1060 > this.canvas.height && this.collidedSwitch == false) {
             this.collidedSwitch = true;
             return true;
         }
@@ -973,8 +991,8 @@ class SilverCoin extends ScoringObject {
     }
 }
 class DeathScreen extends Screens {
-    constructor(canvas) {
-        super();
+    constructor(canvas, player) {
+        super(player);
         this.canvas = canvas;
     }
     gameLogic() {
@@ -989,8 +1007,8 @@ class DeathScreen extends Screens {
     }
 }
 class GameWon extends Screens {
-    constructor(canvas) {
-        super();
+    constructor(canvas, player) {
+        super(player);
         this.canvas = canvas;
     }
     gameLogic() {
@@ -1005,12 +1023,16 @@ class GameWon extends Screens {
     }
 }
 class LevelWon extends Screens {
-    constructor(canvas) {
-        super();
+    constructor(canvas, player) {
+        super(player);
+        this.keyWasPressed = true;
         this.canvas = canvas;
     }
     gameLogic() {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL) != true) {
+            this.keyWasPressed = false;
+        }
+        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL) && this.keyWasPressed == false) {
             this.state = ScreenState.NEXT_SCREEN;
         }
     }
@@ -1021,8 +1043,8 @@ class LevelWon extends Screens {
     }
 }
 class StartScreen extends Screens {
-    constructor(canvas) {
-        super();
+    constructor(canvas, player) {
+        super(player);
         this.canvas = canvas;
     }
     gameLogic() {

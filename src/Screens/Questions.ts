@@ -4,7 +4,6 @@
  */
 abstract class Questions extends Screens {
 
-    private player: Player;
     protected canvas: HTMLCanvasElement;
 
     protected questionArray: any;
@@ -27,7 +26,7 @@ abstract class Questions extends Screens {
 
 
     constructor(canvas: HTMLCanvasElement, player: Player) {
-        super();
+        super(player);
         this.player = player;
         this.canvas = canvas
         this.reset(0);
@@ -64,7 +63,7 @@ abstract class Questions extends Screens {
         }
 
 
-        console.log(this.leftOrRight, this.questionConfirmed);
+        //console.log(this.leftOrRight, this.questionConfirmed);
         if (this.questionConfirmed == false) {
             if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) || this.leftOrRight == 1) {
                 this.leftOrRight = 1;
@@ -74,11 +73,13 @@ abstract class Questions extends Screens {
             }
         }
         this.questionCheck();
-        if(this.questionConfirmed == true && this.keyListener.isKeyDown(KeyListener.KEY_SHIFT)){
+        if(this.questionConfirmed == true && this.keyListener.isKeyDown(KeyListener.KEY_CTRL)){
             this.questionCounter ++
-            if (this.questionCounter ==2){
+            if (this.questionCounter >=2){
+                if(this.player.goUp(true, true)){
                 this.state = ScreenState.NEXT_SCREEN;
                 this.questionCounter = 0;
+                }
             }else{
             this.reset(1);
         }
@@ -112,7 +113,7 @@ abstract class Questions extends Screens {
         this.writeTextToCanvas(ctx, this.currentOptions[0], this.canvas.width / 2 - 350, 170, 40);
         this.writeTextToCanvas(ctx, this.currentOptions[1], this.canvas.width / 2 + 350, 170, 40);    
         } else {
-            this.writeTextToCanvas(ctx, "Druk op SHIFT om door te gaan!", this.canvas.width / 2, 150, 45);
+            this.writeTextToCanvas(ctx, "Druk op CTRL om door te gaan!", this.canvas.width / 2, 150, 45);
         }
         
         

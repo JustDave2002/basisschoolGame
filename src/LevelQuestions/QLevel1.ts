@@ -42,7 +42,7 @@ class QLevel1 extends Questions {
                 explanation:[ "Deze info is voor vrienden niet iedereen."]
             
             },{
-                question: ["Is het oké om je je ouders betalings informatie op het internet te delen?"],
+                question: ["Is het oké om je ouders hun betalings informatie op het internet te delen?"],
                 choices: ["ja", "nee"],
                 answer: 2, 
                 explanation:[ "Nooit Betalingsgegevens delen."]

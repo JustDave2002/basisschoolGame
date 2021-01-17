@@ -23,13 +23,14 @@ class QLevel2 extends Questions {
                 "de e-mail staat “je zal nooit geloven wat er is gebeurt” wat doe je?"],
                 choices: ["Verwijder de E-mail en vertel je ouders dat je neef gehackt is ", " Open hem hij is toch familie"],
                  answer: 1, 
-                 explanation: ["Nooit rare emails vetrouwen"]
+                 explanation: ["Nooit rare emails vertouwen"]
              
              },{
                  question: [" Een site vraagt voor je bankgegevens wat moet je doen?"],
                  choices: ["vul het in ", " negeer het en ga weg van de site"],
                  answer: 2, 
-                 explanation: ["nooit zomaar het geven"]
+                 explanation: ["Het is nooit slim om zomaar je bankgegevens te geven, hiermee kunnen slechte mensen",
+                "deze gebruiken om je geld te stelen."]
              
              },{
                  question: [" Je wil een product kopen op een site waar kijk je naar?"],

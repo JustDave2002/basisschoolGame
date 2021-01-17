@@ -7,6 +7,6 @@ class Level6 extends Level {
         super(canvas, player, 6)
         this.baseSpawnRate = 60;
         this.maxPoints = 800;
-        this.speedMultiplier = 2.5;
+        this.baseSpeed = 2.5;
     }
 }

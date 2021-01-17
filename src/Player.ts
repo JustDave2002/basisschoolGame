@@ -93,22 +93,27 @@ class Player {
         this.animatePlayer();
     }
 
-    public goUp(activate: boolean, reset:boolean) {
+    public goUp(activate: boolean, reset:boolean) :boolean {
         if (reset == true){
             this.positionX = this.middleLane;
             this.goLeft = undefined;
             
         }
-        if (activate == true) {;
+        
+        if (activate == true) {
             this.velocityY +=  1,5
-            if(this.positionY <= this.canvas.height){
+            if(this.positionY >= -200){
                 this.positionY -= this.velocityY;
-            } 
+                return false;
+            } else {
+                return true;
+            }
 
            
         } else {
             this.positionY = this.canvas.height - 175;
             this.velocityY = 2;
+            return false;
         }
     }
 
