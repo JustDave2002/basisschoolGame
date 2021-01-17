@@ -63,12 +63,16 @@ class Game {
             new QLevel4(this.canvas, this.player),
             new LevelWon(this.canvas, this.player),
             new Level5(this.canvas, this.player),
+            new QLevel5(this.canvas, this.player),
             new LevelWon(this.canvas, this.player),
             new Level6(this.canvas, this.player),
+            new QLevel6(this.canvas, this.player),
             new LevelWon(this.canvas, this.player),
             new Level7(this.canvas, this.player),
+            new QLevel7(this.canvas, this.player),
             new LevelWon(this.canvas, this.player),
             new Level8(this.canvas, this.player),
+            new QLevel8(this.canvas, this.player),
             new GameWon(this.canvas, this.player),
             new DeathScreen(this.canvas, this.player)
         ];
@@ -681,6 +685,168 @@ class QLevel4 extends Questions {
                 choices: ["Minecraft", "Fortnite"],
                 answer: 1,
                 explanation: ["Minecraft is een veel beter spel"]
+            }
+        ];
+    }
+}
+class QLevel5 extends Questions {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.questionArray = [
+            {
+                question: ["Wat is de correcte naam van deze app?", ""],
+                choices: ["WhatsApp", "WhatsApping!"],
+                answer: 1,
+                explanation: ["Soms zijn er neppe versies van een app, let daarop. 'WhatsApp' is de juiste!", ""],
+            }, {
+                question: ["Terwijl je op sites zit te kijken, krijg je plots allemaal advertenties. Wat doe je?", ""],
+                choices: ["je klikt de site weg", "je kijkt naar de advertenties"],
+                answer: 1,
+                explanation: ["Als je plots allemaal advertenties krijgt, kan het zo zijn dat de website waar je op zit niet betrouwbaar is.", "Kijk dus uit!"],
+            }, {
+                question: ["Iemand die je niet kent belt je. Neem je op?", ""],
+                choices: ["Ja", "Nee"],
+                answer: 2,
+                explanation: ["Het veiligst is om niet op te nemen.", "Vraag je ouders om hulp als je het niet zeker weet."],
+            }, {
+                question: ["Je laptop loopt vast. Wat doe je?", ""],
+                choices: ["Je slaat erop", "Roep je ouders"],
+                answer: 2,
+                explanation: ["Sommige mensen slaan op hun apparaat in de hoop dat het weer gaat werken.", "Niet doen! Het is niet slim en je kan je laptop meer schade aanrichten."],
+            }, {
+                question: ["Iemand online stuurt je een bericht, zij wil graag je telefoonnummer zodat ze je een kaar kan bellen", "Wat doe je?"],
+                choices: ["Geef haar niet je nummer", "Geef het nummer"],
+                answer: 1,
+                explanation: ["Als je de persoon niet kent, kan je beter niet persoonlijke dingen weggeven.", ""],
+            }, {
+                question: ["Je krijgt een melding die zegt dat je telefoon gehackt is en dat je geld moet betalen om het weer te kunnen gebruiken", "Ga je naar je ouders of los je het zelf op?"],
+                choices: ["Zelf: Ik betaal", "Ouders: ik vraag mijn ouders om hulp"],
+                answer: 2,
+                explanation: ["Het is dapper dat je het zelf wilt oplossen, maar hulp van je ouders is altijd handiger!", ""],
+            }
+        ];
+    }
+}
+class QLevel6 extends Questions {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.questionArray = [
+            {
+                question: ["Wat is een goed wachtwoord?", ""],
+                choices: ["!H0i.", "54321"],
+                answer: 1,
+                explanation: ["Meer verschillende tekens als wachtwoord is altijd beter.", ""],
+            }, {
+                question: ["Als je klaar bent met op je computer zitten, wat is dan het beste om te doen?", ""],
+                choices: ["Weglopen", "De computer uitzetten"],
+                answer: 1,
+                explanation: ["Het uitzetten bespaart energie, en niemand kan iets met je computer doen!", ""],
+            }, {
+                question: ["Je krijgt een berichtje van iemand die zegt dat hij graag een foto van je zou willen zien.", "Wat doe je?"],
+                choices: ["Je stuurt een foto", "Je stuurt geen foto"],
+                answer: 2,
+                explanation: ["Het is beter om anoniem te blijven!", ""],
+            }, {
+                question: ["Je moet een wachtwoord aanmaken. Wat voor wachtwoord doe je?", ""],
+                choices: ["Deel van je naam en wat cijfers", "Willekeurige letters en cijfers"],
+                answer: 2,
+                explanation: ["Hoewel 1 makkelijker te onthouden is, is het ook makkelijker te raden voor dieven.", "Dat is dus niet zo handig."],
+            }, {
+                question: ["Een klasgenoot vraagt je of hij met jouw inloggegevens in mag loggen, omdat hij zijn gegevens vergeten is.", "Sta je dat toe?"],
+                choices: ["Nee, eigen schuld dikke bult", "Ja, 1 keertje maar"],
+                answer: 1,
+                explanation: ["Wie het ook is, deel NOOIT je inloggegevens! Ze zijn alleen van jou.", ""],
+            }, {
+                question: ["Een klasgenoot stuurt je een grappig maar beschamende video van een klasgenoot die struikelt", "Wat doe je?"],
+                choices: ["Je verwijdert de video", "Je stuurt de video door"],
+                answer: 1,
+                explanation: ["Dit is cyberpesten, en natuurlijk doe jij hier niet aan mee.", ""],
+            }
+        ];
+    }
+}
+class QLevel7 extends Questions {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.questionArray = [
+            {
+                question: ["wat is een betrouwbare emailadres?", ""],
+                choices: ["choochoo@outlook.com", "info@zeelandnet.nl"],
+                answer: 2,
+                explanation: ["Misschien geen van beide, maar als je moet kiezen is de 2de betrouwbaarder.", ""],
+            }, {
+                question: ["Je gaat naar een site die wilt dat je een vragenlijst invult, zodat je een prijs kan winnen.", "Je moet je volledige naam en adres invullen. Ga je het invullen?"],
+                choices: ["Ja", "Nee"],
+                answer: 2,
+                explanation: ["De kans is groot dat hier dieven achter zitten die je persoonlijke gegevens willen weten.", "Niet doen dus!"],
+            }, {
+                question: ["Je zit in een groepschat en iemand zegt iets gemeens over jou.", "Jij:"],
+                choices: ["Negeer het bericht en laat het je ouders weten", "Zegt iets gemeens terug"],
+                answer: 1,
+                explanation: ["Je hoeft nooit te reageren op een bericht dat je verdrietig of ongemakkelijk laat voelen", "Ga naar je ouders zodat zij je kunnen helpen."],
+            }, {
+                question: ["Met je ouder(s) heb je afgesproken wat je wel en niet mag doen op je computer. Maar nu ben je aan het spelen bij een vriend van je!", "Hou je je nog steeds aan de afspraken?"],
+                choices: ["Ja", "Tuurlijk niet!"],
+                answer: 1,
+                explanation: ["Die afspraken zijn er voor een reden.", "Het is dus het beste om je eraan te houden."],
+            }, {
+                question: ["Een vriendin heeft een foto van je online gezet die jij niet leuk vindt. Je vraagt of zij het wilt verwijderen maar ze zegt nee", "Wat doe je?"],
+                choices: ["Zet een stomme foto van HAAR online", "Laat je ouders helpen"],
+                answer: 2,
+                explanation: ["Je ouders kunnen je helpen met de foto verwijderen of je vriendin aan te spreken.", ""],
+            }, {
+                question: ["Iemand online wilt je ontmoeten. Wil je dat ook doen?", ""],
+                choices: ["Ja, kan geen kwaad", "Nee, voor de zekerheid"],
+                answer: 2,
+                explanation: ["Alleen als je de persoon ECHT kent, is het veilig om te doen.", ""],
+            }, {
+                question: ["Op je telefoon, waar installeer je apps mee?", ""],
+                choices: ["Op een website", "op een 'store'"],
+                answer: 2,
+                explanation: ["Op je telefoon gebruik je de 'App Store' or 'Play Store' om veilig apps te downloaden.", ""],
+            }
+        ];
+    }
+}
+class QLevel8 extends Questions {
+    constructor(canvas, player) {
+        super(canvas, player);
+        this.questionArray = [
+            {
+                question: ["Iemand stuurt je een vriendverzoek. Je kent hem niet maar je vriend zegt dat hij hem misschien kent. Accepteer je het vriendverzoek?", ""],
+                choices: ["Ja", "Nee"],
+                answer: 2,
+                explanation: ["Het veiligst is om dat niet te doen. Het is altijd veiliger om iemand toe te voegen in je vriendenlijst "],
+            }, {
+                question: ["Wat is de veiligste manier om je telefoon mee te beschermen?", ""],
+                choices: ["PIN-code", "vingerafdruk"],
+                answer: 2,
+                explanation: ["Tegenwoordig kan je je telefoon vergrendelen met je vingerafdruk of zelfs je gezicht!", "Het is makkelijker EN veiliger om dat te gebruiken."],
+            }, {
+                question: ["Als je iets op het internet zet, wie kunnen dat dan zien?", ""],
+                choices: ["Alleen jij", "Iedereen"],
+                answer: 2,
+                explanation: ["Zodra je iets op het internet zet, kan iedereen het zien en kan je het niet meer verwijderen.", "Je moet dus heel goed nadenken voordat je iets online zet."],
+            }, {
+                question: ["Je krijgt een link voor Google Meet. 1 van je juf/meester, maar ook 1 van een andere persoon", "Welke klik je aan?"],
+                choices: ["Je Juf", "De andere persoon"],
+                answer: 2,
+                explanation: ["Vertrouw nooit links van onbekenden.", ""],
+            }, {
+                question: ["Je zit op een spelletjes-website, en ze vragen of je iets wilt downloaden voordat je het spel kan spelen.", "Wat doe je?"],
+                choices: ["Spelen! download het", "Vraag aan volwassene of het veilig is"],
+                answer: 2,
+                explanation: ["Zomaar iets downloaden is nooit veilig. Je moet altijd zeker weten wat je download.", ""],
+            }, {
+                question: ["Wat is GEEN persoonlijke informatie?", ""],
+                choices: ["Je favoriete ijs-smaak", "De voornaam van je moeder"],
+                answer: 1,
+                explanation: ["De tweede kan tegen jou of je moeder gebruikt worden.", "Daar moet je voor oppassen!"],
+            }, {
+                question: ["Dit is een geheime vraag. Als je deze hebt, heel cool B)", ""],
+                choices: ["Ik ben cool", "Ik ben cool"],
+                answer: 1,
+                explanation: ["Jij bent cool B)", ""],
             }
         ];
     }
