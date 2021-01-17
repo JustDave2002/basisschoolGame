@@ -42,7 +42,7 @@ class Game {
         this.canvas = canvas;
         this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
-        this.load(0);
+        this.load(19);
     }
     load(screenIndex) {
         this.screenIndex = screenIndex;
