@@ -22,7 +22,7 @@ class QLevel7 extends Questions {
                 answer: 1, 
                 explanation: ["Je hoeft nooit te reageren op een bericht dat je verdrietig of ongemakkelijk laat voelen","Ga naar je ouders zodat zij je kunnen helpen."],
             },{
-                question: ["Met je ouder(s) heb je afgesproken wat je wel en niet mag doen op je computer.", "Maar nu ben je bij een vriend van je! Hou je je nog steeds aan de afspraken?"],
+                question: ["Met je ouders heb je afgesproken wat je wel en niet mag doen op je computer.", "Maar nu ben je bij een vriend van je! Hou je je nog steeds aan de afspraken?"],
                 choices: ["Ja", "Tuurlijk niet!"],
                 answer: 1, 
                 explanation: ["Die afspraken zijn er voor een reden.","Het is dus het beste om je eraan te houden."],
