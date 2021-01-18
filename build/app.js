@@ -547,7 +547,7 @@ class QLevel2 extends Questions {
         super(canvas, player);
         this.questionArray = [
             {
-                question: [" Je krijgt een grappige e-mail naar je toegestuurd die vreemd lijkt wat doe je?", ""],
+                question: [" Je krijgt een grappige e-mail naar je toegestuurd.", " Hij lijkt vreemd  wat doe je?", ""],
                 choices: ["Let niet op deze mail en verwijder hem", " Stuur de e-mail door naar je vrienden."],
                 answer: 1,
                 explanation: ["links zijn gevaarlijk ", ""]
@@ -557,9 +557,9 @@ class QLevel2 extends Questions {
                 answer: 2,
                 explanation: ["Mensen gebruiken vaak hun naam, let daar op!", ""]
             }, {
-                question: [" Je krijgt een e-mail van je neef.",
-                    "In de bijlage staat een link met de titel: “je zal nooit geloven wat er is gebeurt” wat doe je?", ""],
-                choices: ["Verwijder de E-mail en vertel hou je ouders hievan op de hoogte.", " Open hem. Hij is toch familie"],
+                question: [" Je krijgt een e-mail van je neef in de bijlage staat een link met de titel:",
+                    " “je zal nooit geloven wat er is gebeurt” wat doe je?", ""],
+                choices: ["Verwijder de E-mail en vertel het je ouders.", " Open hem. Hij is toch familie"],
                 answer: 1,
                 explanation: ["Vetrouw nooit van deze rare e-mails.", ""]
             }, {
@@ -586,9 +586,10 @@ class QLevel3 extends Questions {
         super(canvas, player);
         this.questionArray = [
             {
-                question: ["Je zit al een tijdje achter de computer", "Wat ga je nu doen?", ""],
+                question: ["Je zit al een tijdje achter de computer",
+                    "Wat ga je nu doen?", ""],
                 choices: ["Nog een youtube filmpje kijken", "Buiten spelen"],
-                answer: 1,
+                answer: 2,
                 explanation: ["Het is beter voor je om niet te lang achter de computer te zitten.", ""]
             }, {
                 question: [" Je krijgt een vriendschapsverzoek van iemand die je niet kent. Wat doe je?", ""],
@@ -647,7 +648,8 @@ class QLevel4 extends Questions {
                 question: ["Je laptop begint langzamer te werken. Wat doe je?", ""],
                 choices: ["Je doet er niks tegen.", "Je gebruikt een anti virus."],
                 answer: 2,
-                explanation: ["Door een anti virus te gebruiken, kan je checken of je computer door een virus langzamer is gaan werken.", ""]
+                explanation: ["Door een anti virus te gebruiken.",
+                    "Kan je checken of je computer door een virus langzamer is geworden.", ""]
             }, {
                 question: ["Een site vraagt om toegang tot je locatie. Wat doe je?", ""],
                 choices: ["Niet doen.", "Geef toegang."],
@@ -1030,7 +1032,7 @@ class Level8 extends Level {
     }
 }
 class Background extends ScoringObject {
-    constructor(canvas, currentLevel, yPos = canvas.height * -2.4) {
+    constructor(canvas, currentLevel, yPos = canvas.height * -1.9) {
         super(canvas);
         this.collidedSwitch = false;
         this.speed = 7;
