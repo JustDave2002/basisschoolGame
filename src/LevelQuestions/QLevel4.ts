@@ -20,7 +20,7 @@ class QLevel4 extends Questions {
                answer: 1, 
                explanation: ["Altijd na checken.",""]
            },{
-               question: [" Je zit op een chatbox website iemand stelt wat rare persoonlijk vragen wat doe je?",""],
+               question: [" Je zit op een chatbox website."," Iemand stelt wat rare persoonlijk vragen wat doe je?",""],
                choices: ["Vertel je ouders.", "Je beantwoordt de vragen."],
                answer: 1, 
                explanation: ["Je moet nooit persoonlijke vragen beantwoorden.",""]  
