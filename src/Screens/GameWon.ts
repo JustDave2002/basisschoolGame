@@ -25,7 +25,7 @@ class GameWon extends Screens {
             this.keyWasPressed = false;
         }
         if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL) && this.keyWasPressed == false) {
-            this.state = ScreenState.NEXT_SCREEN;
+            this.state = ScreenState.RESTART;
         }
     }
 

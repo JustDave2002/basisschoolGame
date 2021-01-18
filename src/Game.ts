@@ -30,7 +30,7 @@ class Game {
         this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
 
-        this.load(21);
+        this.load(0);
     }
 
     /**

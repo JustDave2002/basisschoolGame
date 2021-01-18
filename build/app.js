@@ -42,7 +42,7 @@ class Game {
         this.canvas = canvas;
         this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
-        this.load(21);
+        this.load(0);
     }
     load(screenIndex) {
         this.screenIndex = screenIndex;
@@ -1162,7 +1162,7 @@ class GameWon extends Screens {
             this.keyWasPressed = false;
         }
         if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL) && this.keyWasPressed == false) {
-            this.state = ScreenState.NEXT_SCREEN;
+            this.state = ScreenState.RESTART;
         }
     }
     draw() {
