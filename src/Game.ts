@@ -119,7 +119,7 @@ class Game {
             }
 
 
-
+            //framerate counter for debug
             let sinceStart = this.now - this.startTime;
             let currentFps = Math.round(1000 / (sinceStart / ++this.frameCount) * 100) / 100;
             if (currentFps == 60) {

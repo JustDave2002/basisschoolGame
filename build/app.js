@@ -852,7 +852,6 @@ class Level extends Screens {
             }
             this.spawnRateSetter();
             this.speedSetter();
-            console.log(`${this.spawnInterval} spawnFrems, ${this.gameSpeed} speed`);
         }
     }
     spawnRateSetter() {
@@ -914,7 +913,6 @@ class Level extends Screens {
     }
     backgroundLogic() {
         this.backgroundArray.forEach((background, index) => {
-            console.log(background.getPositionY());
             if (background.backgroundCollision()) {
                 this.backgroundArray.push(new Background(this.canvas, this.levelIndex));
             }
