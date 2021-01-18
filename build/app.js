@@ -1032,7 +1032,7 @@ class Level8 extends Level {
     }
 }
 class Background extends ScoringObject {
-    constructor(canvas, currentLevel, yPos = canvas.height * -2.4) {
+    constructor(canvas, currentLevel, yPos = canvas.height * -1.9) {
         super(canvas);
         this.collidedSwitch = false;
         this.speed = 7;
