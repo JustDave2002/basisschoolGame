@@ -42,7 +42,7 @@ class Game {
         this.canvas = canvas;
         this.canvas.width = window.innerHeight * 1.77777777778;
         this.canvas.height = window.innerHeight;
-        this.load(0);
+        this.load(21);
     }
     load(screenIndex) {
         this.screenIndex = screenIndex;
@@ -574,7 +574,7 @@ class QLevel2 extends Questions {
                 explanation: ["Kijk altijd naar de  recensies zodat je niet wordt opgelicht.", ""]
             }, {
                 question: [" Je wilt een computerprogramma downloaden. Waar kijk je naar?", ""],
-                choices: ["Controleer of je op een goede site zit.", "Alleen naar het product zelf."],
+                choices: ["Controleer of je op de goede site zit.", "Alleen naar het product zelf."],
                 answer: 1,
                 explanation: ["Zo wat je zeker dat je het goede download.", ""]
             },
@@ -1035,7 +1035,7 @@ class Level8 extends Level {
     constructor(canvas, player) {
         super(canvas, player, 8);
         this.baseSpawnRate = 50;
-        this.maxPoints = 1200;
+        this.maxPoints = 10;
         this.baseSpeed = 6;
     }
 }
