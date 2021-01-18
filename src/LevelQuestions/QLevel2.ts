@@ -27,7 +27,7 @@ class QLevel2 extends Questions {
              
              },{
                 question: [" Een site vraagt voor je adres wat moet je doen?",""],
-                choices: ["Vul het in.", " Negeer het en ga weg van de site."],
+                choices: ["Vul het in."," Ga weg van de site."],
                 answer: 2, 
                 explanation: ["Geef nooit prive informatie uit op het internet.",""]
              
