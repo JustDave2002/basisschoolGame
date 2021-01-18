@@ -68,7 +68,7 @@ abstract class Level extends Screens {
             this.spawnRateSetter();
             this.speedSetter();
 
-            console.log(`${this.spawnInterval} spawnFrems, ${this.gameSpeed} speed`);
+            //console.log(`${this.spawnInterval} spawnFrems, ${this.gameSpeed} speed`);
         }
     }
 
@@ -182,7 +182,7 @@ abstract class Level extends Screens {
     private backgroundLogic() {
         this.backgroundArray.forEach(
             (background, index) => {
-                console.log(background.getPositionY());
+                //console.log(background.getPositionY());
                 //spawns new BG if a previous BG touches the bottom of the canvas
                 if (background.backgroundCollision()) {
                     this.backgroundArray.push(new Background(this.canvas, this.levelIndex));
