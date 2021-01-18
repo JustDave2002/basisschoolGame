@@ -557,14 +557,14 @@ class QLevel2 extends Questions {
                 answer: 2,
                 explanation: ["Mensen gebruiken vaak hun naam, let daar op!", ""]
             }, {
-                question: [" Je krijgt een e-mail van je neef in de bijlage staat een link met de titel:",
-                    " “je zal nooit geloven wat er is gebeurt” wat doe je?", ""],
+                question: [" Je krijgt een e-mail van je neef in de bijlage staat een link met",
+                    " de titel: “je zal nooit geloven wat er is gebeurt” wat doe je?", ""],
                 choices: ["Verwijder de E-mail en vertel het je ouders.", " Open hem. Hij is toch familie"],
                 answer: 1,
                 explanation: ["Vetrouw nooit van deze rare e-mails.", ""]
             }, {
                 question: [" Een site vraagt voor je adres wat moet je doen?", ""],
-                choices: ["Vul het in.", " Negeer het en ga weg van de site."],
+                choices: ["Vul het in.", " Ga weg van de site."],
                 answer: 2,
                 explanation: ["Geef nooit prive informatie uit op het internet.", ""]
             }, {
@@ -592,27 +592,32 @@ class QLevel3 extends Questions {
                 answer: 2,
                 explanation: ["Het is beter voor je om niet te lang achter de computer te zitten.", ""]
             }, {
-                question: [" Je krijgt een vriendschapsverzoek van iemand die je niet kent. Wat doe je?", ""],
+                question: [" Je krijgt een vriendschapsverzoek van iemand die je niet kent.",
+                    " Wat doe je?", ""],
                 choices: ["Je accepteert het vriendschapsverzoek.", " Je weigert het vriendschapsverzoek."],
                 answer: 2,
                 explanation: ["Voeg alleen mensen die je kent als vriend toe.", ""]
             }, {
-                question: [" Je krijgt een link doorgestuurd  waarvan je niet van weet wat het doet. Wat doe je?", ""],
-                choices: ["Je klikt erop om te kijken waar het naartoe gaat.", "Je klikt er niet op."],
+                question: [" Je krijgt een link doorgestuurd.",
+                    " Waarvan je niet van weet wat het doet. Wat doe je?", ""],
+                choices: ["Je kijkt waar het naartoe gaat.", "Je klikt er niet op."],
                 answer: 2,
                 explanation: ["Klik nooit op vreemde internet links.", ""]
             }, {
-                question: ["Een site zegt dat je iets duurs hebt gewonnen. Wat doe je?", ""],
+                question: ["Een site zegt dat je iets duurs hebt gewonnen.",
+                    " Wat doe je?", ""],
                 choices: ["Vetrouw het niet.", "Doe wat er word gevraagd."],
                 answer: 1,
                 explanation: ["Dit is altijd nep dus trap er niet in.", ""]
             }, {
-                question: ["Een site zegt dat je iets duurs hebt gewonnen. Wat doe je?", ""],
+                question: ["Een site zegt dat je iets duurs hebt gewonnen.",
+                    " Wat doe je?", ""],
                 choices: ["Vetrouw het niet.", "Doe wat er word gevraagd."],
                 answer: 1,
                 explanation: ["Dit is altijd nep dus trap er niet in.", ""]
             }, {
-                question: ["Je word gehacked en ze vragen om geld. Wat doe je?", ""],
+                question: ["Je word gehacked en ze vragen om geld.",
+                    " Wat doe je?", ""],
                 choices: ["Geef geen geld.", "Geef ze het geld."],
                 answer: 1,
                 explanation: ["Nooit betalen hiervoor dan kunnen ze om nog meer vragen.", ""]
@@ -625,8 +630,9 @@ class QLevel4 extends Questions {
         super(canvas, player);
         this.questionArray = [
             {
-                question: ["Je komt met iemand op het internet in discussie. Wat doe je?", ""],
-                choices: ["Ga verder met deze persoon in gesprek.", "Ga de discussie niet aan."],
+                question: ["Je komt met iemand op het internet in discussie.",
+                    " Wat doe je?", ""],
+                choices: ["Ga verder met het gesprek.", "Ga de discussie niet aan."],
                 answer: 2,
                 explanation: ["Dit soort gesprekken kunnen uit de hand lopen ga ze niet aan.", ""]
             }, {
@@ -635,23 +641,27 @@ class QLevel4 extends Questions {
                 answer: 2,
                 explanation: ["Altijd lezen dan weet je wat je accepteert.", ""]
             }, {
-                question: ["Je krijgt een mail van de bank die vraagt voor je bank gegevens wat doe je?", ""],
+                question: ["Je krijgt een mail van de bank die vraagt",
+                    " voor je bank gegevens wat doe je?", ""],
                 choices: ["Je belt de bank en checkt het na.", " Je geeft de informatie."],
                 answer: 1,
                 explanation: ["Altijd na checken.", ""]
             }, {
-                question: [" Je zit op een chatbox website iemand stelt wat rare persoonlijk vragen wat doe je?", ""],
+                question: [" Je zit op een chatbox website.",
+                    " Iemand stelt wat rare persoonlijk vragen wat doe je?", ""],
                 choices: ["Vertel je ouders.", "Je beantwoordt de vragen."],
                 answer: 1,
                 explanation: ["Je moet nooit persoonlijke vragen beantwoorden.", ""]
             }, {
-                question: ["Je laptop begint langzamer te werken. Wat doe je?", ""],
+                question: ["Je laptop begint langzamer te werken.",
+                    " Wat doe je?", ""],
                 choices: ["Je doet er niks tegen.", "Je gebruikt een anti virus."],
                 answer: 2,
                 explanation: ["Door een anti virus te gebruiken.",
                     "Kan je checken of je computer door een virus langzamer is geworden.", ""]
             }, {
-                question: ["Een site vraagt om toegang tot je locatie. Wat doe je?", ""],
+                question: ["Een site vraagt om toegang tot je locatie.",
+                    " Wat doe je?", ""],
                 choices: ["Niet doen.", "Geef toegang."],
                 answer: 1,
                 explanation: ["Nooit zomaar een site je locatie geven.", ""]
