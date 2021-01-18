@@ -6,6 +6,8 @@
  */
 class GameWon extends Screens {
 
+    //switch to make sure the player doesn't accidentally have the CTRL key pressed already, skipping the screen
+    private keyWasPressed: boolean = true;
     private canvas: HTMLCanvasElement
 
     public constructor(canvas: HTMLCanvasElement, player: Player) {
@@ -18,8 +20,12 @@ class GameWon extends Screens {
     * checks if CTRL key is pressed and puts game on restart
     */
     public gameLogic() {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
-            this.state = ScreenState.RESTART;
+         //checks if key was not already pressed
+         if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL) != true) {
+            this.keyWasPressed = false;
+        }
+        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL) && this.keyWasPressed == false) {
+            this.state = ScreenState.NEXT_SCREEN;
         }
     }
 

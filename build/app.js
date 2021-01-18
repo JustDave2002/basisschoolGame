@@ -1154,11 +1154,15 @@ class DeathScreen extends Screens {
 class GameWon extends Screens {
     constructor(canvas, player) {
         super(player);
+        this.keyWasPressed = true;
         this.canvas = canvas;
     }
     gameLogic() {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL)) {
-            this.state = ScreenState.RESTART;
+        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL) != true) {
+            this.keyWasPressed = false;
+        }
+        if (this.keyListener.isKeyDown(KeyListener.KEY_CTRL) && this.keyWasPressed == false) {
+            this.state = ScreenState.NEXT_SCREEN;
         }
     }
     draw() {
