@@ -39,7 +39,7 @@ class QLevel2 extends Questions {
              
              },{
                 question: [" Je wilt een computerprogramma downloaden. Waar kijk je naar?",""],
-                choices: ["Controleer of je op een goede site zit.", "Alleen naar het product zelf."],
+                choices: ["Controleer of je op de goede site zit.","Alleen naar het product zelf."],
                 answer: 1, 
                 explanation: ["Zo wat je zeker dat je het goede download.",""]
              
